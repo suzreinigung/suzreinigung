@@ -1,0 +1,12 @@
+#root {
+  /* Remove conflicting styles that interfere with full-width sections */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* Let individual components handle their own alignment */
+}
+
+/* App.css - Minimal styles to avoid conflicts with SUZ design system */
+
+/* Remove default Vite styles that could interfere with premium design */
+/* All styling is now handled by the comprehensive SUZ design system in index.css */

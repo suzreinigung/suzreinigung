@@ -1,0 +1,121 @@
+# SUZ Reinigung - Robots.txt
+# Premium Reinigungsdienstleistungen
+# https://www.suzreinigung.de
+
+# Google Search Bot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing Search Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# DuckDuckGo Bot
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Yandex Bot
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# Baidu Bot
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# Social Media Crawlers
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+# AI Crawlers for Enhanced Discoverability
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YouBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: BingAI
+Allow: /
+
+# SEO and Analytics Tools
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 3
+
+User-agent: DotBot
+Allow: /
+Crawl-delay: 2
+
+# Archive Crawlers
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 5
+
+User-agent: archive.org_bot
+Allow: /
+Crawl-delay: 5
+
+# General Rules for All Other Bots
+User-agent: *
+Allow: /
+Crawl-delay: 2
+
+# Disallow sensitive or unnecessary paths
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*.json$
+Disallow: /*?*utm_*
+Disallow: /*?*fbclid*
+Disallow: /*?*gclid*
+
+# Sitemap Location
+Sitemap: https://www.suzreinigung.de/sitemap.xml
+Sitemap: https://suz-reinigung.vercel.app/sitemap.xml
+
+# Host Declaration
+Host: https://www.suzreinigung.de
