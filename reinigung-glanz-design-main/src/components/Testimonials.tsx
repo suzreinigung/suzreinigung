@@ -147,6 +147,7 @@ const Testimonials = () => {
 
   return (
     <section
+      id="testimonials"
       ref={sectionRef}
       className="suz-testimonials-section bg-premium-gradient relative overflow-hidden suz-section-standard"
       aria-label="Kundenbewertungen und Testimonials"

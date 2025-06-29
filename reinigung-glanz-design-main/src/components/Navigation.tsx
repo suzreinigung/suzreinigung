@@ -97,11 +97,11 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
               </button>
               <button
                 type="button"
-                onClick={() => handleNavClick('team')}
+                onClick={() => handleNavClick('testimonials')}
                 className="suz-nav-link suz-focus-ring whitespace-nowrap"
-                aria-label="Zu unserem Team navigieren"
+                aria-label="Zu unseren Referenzen navigieren"
               >
-                Unser Team
+                Referenzen
               </button>
               <button
                 type="button"
@@ -175,11 +175,11 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
               </button>
               <button
                 type="button"
-                onClick={() => handleNavClick('team')}
+                onClick={() => handleNavClick('testimonials')}
                 className="suz-mobile-nav-link suz-focus-ring"
-                aria-label="Zu unserem Team navigieren"
+                aria-label="Zu unseren Referenzen navigieren"
               >
-                Unser Team
+                Referenzen
               </button>
               <button
                 type="button"
