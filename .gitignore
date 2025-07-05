@@ -92,3 +92,5 @@ performance-test.html
 
 # Development documentation (keep main docs but exclude temporary ones)
 chromeconsole.md
+
+.vercel
