@@ -118,85 +118,104 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
               )}
               
               {/* Services Dropdown */}
-              <div className="relative group">
+              <div className="relative group" data-dropdown="services">
                 <button
-                  className="flex items-center gap-1 px-4 py-2 text-white hover:text-blue-300 transition-colors"
+                  className="suz-services-button"
+                  onClick={toggleServicesDropdown}
                   onMouseEnter={() => setIsServicesOpen(true)}
-                  onMouseLeave={() => setIsServicesOpen(false)}
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  onMouseLeave={() => setTimeout(() => {
+                    if (!document.querySelector('[data-dropdown="services"]:hover')) {
+                      setIsServicesOpen(false);
+                    }
+                  }, 100)}
+                  aria-expanded={isServicesOpen}
+                  aria-haspopup="true"
+                  aria-label="Leistungen anzeigen"
                 >
                   Leistungen
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`chevron ${isServicesOpen ? 'open' : ''}`} />
                 </button>
                 
-                {isServicesOpen && (
-                  <div 
-                    className="absolute top-full left-0 mt-1 w-80 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50"
-                    onMouseEnter={() => setIsServicesOpen(true)}
-                    onMouseLeave={() => setIsServicesOpen(false)}
+                <div 
+                  className={`suz-services-dropdown ${isServicesOpen ? 'show' : ''}`}
+                  onMouseEnter={() => setIsServicesOpen(true)}
+                  onMouseLeave={() => setIsServicesOpen(false)}
+                  role="menu"
+                  aria-label="Leistungen Dropdown"
+                >
+                  <Link
+                    to="/services/hotelzimmerreinigung"
+                    className="suz-services-dropdown-item"
+                    role="menuitem"
+                    onClick={() => setIsServicesOpen(false)}
                   >
-                    <Link
-                      to="/services/hotelzimmerreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                    >
-                      <Building2 className="w-5 h-5 text-blue-600" />
-                      <div>
-                        <div className="font-medium">Hotelzimmerreinigung</div>
-                        <div className="text-sm text-gray-500">Höchste Hygienestandards</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/teppichreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                    >
-                      <Home className="w-5 h-5 text-green-600" />
-                      <div>
-                        <div className="font-medium">Teppichreinigung</div>
-                        <div className="text-sm text-gray-500">Tiefenreinigung & Fleckenentfernung</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/bodenreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors"
-                    >
-                      <Sparkles className="w-5 h-5 text-purple-600" />
-                      <div>
-                        <div className="font-medium">Bodenreinigung</div>
-                        <div className="text-sm text-gray-500">Hartböden, Fliesen, Laminat</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/gemeinschaftsraeume"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                    >
-                      <Users className="w-5 h-5 text-orange-600" />
-                      <div>
-                        <div className="font-medium">Gemeinschaftsräume</div>
-                        <div className="text-sm text-gray-500">Treppenhäuser & Flure</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/bueroreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                    >
-                      <Briefcase className="w-5 h-5 text-blue-600" />
-                      <div>
-                        <div className="font-medium">Büroreinigung</div>
-                        <div className="text-sm text-gray-500">Arbeitsplätze & Büroflächen</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/krankenhausreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
-                    >
-                      <Heart className="w-5 h-5 text-red-600" />
-                      <div>
-                        <div className="font-medium">Krankenhausreinigung</div>
-                        <div className="text-sm text-gray-500">Medizinische Einrichtungen</div>
-                      </div>
-                    </Link>
-                  </div>
-                )}
+                    <Building2 className="suz-services-dropdown-icon text-blue-600" />
+                    <div className="suz-services-dropdown-content">
+                      <div className="suz-services-dropdown-title">Hotelzimmerreinigung</div>
+                      <div className="suz-services-dropdown-description">Höchste Hygienestandards</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/services/teppichreinigung"
+                    className="suz-services-dropdown-item"
+                    role="menuitem"
+                    onClick={() => setIsServicesOpen(false)}
+                  >
+                    <Home className="suz-services-dropdown-icon text-green-600" />
+                    <div className="suz-services-dropdown-content">
+                      <div className="suz-services-dropdown-title">Teppichreinigung</div>
+                      <div className="suz-services-dropdown-description">Tiefenreinigung & Fleckenentfernung</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/services/bodenreinigung"
+                    className="suz-services-dropdown-item"
+                    role="menuitem"
+                    onClick={() => setIsServicesOpen(false)}
+                  >
+                    <Sparkles className="suz-services-dropdown-icon text-purple-600" />
+                    <div className="suz-services-dropdown-content">
+                      <div className="suz-services-dropdown-title">Bodenreinigung</div>
+                      <div className="suz-services-dropdown-description">Hartböden, Fliesen, Laminat</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/services/gemeinschaftsraeume"
+                    className="suz-services-dropdown-item"
+                    role="menuitem"
+                    onClick={() => setIsServicesOpen(false)}
+                  >
+                    <Users className="suz-services-dropdown-icon text-orange-600" />
+                    <div className="suz-services-dropdown-content">
+                      <div className="suz-services-dropdown-title">Gemeinschaftsräume</div>
+                      <div className="suz-services-dropdown-description">Treppenhäuser & Flure</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/services/bueroreinigung"
+                    className="suz-services-dropdown-item"
+                    role="menuitem"
+                    onClick={() => setIsServicesOpen(false)}
+                  >
+                    <Briefcase className="suz-services-dropdown-icon text-blue-600" />
+                    <div className="suz-services-dropdown-content">
+                      <div className="suz-services-dropdown-title">Büroreinigung</div>
+                      <div className="suz-services-dropdown-description">Arbeitsplätze & Büroflächen</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/services/krankenhausreinigung"
+                    className="suz-services-dropdown-item"
+                    role="menuitem"
+                    onClick={() => setIsServicesOpen(false)}
+                  >
+                    <Heart className="suz-services-dropdown-icon text-red-600" />
+                    <div className="suz-services-dropdown-content">
+                      <div className="suz-services-dropdown-title">Krankenhausreinigung</div>
+                      <div className="suz-services-dropdown-description">Medizinische Einrichtungen</div>
+                    </div>
+                  </Link>
+                </div>
               </div>
               
               <button
@@ -294,70 +313,92 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
                 </svg>
               </button>
               
-              {isServicesOpen && (
-                <div className="pl-4 space-y-2 bg-black/20 rounded-lg p-2 ml-2 mt-2">
-                  <Link
-                    to="/services/hotelzimmerreinigung"
-                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsServicesOpen(false);
-                    }}
-                  >
-                    Hotelzimmerreinigung
-                  </Link>
-                  <Link
-                    to="/services/teppichreinigung"
-                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsServicesOpen(false);
-                    }}
-                  >
-                    Teppichreinigung
-                  </Link>
-                  <Link
-                    to="/services/bodenreinigung"
-                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsServicesOpen(false);
-                    }}
-                  >
-                    Bodenreinigung
-                  </Link>
-                  <Link
-                    to="/services/gemeinschaftsraeume"
-                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsServicesOpen(false);
-                    }}
-                  >
-                    Gemeinschaftsräume
-                  </Link>
-                  <Link
-                    to="/services/bueroreinigung"
-                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsServicesOpen(false);
-                    }}
-                  >
-                    Büroreinigung
-                  </Link>
-                  <Link
-                    to="/services/krankenhausreinigung"
-                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsServicesOpen(false);
-                    }}
-                  >
-                    Krankenhausreinigung
-                  </Link>
-                </div>
-              )}
+              <div className={`suz-services-dropdown ${isServicesOpen ? 'show' : ''}`}>
+                <Link
+                  to="/services/hotelzimmerreinigung"
+                  className="suz-services-dropdown-item"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsServicesOpen(false);
+                  }}
+                >
+                  <Building2 className="suz-services-dropdown-icon text-blue-600" />
+                  <div className="suz-services-dropdown-content">
+                    <div className="suz-services-dropdown-title">Hotelzimmerreinigung</div>
+                    <div className="suz-services-dropdown-description">Höchste Hygienestandards</div>
+                  </div>
+                </Link>
+                <Link
+                  to="/services/teppichreinigung"
+                  className="suz-services-dropdown-item"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsServicesOpen(false);
+                  }}
+                >
+                  <Home className="suz-services-dropdown-icon text-green-600" />
+                  <div className="suz-services-dropdown-content">
+                    <div className="suz-services-dropdown-title">Teppichreinigung</div>
+                    <div className="suz-services-dropdown-description">Tiefenreinigung & Fleckenentfernung</div>
+                  </div>
+                </Link>
+                <Link
+                  to="/services/bodenreinigung"
+                  className="suz-services-dropdown-item"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsServicesOpen(false);
+                  }}
+                >
+                  <Sparkles className="suz-services-dropdown-icon text-purple-600" />
+                  <div className="suz-services-dropdown-content">
+                    <div className="suz-services-dropdown-title">Bodenreinigung</div>
+                    <div className="suz-services-dropdown-description">Hartböden, Fliesen, Laminat</div>
+                  </div>
+                </Link>
+                <Link
+                  to="/services/gemeinschaftsraeume"
+                  className="suz-services-dropdown-item"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsServicesOpen(false);
+                  }}
+                >
+                  <Users className="suz-services-dropdown-icon text-orange-600" />
+                  <div className="suz-services-dropdown-content">
+                    <div className="suz-services-dropdown-title">Gemeinschaftsräume</div>
+                    <div className="suz-services-dropdown-description">Treppenhäuser & Flure</div>
+                  </div>
+                </Link>
+                <Link
+                  to="/services/bueroreinigung"
+                  className="suz-services-dropdown-item"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsServicesOpen(false);
+                  }}
+                >
+                  <Briefcase className="suz-services-dropdown-icon text-blue-600" />
+                  <div className="suz-services-dropdown-content">
+                    <div className="suz-services-dropdown-title">Büroreinigung</div>
+                    <div className="suz-services-dropdown-description">Arbeitsplätze & Büroflächen</div>
+                  </div>
+                </Link>
+                <Link
+                  to="/services/krankenhausreinigung"
+                  className="suz-services-dropdown-item"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsServicesOpen(false);
+                  }}
+                >
+                  <Heart className="suz-services-dropdown-icon text-red-600" />
+                  <div className="suz-services-dropdown-content">
+                    <div className="suz-services-dropdown-title">Krankenhausreinigung</div>
+                    <div className="suz-services-dropdown-description">Medizinische Einrichtungen</div>
+                  </div>
+                </Link>
+              </div>
               
               <button
                 type="button"
