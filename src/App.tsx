@@ -21,6 +21,13 @@ const Hausreinigung = lazy(() => import("./pages/services/Hausreinigung"));
 const Fensterreinigung = lazy(() => import("./pages/services/Fensterreinigung"));
 const Grundreinigung = lazy(() => import("./pages/services/Grundreinigung"));
 
+// Lazy load blog pages
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+
+// Lazy load location pages
+const LocationPage = lazy(() => import("./pages/LocationPage"));
+
 // Loading component for Suspense fallback
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
@@ -108,10 +115,17 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 
                 {/* Service Pages */}
-                <Route path="/services/bueroreinigung" element={<Bueroreinigung />} />
-                <Route path="/services/hausreinigung" element={<Hausreinigung />} />
-                <Route path="/services/fensterreinigung" element={<Fensterreinigung />} />
-                <Route path="/services/grundreinigung" element={<Grundreinigung />} />
+                          <Route path="/services/bueroreinigung" element={<Bueroreinigung />} />
+          <Route path="/services/hausreinigung" element={<Hausreinigung />} />
+          <Route path="/services/fensterreinigung" element={<Fensterreinigung />} />
+          <Route path="/services/grundreinigung" element={<Grundreinigung />} />
+          
+          {/* Blog Routes */}
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          
+          {/* Local SEO Routes */}
+          <Route path="/standorte/:location" element={<LocationPage />} />
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
