@@ -13,26 +13,23 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
 
-  // Service menu items
-  const services = [
-    { id: 'bueroreinigung', title: 'Büroreinigung', path: '/services/bueroreinigung' },
-    { id: 'hausreinigung', title: 'Hausreinigung', path: '/services/hausreinigung' },
-    { id: 'fensterreinigung', title: 'Fensterreinigung', path: '/services/fensterreinigung' },
-    { id: 'grundreinigung', title: 'Grundreinigung', path: '/services/grundreinigung' },
-  ];
-
   // Close menu when clicking outside or on navigation
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const nav = document.querySelector('[data-nav="main"]');
-      if (nav && !nav.contains(event.target as Node)) {
+      const dropdown = document.querySelector('[data-dropdown="services"]');
+      if (nav && !nav.contains(event.target as Node) && 
+          dropdown && !dropdown.contains(event.target as Node)) {
         setIsMenuOpen(false);
+        setIsServicesOpen(false);
       }
     };
 
-    if (isMenuOpen) {
+    if (isMenuOpen || isServicesOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'hidden'; // Prevent background scroll
+      if (isMenuOpen) {
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+      }
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -41,24 +38,25 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = 'unset';
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isServicesOpen]);
 
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsMenuOpen(false);
+        setIsServicesOpen(false);
       }
     };
 
-    if (isMenuOpen) {
+    if (isMenuOpen || isServicesOpen) {
       document.addEventListener('keydown', handleEscape);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isServicesOpen]);
 
   const handleNavClick = (sectionId: string) => {
     // If we're on a service page and trying to navigate to homepage sections
@@ -284,86 +282,82 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
               )}
               
               {/* Mobile Services Section */}
-              <div className="relative group">
-                <button
-                  className="flex items-center gap-1 px-4 py-2 text-white hover:text-blue-300 transition-colors"
-                  onMouseEnter={() => setIsServicesOpen(true)}
-                  onMouseLeave={() => setIsServicesOpen(false)}
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                >
-                  Leistungen
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                
-                {isServicesOpen && (
-                  <div 
-                    className="absolute top-full left-0 mt-1 w-80 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50"
-                    onMouseEnter={() => setIsServicesOpen(true)}
-                    onMouseLeave={() => setIsServicesOpen(false)}
+              <button
+                type="button"
+                onClick={toggleServicesDropdown}
+                className="suz-mobile-nav-link suz-focus-ring flex items-center justify-between w-full"
+                aria-label="Leistungen anzeigen"
+              >
+                Leistungen
+                <svg className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {isServicesOpen && (
+                <div className="pl-4 space-y-2 bg-black/20 rounded-lg p-2 ml-2 mt-2">
+                  <Link
+                    to="/services/hotelzimmerreinigung"
+                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsServicesOpen(false);
+                    }}
                   >
-                    <Link
-                      to="/services/hotelzimmerreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                    >
-                      <Building2 className="w-5 h-5 text-blue-600" />
-                      <div>
-                        <div className="font-medium">Hotelzimmerreinigung</div>
-                        <div className="text-sm text-gray-500">Höchste Hygienestandards</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/teppichreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
-                    >
-                      <Home className="w-5 h-5 text-green-600" />
-                      <div>
-                        <div className="font-medium">Teppichreinigung</div>
-                        <div className="text-sm text-gray-500">Tiefenreinigung & Fleckenentfernung</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/bodenreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors"
-                    >
-                      <Sparkles className="w-5 h-5 text-purple-600" />
-                      <div>
-                        <div className="font-medium">Bodenreinigung</div>
-                        <div className="text-sm text-gray-500">Hartböden, Fliesen, Laminat</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/gemeinschaftsraeume"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                    >
-                      <Users className="w-5 h-5 text-orange-600" />
-                      <div>
-                        <div className="font-medium">Gemeinschaftsräume</div>
-                        <div className="text-sm text-gray-500">Treppenhäuser & Flure</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/bueroreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                    >
-                      <Briefcase className="w-5 h-5 text-blue-600" />
-                      <div>
-                        <div className="font-medium">Büroreinigung</div>
-                        <div className="text-sm text-gray-500">Arbeitsplätze & Büroflächen</div>
-                      </div>
-                    </Link>
-                    <Link
-                      to="/services/krankenhausreinigung"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
-                    >
-                      <Heart className="w-5 h-5 text-red-600" />
-                      <div>
-                        <div className="font-medium">Krankenhausreinigung</div>
-                        <div className="text-sm text-gray-500">Medizinische Einrichtungen</div>
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div>
+                    Hotelzimmerreinigung
+                  </Link>
+                  <Link
+                    to="/services/teppichreinigung"
+                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsServicesOpen(false);
+                    }}
+                  >
+                    Teppichreinigung
+                  </Link>
+                  <Link
+                    to="/services/bodenreinigung"
+                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsServicesOpen(false);
+                    }}
+                  >
+                    Bodenreinigung
+                  </Link>
+                  <Link
+                    to="/services/gemeinschaftsraeume"
+                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsServicesOpen(false);
+                    }}
+                  >
+                    Gemeinschaftsräume
+                  </Link>
+                  <Link
+                    to="/services/bueroreinigung"
+                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsServicesOpen(false);
+                    }}
+                  >
+                    Büroreinigung
+                  </Link>
+                  <Link
+                    to="/services/krankenhausreinigung"
+                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsServicesOpen(false);
+                    }}
+                  >
+                    Krankenhausreinigung
+                  </Link>
+                </div>
+              )}
               
               <button
                 type="button"
