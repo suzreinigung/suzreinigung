@@ -25,14 +25,19 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const nav = document.querySelector('[data-nav="main"]');
-      if (nav && !nav.contains(event.target as Node)) {
+      const dropdown = document.querySelector('[data-dropdown="services"]');
+      if (nav && !nav.contains(event.target as Node) && 
+          dropdown && !dropdown.contains(event.target as Node)) {
         setIsMenuOpen(false);
+        setIsServicesOpen(false);
       }
     };
 
-    if (isMenuOpen) {
+    if (isMenuOpen || isServicesOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'hidden'; // Prevent background scroll
+      if (isMenuOpen) {
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+      }
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -41,24 +46,25 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = 'unset';
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isServicesOpen]);
 
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsMenuOpen(false);
+        setIsServicesOpen(false);
       }
     };
 
-    if (isMenuOpen) {
+    if (isMenuOpen || isServicesOpen) {
       document.addEventListener('keydown', handleEscape);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isServicesOpen]);
 
   const handleNavClick = (sectionId: string) => {
     // If we're on a service page and trying to navigate to homepage sections
@@ -119,43 +125,19 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
                 </Link>
               )}
               
-              {/* Services Dropdown */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={toggleServicesDropdown}
-                  className="suz-nav-link suz-focus-ring whitespace-nowrap flex items-center gap-1"
-                  aria-label="Leistungen anzeigen"
-                  aria-expanded={isServicesOpen}
-                >
-                  Leistungen
-                  <svg className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                
-                {isServicesOpen && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 py-2 w-56 suz-card-glass rounded-lg shadow-xl border border-white/20 z-[60]">
-                    <Link
-                      to="/#services"
-                      className="block px-4 py-2 text-sm text-white hover:bg-blue-500/20 hover:text-blue-300 transition-colors rounded-md mx-2"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Alle Leistungen
-                    </Link>
-                    {services.map((service) => (
-                      <Link
-                        key={service.id}
-                        to={service.path}
-                        className="block px-4 py-2 text-sm text-gray-200 hover:bg-blue-500/20 hover:text-blue-300 transition-colors rounded-md mx-2"
-                        onClick={() => setIsServicesOpen(false)}
-                      >
-                        {service.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {/* Services Button */}
+              <button
+                type="button"
+                onClick={toggleServicesDropdown}
+                className="suz-nav-link suz-focus-ring whitespace-nowrap flex items-center gap-1"
+                aria-label="Leistungen anzeigen"
+                aria-expanded={isServicesOpen}
+              >
+                Leistungen
+                <svg className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
               
               <button
                 type="button"
@@ -176,6 +158,35 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
             </div>
           </div>
         </nav>
+      )}
+
+      {/* Services Dropdown - Outside navigation container */}
+      {!isMobile && isServicesOpen && (
+        <div 
+          className="fixed z-[70]" 
+          style={{top: '5.5rem', left: '50%', transform: 'translateX(-50%)'}}
+          data-dropdown="services"
+        >
+          <div className="suz-card-glass py-2 w-56 rounded-lg shadow-xl border border-white/20">
+            <Link
+              to="/#services"
+              className="block px-4 py-2 text-sm text-white hover:bg-blue-500/20 hover:text-blue-300 transition-colors rounded-md mx-2"
+              onClick={() => setIsServicesOpen(false)}
+            >
+              Alle Leistungen
+            </Link>
+            {services.map((service) => (
+              <Link
+                key={service.id}
+                to={service.path}
+                className="block px-4 py-2 text-sm text-gray-200 hover:bg-blue-500/20 hover:text-blue-300 transition-colors rounded-md mx-2"
+                onClick={() => setIsServicesOpen(false)}
+              >
+                {service.title}
+              </Link>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Mobile Navigation - Only visible on screens 768px and below */}
