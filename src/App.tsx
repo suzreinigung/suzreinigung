@@ -15,6 +15,12 @@ const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const CookieConsent = lazy(() => import("./components/CookieConsent"));
 
+// Lazy load service pages
+const Bueroreinigung = lazy(() => import("./pages/services/Bueroreinigung"));
+const Hausreinigung = lazy(() => import("./pages/services/Hausreinigung"));
+const Fensterreinigung = lazy(() => import("./pages/services/Fensterreinigung"));
+const Grundreinigung = lazy(() => import("./pages/services/Grundreinigung"));
+
 // Loading component for Suspense fallback
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
@@ -100,6 +106,13 @@ const App = () => (
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />
+                
+                {/* Service Pages */}
+                <Route path="/services/bueroreinigung" element={<Bueroreinigung />} />
+                <Route path="/services/hausreinigung" element={<Hausreinigung />} />
+                <Route path="/services/fensterreinigung" element={<Fensterreinigung />} />
+                <Route path="/services/grundreinigung" element={<Grundreinigung />} />
+                
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

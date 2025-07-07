@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Link, useLocation } from 'react-router-dom';
 
 interface NavigationProps {
   scrollToSection: (id: string) => void;
@@ -8,7 +9,17 @@ interface NavigationProps {
 
 const Navigation = ({ scrollToSection }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const isMobile = useIsMobile();
+  const location = useLocation();
+
+  // Service menu items
+  const services = [
+    { id: 'bueroreinigung', title: 'Büroreinigung', path: '/services/bueroreinigung' },
+    { id: 'hausreinigung', title: 'Hausreinigung', path: '/services/hausreinigung' },
+    { id: 'fensterreinigung', title: 'Fensterreinigung', path: '/services/fensterreinigung' },
+    { id: 'grundreinigung', title: 'Grundreinigung', path: '/services/grundreinigung' },
+  ];
 
   // Close menu when clicking outside or on navigation
   useEffect(() => {
@@ -50,8 +61,18 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
   }, [isMenuOpen]);
 
   const handleNavClick = (sectionId: string) => {
+    // If we're on a service page and trying to navigate to homepage sections
+    if (location.pathname !== '/' && ['home', 'services', 'testimonials', 'contact'].includes(sectionId)) {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
     scrollToSection(sectionId);
     setIsMenuOpen(false); // Close mobile menu after navigation
+    setIsServicesOpen(false); // Close services dropdown
+  };
+
+  const toggleServicesDropdown = () => {
+    setIsServicesOpen(!isServicesOpen);
   };
 
   const toggleMenu = () => {
@@ -79,22 +100,63 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
         >
           <div className="suz-card-glass px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-white/30 shadow-xl">
             <div className="flex items-center justify-center space-x-1 sm:space-x-2 md:space-x-4 lg:space-x-6 xl:space-x-8">
-              <button
-                type="button"
-                onClick={() => handleNavClick('home')}
-                className="suz-nav-link suz-focus-ring whitespace-nowrap"
-                aria-label="Zur Startseite navigieren"
-              >
-                Startseite
-              </button>
-              <button
-                type="button"
-                onClick={() => handleNavClick('services')}
-                className="suz-nav-link suz-focus-ring whitespace-nowrap"
-                aria-label="Zu unseren Leistungen navigieren"
-              >
-                Leistungen
-              </button>
+              {location.pathname === '/' ? (
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('home')}
+                  className="suz-nav-link suz-focus-ring whitespace-nowrap"
+                  aria-label="Zur Startseite navigieren"
+                >
+                  Startseite
+                </button>
+              ) : (
+                <Link
+                  to="/"
+                  className="suz-nav-link suz-focus-ring whitespace-nowrap"
+                  aria-label="Zur Startseite navigieren"
+                >
+                  Startseite
+                </Link>
+              )}
+              
+              {/* Services Dropdown */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={toggleServicesDropdown}
+                  className="suz-nav-link suz-focus-ring whitespace-nowrap flex items-center gap-1"
+                  aria-label="Leistungen anzeigen"
+                  aria-expanded={isServicesOpen}
+                >
+                  Leistungen
+                  <svg className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {isServicesOpen && (
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+                    <Link
+                      to="/#services"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Alle Leistungen
+                    </Link>
+                    {services.map((service) => (
+                      <Link
+                        key={service.id}
+                        to={service.path}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        onClick={() => setIsServicesOpen(false)}
+                      >
+                        {service.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
               <button
                 type="button"
                 onClick={() => handleNavClick('testimonials')}
@@ -157,22 +219,67 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
             aria-hidden={!isMenuOpen ? 'true' : 'false'}
           >
             <div className="suz-mobile-menu-content">
+              {location.pathname === '/' ? (
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('home')}
+                  className="suz-mobile-nav-link suz-focus-ring"
+                  aria-label="Zur Startseite navigieren"
+                >
+                  Startseite
+                </button>
+              ) : (
+                <Link
+                  to="/"
+                  className="suz-mobile-nav-link suz-focus-ring"
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-label="Zur Startseite navigieren"
+                >
+                  Startseite
+                </Link>
+              )}
+              
+              {/* Mobile Services Section */}
               <button
                 type="button"
-                onClick={() => handleNavClick('home')}
-                className="suz-mobile-nav-link suz-focus-ring"
-                aria-label="Zur Startseite navigieren"
-              >
-                Startseite
-              </button>
-              <button
-                type="button"
-                onClick={() => handleNavClick('services')}
-                className="suz-mobile-nav-link suz-focus-ring"
-                aria-label="Zu unseren Leistungen navigieren"
+                onClick={toggleServicesDropdown}
+                className="suz-mobile-nav-link suz-focus-ring flex items-center justify-between w-full"
+                aria-label="Leistungen anzeigen"
               >
                 Leistungen
+                <svg className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
+              
+              {isServicesOpen && (
+                <div className="pl-4 space-y-2">
+                  <Link
+                    to="/#services"
+                    className="block py-2 text-sm text-white/80 hover:text-white transition-colors"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsServicesOpen(false);
+                    }}
+                  >
+                    Alle Leistungen
+                  </Link>
+                  {services.map((service) => (
+                    <Link
+                      key={service.id}
+                      to={service.path}
+                      className="block py-2 text-sm text-white/80 hover:text-white transition-colors"
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        setIsServicesOpen(false);
+                      }}
+                    >
+                      {service.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              
               <button
                 type="button"
                 onClick={() => handleNavClick('testimonials')}

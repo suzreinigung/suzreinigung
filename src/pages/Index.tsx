@@ -27,19 +27,7 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Debug: Log CSS classes being applied
-  useEffect(() => {
-    console.log('🎨 SUZ Design System Debug:');
-    console.log('- Premium gradient class applied:', document.querySelector('.bg-premium-gradient') !== null);
-    console.log('- Glass morphism class applied:', document.querySelector('.glass-morphism-premium') !== null);
-    console.log('- Gradient text class applied:', document.querySelector('.gradient-text-animated') !== null);
-    console.log('- Force Apple design class applied:', document.querySelector('.force-apple-design') !== null);
-
-    // Check if CSS custom properties are loaded
-    const rootStyles = getComputedStyle(document.documentElement);
-    console.log('- SUZ Blue Primary:', rootStyles.getPropertyValue('--suz-blue-primary'));
-    console.log('- Current theme class:', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-  }, []);
+  // Removed debug console logs for production performance
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
