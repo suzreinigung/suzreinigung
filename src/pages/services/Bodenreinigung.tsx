@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Briefcase, Check, Star, Phone, MessageCircle } from 'lucide-react';
+import { Sparkles, Check, Star, Phone, MessageCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { TrustIndicators } from '@/components/TrustIndicators';
@@ -8,11 +8,11 @@ import QuoteRequestForm from '@/components/QuoteRequestForm';
 import { services } from '@/data/services';
 import { trackBusinessEvents } from '@/lib/analytics';
 
-const Bueroreinigung = () => {
-  const serviceData = services.bueroreinigung;
+const Bodenreinigung = () => {
+  const serviceData = services.bodenreinigung;
 
   useEffect(() => {
-    trackBusinessEvents.servicePageView('bueroreinigung');
+    trackBusinessEvents.servicePageView('bodenreinigung');
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -21,7 +21,7 @@ const Bueroreinigung = () => {
   };
 
   const handleCTAClick = () => {
-    trackBusinessEvents.serviceInquiry('bueroreinigung');
+    trackBusinessEvents.serviceInquiry('bodenreinigung');
     window.open('https://wa.me/4917623152477', '_blank');
   };
 
@@ -31,21 +31,21 @@ const Bueroreinigung = () => {
         <title>{serviceData.seo.title}</title>
         <meta name="description" content={serviceData.seo.description} />
         <meta name="keywords" content={serviceData.seo.keywords.join(', ')} />
-        <link rel="canonical" href="https://www.suzreinigung.de/services/bueroreinigung" />
+        <link rel="canonical" href="https://www.suzreinigung.de/services/bodenreinigung" />
       </Helmet>
 
       <Navigation scrollToSection={scrollToSection} />
 
       {/* Hero Section */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-900 to-slate-900">
+      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-900 to-slate-900">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 mb-8 bg-blue-600 rounded-full">
-            <Briefcase className="w-10 h-10 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 mb-8 bg-purple-600 rounded-full">
+            <Sparkles className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {serviceData.title}
           </h1>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
             {serviceData.longDescription}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -89,7 +89,7 @@ const Bueroreinigung = () => {
               <div className="grid gap-4">
                 {serviceData.features.map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-purple-600 flex-shrink-0" />
                     <span className="text-gray-700">{feature}</span>
                   </div>
                 ))}
@@ -100,7 +100,7 @@ const Bueroreinigung = () => {
               <div className="grid gap-4">
                 {serviceData.benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <Star className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                    <Star className="w-5 h-5 text-purple-600 flex-shrink-0" />
                     <span className="text-gray-700">{benefit}</span>
                   </div>
                 ))}
@@ -119,8 +119,8 @@ const Bueroreinigung = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {serviceData.process.map((step, index) => (
               <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 bg-blue-100 rounded-full">
-                  <span className="text-2xl font-bold text-blue-600">{step.step}</span>
+                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 bg-purple-100 rounded-full">
+                  <span className="text-2xl font-bold text-purple-600">{step.step}</span>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{step.title}</h3>
                 <p className="text-gray-600">{step.description}</p>
@@ -140,12 +140,12 @@ const Bueroreinigung = () => {
             {serviceData.pricing.options.map((option, index) => (
               <div key={index} className="bg-white rounded-lg p-8 shadow-lg border border-gray-200">
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{option.name}</h3>
-                <div className="text-3xl font-bold text-blue-600 mb-4">{option.price}</div>
+                <div className="text-3xl font-bold text-purple-600 mb-4">{option.price}</div>
                 <p className="text-gray-600 mb-6">{option.description}</p>
                 <ul className="space-y-2">
                   {option.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-blue-600" />
+                      <Check className="w-4 h-4 text-purple-600" />
                       <span className="text-sm text-gray-700">{feature}</span>
                     </li>
                   ))}
@@ -176,14 +176,14 @@ const Bueroreinigung = () => {
       </section>
 
       {/* Quote Request */}
-      <section id="quote" className="py-16 px-4 sm:px-6 lg:px-8 bg-blue-50">
+      <section id="quote" className="py-16 px-4 sm:px-6 lg:px-8 bg-purple-50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Kostenloses Angebot anfordern
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Erhalten Sie ein unverbindliches Angebot für Ihre Büroreinigung. 
+              Erhalten Sie ein unverbindliches Angebot für Ihre Bodenreinigung. 
               Wir melden uns innerhalb von 24 Stunden bei Ihnen.
             </p>
           </div>
@@ -196,4 +196,4 @@ const Bueroreinigung = () => {
   );
 };
 
-export default Bueroreinigung;
+export default Bodenreinigung;

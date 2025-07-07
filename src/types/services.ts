@@ -1,67 +1,70 @@
-export interface Service {
-  id: string;
+import { LucideIcon } from 'lucide-react';
+
+export interface ServiceFeature {
   title: string;
-  subtitle: string;
   description: string;
-  features: string[];
-  benefits: string[];
-  process: ProcessStep[];
-  pricing: PricingInfo;
-  gallery: string[];
-  faqs: FAQ[];
-  cta: {
-    primary: string;
-    secondary: string;
-  };
-  seo: {
-    title: string;
-    description: string;
-    keywords: string[];
-  };
+  icon?: string;
 }
 
-export interface ProcessStep {
+export interface ServiceBenefit {
+  title: string;
+  description: string;
+}
+
+export interface ServiceProcess {
   step: number;
   title: string;
   description: string;
-  icon: string;
 }
 
-export interface PricingInfo {
-  startingPrice: string;
-  priceRange: string;
-  factors: string[];
-  includes: string[];
+export interface ServicePricingOption {
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
 }
 
-export interface FAQ {
+export interface ServicePricing {
+  title: string;
+  options: ServicePricingOption[];
+}
+
+export interface ServiceFAQ {
   question: string;
   answer: string;
 }
 
-export interface QuoteRequest {
-  serviceType: string;
-  contactInfo: {
-    name: string;
-    email: string;
-    phone: string;
-    company?: string;
-  };
-  serviceDetails: {
-    area: string;
-    frequency: string;
-    size: string;
-    urgency: string;
-    additionalServices: string[];
-  };
-  message?: string;
+export interface ServiceSEO {
+  title: string;
+  description: string;
+  keywords: string[];
 }
 
-export const SERVICE_TYPES = {
+export interface Service {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  longDescription: string;
+  icon: LucideIcon;
+  image: string;
+  category: string;
+  color: string;
+  features: string[];
+  benefits: string[];
+  process: ServiceProcess[];
+  pricing: ServicePricing;
+  faqs: ServiceFAQ[];
+  seo: ServiceSEO;
+}
+
+export const SERVICE_SLUGS = {
+  HOTELZIMMERREINIGUNG: 'hotelzimmerreinigung',
+  TEPPICHREINIGUNG: 'teppichreinigung', 
+  BODENREINIGUNG: 'bodenreinigung',
+  GEMEINSCHAFTSRAEUME: 'gemeinschaftsraeume',
   BUEROREINIGUNG: 'bueroreinigung',
-  HAUSREINIGUNG: 'hausreinigung', 
-  FENSTERREINIGUNG: 'fensterreinigung',
-  GRUNDREINIGUNG: 'grundreinigung',
+  KRANKENHAUSREINIGUNG: 'krankenhausreinigung'
 } as const;
 
-export type ServiceType = typeof SERVICE_TYPES[keyof typeof SERVICE_TYPES];
+export type ServiceSlug = typeof SERVICE_SLUGS[keyof typeof SERVICE_SLUGS];

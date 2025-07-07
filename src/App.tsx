@@ -15,11 +15,13 @@ const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const CookieConsent = lazy(() => import("./components/CookieConsent"));
 
-// Lazy load service pages
+// Lazy load service pages - Updated to match real services
+const Hotelzimmerreinigung = lazy(() => import("./pages/services/Hotelzimmerreinigung"));
+const Teppichreinigung = lazy(() => import("./pages/services/Teppichreinigung"));
+const Bodenreinigung = lazy(() => import("./pages/services/Bodenreinigung"));
+const Gemeinschaftsraeume = lazy(() => import("./pages/services/Gemeinschaftsraeume"));
 const Bueroreinigung = lazy(() => import("./pages/services/Bueroreinigung"));
-const Hausreinigung = lazy(() => import("./pages/services/Hausreinigung"));
-const Fensterreinigung = lazy(() => import("./pages/services/Fensterreinigung"));
-const Grundreinigung = lazy(() => import("./pages/services/Grundreinigung"));
+const Krankenhausreinigung = lazy(() => import("./pages/services/Krankenhausreinigung"));
 
 // Lazy load blog pages
 const Blog = lazy(() => import("./pages/Blog"));
@@ -114,18 +116,20 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 
-                {/* Service Pages */}
-                          <Route path="/services/bueroreinigung" element={<Bueroreinigung />} />
-          <Route path="/services/hausreinigung" element={<Hausreinigung />} />
-          <Route path="/services/fensterreinigung" element={<Fensterreinigung />} />
-          <Route path="/services/grundreinigung" element={<Grundreinigung />} />
-          
-          {/* Blog Routes */}
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          
-          {/* Local SEO Routes */}
-          <Route path="/standorte/:location" element={<LocationPage />} />
+                {/* Service Pages - Updated to match real services */}
+                <Route path="/services/hotelzimmerreinigung" element={<Hotelzimmerreinigung />} />
+                <Route path="/services/teppichreinigung" element={<Teppichreinigung />} />
+                <Route path="/services/bodenreinigung" element={<Bodenreinigung />} />
+                <Route path="/services/gemeinschaftsraeume" element={<Gemeinschaftsraeume />} />
+                <Route path="/services/bueroreinigung" element={<Bueroreinigung />} />
+                <Route path="/services/krankenhausreinigung" element={<Krankenhausreinigung />} />
+                
+                {/* Blog Routes */}
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                
+                {/* Local SEO Routes */}
+                <Route path="/standorte/:location" element={<LocationPage />} />
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

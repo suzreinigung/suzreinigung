@@ -1,419 +1,641 @@
-import { Service, SERVICE_TYPES } from '@/types/services';
+import { Building2, Home, Sparkles, Users, Briefcase, Heart } from 'lucide-react';
 
-export const servicesData: Record<string, Service> = {
-  [SERVICE_TYPES.BUEROREINIGUNG]: {
-    id: SERVICE_TYPES.BUEROREINIGUNG,
-    title: 'Professionelle Büroreinigung',
-    subtitle: 'Für einen sauberen und produktiven Arbeitsplatz',
-    description: 'Unsere professionelle Büroreinigung sorgt für ein hygienisches und motivierendes Arbeitsumfeld. Von kleinen Praxen bis hin zu großen Bürokomplexen – wir reinigen zuverlässig und diskret nach Ihren individuellen Anforderungen.',
+export const services = {
+  hotelzimmerreinigung: {
+    id: 'hotelzimmerreinigung',
+    title: 'Hotelzimmerreinigung',
+    slug: 'hotelzimmerreinigung',
+    description: 'Tiefenreinigung und tägliche Pflege für höchste Hygienestandards in Hotelzimmern.',
+    longDescription: 'Professionelle Hotelzimmerreinigung mit höchsten Hygienestandards. Wir sorgen für perfekt saubere Zimmer, die Ihre Gäste begeistern und für positive Bewertungen sorgen.',
+    icon: Building2,
+    image: '/assets/images/services/Hotelzimmerreinigung-min.png',
+    category: 'Gewerbereinigung',
+    color: 'blue',
+    
     features: [
-      'Tägliche, wöchentliche oder monatliche Reinigung',
-      'Flexible Zeiten (früh morgens, abends, Wochenende)',
-      'Umweltfreundliche Reinigungsmittel',
-      'Erfahrenes und geschultes Personal',
-      'Reinigung von Büroräumen, Besprechungsräumen, Küchen',
-      'Sanitärbereich-Hygiene',
-      'Müllentsorgung und Recycling',
-      'Fensterreinigung innen und außen'
+      'Tägliche Zimmerreinigung',
+      'Tiefenreinigung nach Auszug',
+      'Badezimmer-Vollreinigung',
+      'Bettwäsche-Service',
+      'Staubsaugen und Wischen',
+      'Mülleimer-Service',
+      'Handtuch-Austausch',
+      'Minibar-Auffüllung'
     ],
+    
     benefits: [
-      'Bessere Arbeitsatmosphäre für Ihre Mitarbeiter',
-      'Professioneller Eindruck bei Kunden und Partnern',
-      'Weniger Krankheitstage durch bessere Hygiene',
-      'Mehr Zeit für Ihr Kerngeschäft',
-      'Kostenersparnis gegenüber eigener Reinigungskraft',
-      'Versicherte und bonded Mitarbeiter',
-      'Qualitätsgarantie auf alle Leistungen'
+      'Höchste Hygienestandards',
+      'Zufriedene Hotelgäste',
+      'Bessere Online-Bewertungen',
+      'Professionelle Ausstattung',
+      'Zuverlässige Zeiten',
+      'Geschultes Personal',
+      'Qualitätskontrolle',
+      'Flexible Buchungszeiten'
     ],
+    
     process: [
       {
         step: 1,
-        title: 'Kostenlose Besichtigung',
-        description: 'Wir besichtigen Ihre Räumlichkeiten und erstellen ein individuelles Angebot',
-        icon: 'Eye'
+        title: 'Zimmer-Check',
+        description: 'Inspektion der Zimmer und Bestandsaufnahme'
       },
       {
         step: 2,
-        title: 'Reinigungsplan erstellen',
-        description: 'Gemeinsam entwickeln wir einen Reinigungsplan nach Ihren Bedürfnissen',
-        icon: 'Calendar'
+        title: 'Badezimmer',
+        description: 'Vollständige Reinigung aller Sanitäranlagen'
       },
       {
         step: 3,
-        title: 'Team-Einsatz',
-        description: 'Unser geschultes Team beginnt mit der regelmäßigen Reinigung',
-        icon: 'Users'
+        title: 'Schlafbereich',
+        description: 'Bettwäsche, Staubsaugen, Oberflächenreinigung'
       },
       {
         step: 4,
-        title: 'Qualitätskontrolle',
-        description: 'Regelmäßige Kontrollen sichern die gleichbleibend hohe Qualität',
-        icon: 'CheckCircle'
+        title: 'Endkontrolle',
+        description: 'Qualitätsprüfung und finale Inspektion'
       }
     ],
+    
     pricing: {
-      startingPrice: 'Ab 15€',
-      priceRange: '15€ - 45€ pro Stunde',
-      factors: [
-        'Größe der Bürofläche',
-        'Reinigungsfrequenz',
-        'Spezielle Anforderungen',
-        'Uhrzeit der Reinigung',
-        'Zusätzliche Services'
-      ],
-      includes: [
-        'Grundreinigung aller Oberflächen',
-        'Staubsaugen und Wischen',
-        'Sanitärbereich-Reinigung',
-        'Müllentsorgung',
-        'Reinigungsmittel und Equipment'
+      title: 'Hotelzimmerreinigung Preise',
+      options: [
+        {
+          name: 'Einzelzimmer',
+          price: 'ab 25€',
+          description: 'Standard Hotelzimmer bis 25m²',
+          features: ['Komplette Zimmerreinigung', 'Badezimmer', 'Bettwäsche-Service']
+        },
+        {
+          name: 'Doppelzimmer',
+          price: 'ab 35€',
+          description: 'Doppelzimmer bis 35m²',
+          features: ['Erweiterte Reinigung', 'Zusätzliche Handtücher', 'Minibar-Check']
+        },
+        {
+          name: 'Suite',
+          price: 'auf Anfrage',
+          description: 'Luxus-Suiten und große Zimmer',
+          features: ['Premium-Service', 'Erweiterte Ausstattung', 'Spezielle Anforderungen']
+        }
       ]
     },
-    gallery: [
-      '/assets/images/office-cleaning-1.jpg',
-      '/assets/images/office-cleaning-2.jpg',
-      '/assets/images/office-cleaning-3.jpg'
-    ],
+    
     faqs: [
       {
-        question: 'Wie oft sollte ein Büro gereinigt werden?',
-        answer: 'Das hängt von der Bürogröße und Mitarbeiteranzahl ab. Typischerweise empfehlen wir 2-3x pro Woche für normale Büros und täglich für hochfrequentierte Bereiche.'
+        question: 'Wie lange dauert die Zimmerreinigung?',
+        answer: 'Ein Standardzimmer reinigen wir in 20-30 Minuten. Suiten können 45-60 Minuten dauern, je nach Größe und Ausstattung.'
       },
       {
-        question: 'Können Sie außerhalb der Arbeitszeiten reinigen?',
-        answer: 'Ja, wir bieten flexible Zeiten an - früh morgens, abends oder am Wochenende, damit Ihr Arbeitsablauf nicht gestört wird.'
+        question: 'Arbeiten Sie auch an Wochenenden?',
+        answer: 'Ja, wir sind 7 Tage die Woche verfügbar. Hotels haben einen kontinuierlichen Betrieb und wir passen uns Ihren Bedürfnissen an.'
       },
       {
-        question: 'Was ist im Service enthalten?',
-        answer: 'Unser Standard-Service umfasst Staubsaugen, Oberflächenreinigung, Sanitärreinigung, Müllentsorgung und Fensterreinigung innen.'
+        question: 'Welche Reinigungsmittel verwenden Sie?',
+        answer: 'Wir verwenden professionelle, hotelzertifizierte Reinigungsmittel, die höchste Hygiene gewährleisten und umweltfreundlich sind.'
       },
       {
-        question: 'Wie schnell können Sie starten?',
-        answer: 'Nach der Besichtigung und Vertragsabschluss können wir meist innerhalb von 3-5 Werktagen mit der regelmäßigen Reinigung beginnen.'
+        question: 'Bieten Sie auch Tiefenreinigung an?',
+        answer: 'Ja, bei Zimmerrenovierungen oder nach längeren Aufenthalten bieten wir spezielle Tiefenreinigungen mit erweiterten Services an.'
       }
     ],
-    cta: {
-      primary: 'Kostenloses Angebot anfordern',
-      secondary: 'Beratungstermin vereinbaren'
-    },
+    
     seo: {
-      title: 'Büroreinigung Köln & Bonn - Professionell & Zuverlässig | SUZ Reinigung',
-      description: 'Professionelle Büroreinigung in Köln und Bonn. ✓ Flexible Zeiten ✓ Erfahrenes Team ✓ Umweltfreundlich ✓ Kostenloses Angebot. Jetzt anfragen!',
-      keywords: ['Büroreinigung Köln', 'Office Cleaning Bonn', 'Gebäudereinigung', 'Reinigungsservice Büro', 'Unterhaltsreinigung']
+      title: 'Hotelzimmerreinigung Köln & Bonn | SUZ Reinigung',
+      description: 'Professionelle Hotelzimmerreinigung in Köln und Bonn. Höchste Hygienestandards für zufriedene Gäste. ✓ 20+ Jahre Erfahrung ✓ Täglich verfügbar',
+      keywords: ['Hotelzimmerreinigung', 'Hotelreinigung Köln', 'Zimmerreinigung', 'Hotelhygiene', 'Gastgewerbe Reinigung']
     }
   },
 
-  [SERVICE_TYPES.HAUSREINIGUNG]: {
-    id: SERVICE_TYPES.HAUSREINIGUNG,
-    title: 'Zuverlässige Hausreinigung',
-    subtitle: 'Mehr Zeit für die wichtigen Dinge im Leben',
-    description: 'Unsere professionelle Hausreinigung gibt Ihnen die Zeit zurück, die Sie für Familie, Hobbys und Entspannung brauchen. Vertrauen Sie auf unsere erfahrenen Reinigungskräfte für Ihr Zuhause.',
+  teppichreinigung: {
+    id: 'teppichreinigung',
+    title: 'Teppichreinigung',
+    slug: 'teppichreinigung',
+    description: 'Tiefenreinigung für Teppiche und Polster. Wir entfernen Flecken, Gerüche und Allergene für ein frisches und hygienisches Raumklima.',
+    longDescription: 'Professionelle Teppich- und Polsterreinigung mit modernsten Verfahren. Wir entfernen selbst hartnäckige Flecken und Gerüche dauerhaft.',
+    icon: Home,
+    image: '/assets/images/services/Teppichreinigung-min.png',
+    category: 'Spezialreinigung',
+    color: 'green',
+    
     features: [
-      'Regelmäßige Hausreinigung (wöchentlich, 14-tägig, monatlich)',
-      'Grundreinigung bei Umzug oder saisonaler Reinigung',
-      'Alle Räume: Wohnzimmer, Schlafzimmer, Küche, Bad',
-      'Fensterreinigung innen und außen',
-      'Treppenhaus und Keller auf Wunsch',
-      'Eigene Reinigungsmittel oder Ihre bevorzugten Produkte',
-      'Flexible Terminplanung',
-      'Schlüsselservice für regelmäßige Kunden'
+      'Fleckenentfernung',
+      'Geruchsbeseitigung',
+      'Allergen-Entfernung',
+      'Tiefenreinigung',
+      'Polsterreinigung',
+      'Teppichpflege',
+      'Schnelle Trocknung',
+      'Umweltfreundlich'
     ],
+    
     benefits: [
-      'Mehr Freizeit für Familie und Hobbys',
-      'Immer ein sauberes und ordentliches Zuhause',
-      'Professionelle Ergebnisse mit Qualitätsgarantie',
-      'Entlastung vom Haushalts-Stress',
-      'Geschultes und vertrauensvolles Personal',
-      'Flexible Anpassung an Ihre Bedürfnisse',
-      'Versicherungsschutz für Ihr Eigentum'
+      'Frisches Raumklima',
+      'Entfernung von Allergenen',
+      'Verlängerte Teppichlebensdauer',
+      'Professionelle Ausrüstung',
+      'Schonende Verfahren',
+      'Schnelle Ergebnisse',
+      'Garantierte Sauberkeit',
+      'Gesünderes Wohnen'
     ],
+    
     process: [
       {
         step: 1,
-        title: 'Erstberatung zu Hause',
-        description: 'Wir lernen Ihr Zuhause und Ihre Wünsche kennen',
-        icon: 'Home'
+        title: 'Inspektion',
+        description: 'Analyse der Verschmutzung und Materialprüfung'
       },
       {
         step: 2,
-        title: 'Individueller Reinigungsplan',
-        description: 'Wir erstellen einen Plan, der perfekt zu Ihrem Alltag passt',
-        icon: 'Calendar'
+        title: 'Vorbehandlung',
+        description: 'Spezielle Behandlung von Flecken und Problemstellen'
+      },
+      {
+        step: 3,
+        title: 'Tiefenreinigung',
+        description: 'Maschinelle Reinigung mit professionellen Geräten'
+      },
+      {
+        step: 4,
+        title: 'Nachbehandlung',
+        description: 'Trocknung und finale Qualitätskontrolle'
+      }
+    ],
+    
+    pricing: {
+      title: 'Teppichreinigung Preise',
+      options: [
+        {
+          name: 'Standard Teppich',
+          price: 'ab 4€/m²',
+          description: 'Normale Verschmutzung, Standardmaterial',
+          features: ['Grundreinigung', 'Fleckenbehandlung', 'Geruchsbeseitigung']
+        },
+        {
+          name: 'Premium Teppich',
+          price: 'ab 6€/m²',
+          description: 'Hochwertige Materialien, starke Verschmutzung',
+          features: ['Intensive Reinigung', 'Spezialbehandlung', 'Materialschutz']
+        },
+        {
+          name: 'Polsterreinigung',
+          price: 'ab 15€/Sitzplatz',
+          description: 'Sofas, Sessel, Autositze',
+          features: ['Tiefenreinigung', 'Fleckenschutz', 'Geruchsneutralisation']
+        }
+      ]
+    },
+    
+    faqs: [
+      {
+        question: 'Wie lange dauert die Trocknung?',
+        answer: 'Die Trocknungszeit beträgt in der Regel 4-8 Stunden, abhängig von Material, Raumtemperatur und Luftfeuchtigkeit.'
+      },
+      {
+        question: 'Können alle Flecken entfernt werden?',
+        answer: 'Die meisten Flecken können wir erfolgreich entfernen. Bei hartnäckigen oder alten Flecken besprechen wir die Erfolgsaussichten vorab.'
+      },
+      {
+        question: 'Ist die Reinigung für Haustiere sicher?',
+        answer: 'Ja, wir verwenden haustiersichere Reinigungsmittel. Nach der Trocknung ist der Teppich vollständig sicher für Ihre Haustiere.'
+      },
+      {
+        question: 'Reinigen Sie auch Orientteppiche?',
+        answer: 'Ja, wir haben spezielle Erfahrung mit wertvollen Orientteppichen und verwenden schonende, materialgerechte Verfahren.'
+      }
+    ],
+    
+    seo: {
+      title: 'Teppichreinigung Köln & Bonn | Professionell & Gründlich | SUZ Reinigung',
+      description: 'Professionelle Teppichreinigung in Köln und Bonn. ✓ Fleckenentfernung ✓ Geruchsbeseitigung ✓ Allergene entfernen ✓ Schnelle Trocknung',
+      keywords: ['Teppichreinigung', 'Polsterreinigung', 'Fleckenentfernung', 'Allergene', 'Teppichreinigung Köln']
+    }
+  },
+
+  bodenreinigung: {
+    id: 'bodenreinigung',
+    title: 'Bodenreinigung',
+    slug: 'bodenreinigung',
+    description: 'Professionelle Pflege für Hartböden, Fliesen, Laminat und mehr. Wir sorgen für glänzende, hygienisch saubere Oberflächen.',
+    longDescription: 'Spezialisierte Bodenreinigung für alle Hartböden. Von Fliesen über Parkett bis Laminat - wir sorgen für perfekt saubere und gepflegte Oberflächen.',
+    icon: Sparkles,
+    image: '/assets/images/services/Bodenreinigung-min.png',
+    category: 'Grundreinigung',
+    color: 'purple',
+    
+    features: [
+      'Alle Bodenarten',
+      'Tiefenreinigung',
+      'Versiegelung',
+      'Fleckenentfernung',
+      'Kratzerentfernung',
+      'Glanzauffrischung',
+      'Hygienische Reinigung',
+      'Materialgerechte Pflege'
+    ],
+    
+    benefits: [
+      'Längere Bodenlebensdauer',
+      'Glänzende Oberflächen',
+      'Hygienische Sauberkeit',
+      'Werterhaltung',
+      'Professionelle Ausrüstung',
+      'Materialschonung',
+      'Zeitersparnis',
+      'Garantierte Ergebnisse'
+    ],
+    
+    process: [
+      {
+        step: 1,
+        title: 'Bodenanalyse',
+        description: 'Bestimmung des Bodentyps und Verschmutzungsgrads'
+      },
+      {
+        step: 2,
+        title: 'Vorreinigung',
+        description: 'Entfernung von Schmutz und Staub'
+      },
+      {
+        step: 3,
+        title: 'Hauptreinigung',
+        description: 'Intensive Reinigung mit speziellen Geräten'
+      },
+      {
+        step: 4,
+        title: 'Nachbehandlung',
+        description: 'Versiegelung oder Politur je nach Bedarf'
+      }
+    ],
+    
+    pricing: {
+      title: 'Bodenreinigung Preise',
+      options: [
+        {
+          name: 'Fliesen & Steinböden',
+          price: 'ab 3€/m²',
+          description: 'Grundreinigung für harte Oberflächen',
+          features: ['Tiefenreinigung', 'Fugenreinigung', 'Versiegelung optional']
+        },
+        {
+          name: 'Parkett & Laminat',
+          price: 'ab 4€/m²',
+          description: 'Schonende Reinigung für empfindliche Böden',
+          features: ['Materialgerechte Pflege', 'Glanzauffrischung', 'Kratzerentfernung']
+        },
+        {
+          name: 'Spezialböden',
+          price: 'auf Anfrage',
+          description: 'Naturstein, Marmor, Designer-Böden',
+          features: ['Expertenwissen', 'Spezialausrüstung', 'Individualbehandlung']
+        }
+      ]
+    },
+    
+    faqs: [
+      {
+        question: 'Welche Böden können Sie reinigen?',
+        answer: 'Wir reinigen alle Arten von Hartböden: Fliesen, Parkett, Laminat, Vinyl, Naturstein, Marmor und Spezialböden.'
+      },
+      {
+        question: 'Ist eine Versiegelung notwendig?',
+        answer: 'Eine Versiegelung empfiehlt sich bei stark beanspruchten Böden oder nach einer Tiefenreinigung für längeren Schutz.'
+      },
+      {
+        question: 'Können Sie Kratzer entfernen?',
+        answer: 'Oberflächliche Kratzer können wir oft erfolgreich behandeln. Bei tiefen Kratzern beraten wir über Reparaturmöglichkeiten.'
+      },
+      {
+        question: 'Wie oft sollte eine Grundreinigung stattfinden?',
+        answer: 'Für Privathaushalte empfehlen wir 1-2 mal jährlich, für gewerbliche Flächen je nach Beanspruchung alle 3-6 Monate.'
+      }
+    ],
+    
+    seo: {
+      title: 'Bodenreinigung Köln & Bonn | Parkett, Fliesen, Laminat | SUZ Reinigung',
+      description: 'Professionelle Bodenreinigung in Köln und Bonn. ✓ Alle Bodenarten ✓ Tiefenreinigung ✓ Versiegelung ✓ Materialgerechte Pflege',
+      keywords: ['Bodenreinigung', 'Parkettreinigung', 'Fliesenreinigung', 'Laminatreinigung', 'Bodenreinigung Köln']
+    }
+  },
+
+  gemeinschaftsraeume: {
+    id: 'gemeinschaftsraeume',
+    title: 'Gemeinschaftsräume',
+    slug: 'gemeinschaftsraeume',
+    description: 'Zuverlässige Reinigung von Treppenhäusern, Fluren und Gemeinschaftsbereichen für Mehrfamilienhäuser und Wohnanlagen.',
+    longDescription: 'Professionelle Reinigung von Gemeinschaftsräumen in Wohnanlagen. Für einen gepflegten Eindruck und Wohlfühlambiente aller Bewohner.',
+    icon: Users,
+    image: '/assets/images/services/Gemeinschaftsräume-min.png',
+    category: 'Hausreinigung',
+    color: 'orange',
+    
+    features: [
+      'Treppenhausreinigung',
+      'Flurreinigung',
+      'Keller & Dachboden',
+      'Briefkastenanlagen',
+      'Aufzugsreinigung',
+      'Fensterreinigung',
+      'Müllplatzreinigung',
+      'Außenbereiche'
+    ],
+    
+    benefits: [
+      'Gepflegter Gesamteindruck',
+      'Wertsteigerung der Immobilie',
+      'Zufriedene Mieter',
+      'Regelmäßige Termine',
+      'Professionelle Ausführung',
+      'Flexible Reinigungszeiten',
+      'Langfristige Partnerschaften',
+      'Faire Preise'
+    ],
+    
+    process: [
+      {
+        step: 1,
+        title: 'Bestandsaufnahme',
+        description: 'Erfassung aller zu reinigenden Bereiche'
+      },
+      {
+        step: 2,
+        title: 'Reinigungsplan',
+        description: 'Erstellung eines individuellen Reinigungsplans'
       },
       {
         step: 3,
         title: 'Regelmäßige Reinigung',
-        description: 'Ihr persönliches Reinigungsteam kümmert sich um Ihr Zuhause',
-        icon: 'Sparkles'
+        description: 'Durchführung nach vereinbartem Rhythmus'
       },
       {
         step: 4,
-        title: 'Zufriedenheitsgarantie',
-        description: 'Wir sorgen dafür, dass Sie mit dem Ergebnis zu 100% zufrieden sind',
-        icon: 'Heart'
+        title: 'Qualitätskontrolle',
+        description: 'Regelmäßige Überprüfung der Reinigungsqualität'
       }
     ],
+    
     pricing: {
-      startingPrice: 'Ab 18€',
-      priceRange: '18€ - 25€ pro Stunde',
-      factors: [
-        'Hausgröße und Anzahl der Räume',
-        'Reinigungsfrequenz',
-        'Besondere Wünsche und Anforderungen',
-        'Zusätzliche Services (Fenster, Terrasse)',
-        'Anfahrtszeit'
-      ],
-      includes: [
-        'Alle Wohnräume (Staubsaugen, Wischen)',
-        'Küche (Arbeitsflächen, Herd, Spüle)',
-        'Badezimmer komplett',
-        'Staubwischen aller Oberflächen',
-        'Reinigungsmittel und Equipment'
+      title: 'Gemeinschaftsräume Preise',
+      options: [
+        {
+          name: 'Wöchentliche Reinigung',
+          price: 'ab 45€/Woche',
+          description: 'Kleinere Wohnanlagen bis 10 Parteien',
+          features: ['Treppenhaus', 'Eingangsbereiche', 'Müllplatz']
+        },
+        {
+          name: 'Große Wohnanlagen',
+          price: 'ab 80€/Woche',
+          description: 'Mehrere Treppenhäuser, Aufzüge',
+          features: ['Alle Gemeinschaftsbereiche', 'Aufzugsreinigung', 'Außenbereiche']
+        },
+        {
+          name: 'Sonderreinigungen',
+          price: 'auf Anfrage',
+          description: 'Grundreinigungen, Renovierungen',
+          features: ['Intensive Reinigung', 'Spezialgeräte', 'Flexible Termine']
+        }
       ]
     },
-    gallery: [
-      '/assets/images/house-cleaning-1.jpg',
-      '/assets/images/house-cleaning-2.jpg',
-      '/assets/images/house-cleaning-3.jpg'
-    ],
+    
     faqs: [
       {
-        question: 'Muss ich während der Reinigung zu Hause sein?',
-        answer: 'Nein, für regelmäßige Kunden bieten wir einen sicheren Schlüsselservice an. Sie können während der Reinigung arbeiten oder Ihre Freizeit genießen.'
+        question: 'Wie oft sollten Gemeinschaftsräume gereinigt werden?',
+        answer: 'Wir empfehlen eine wöchentliche Reinigung für Treppenhäuser und Eingangsbereiche, je nach Nutzungsintensität.'
       },
       {
-        question: 'Bringen Sie eigene Reinigungsmittel mit?',
-        answer: 'Ja, wir bringen professionelle, umweltfreundliche Reinigungsmittel mit. Auf Wunsch verwenden wir gerne auch Ihre bevorzugten Produkte.'
+        question: 'Können Sie auch am Wochenende reinigen?',
+        answer: 'Ja, wir bieten flexible Reinigungszeiten, auch am Wochenende oder an Feiertagen, um Bewohner nicht zu stören.'
       },
       {
-        question: 'Wie lange dauert die Reinigung meines Hauses?',
-        answer: 'Das hängt von der Hausgröße ab. Für eine 100m² Wohnung benötigen wir etwa 2-3 Stunden, für ein Einfamilienhaus 3-5 Stunden.'
+        question: 'Was ist bei der Schlüsselübergabe zu beachten?',
+        answer: 'Wir besprechen die Schlüsselübergabe individuell. Oft arbeiten wir mit Hausverwaltungen oder Hausmeistern zusammen.'
       },
       {
-        question: 'Was passiert, wenn ich mit der Reinigung nicht zufrieden bin?',
-        answer: 'Wir kommen kostenlos zurück und reinigen die beanstandeten Bereiche erneut. Ihre Zufriedenheit ist unsere Priorität.'
+        question: 'Reinigen Sie auch Aufzüge?',
+        answer: 'Ja, die Aufzugsreinigung gehört zu unserem Standard-Service für Gemeinschaftsbereiche, inklusive Kabine und Bedienelemente.'
       }
     ],
-    cta: {
-      primary: 'Kostenlose Beratung buchen',
-      secondary: 'Unverbindlich anfragen'
-    },
+    
     seo: {
-      title: 'Hausreinigung Köln & Bonn - Privater Reinigungsservice | SUZ Reinigung',
-      description: 'Professionelle Hausreinigung für Privatkunden in Köln und Bonn. ✓ Regelmäßig oder einmalig ✓ Vertrauensvoll ✓ Flexibel ✓ Kostenlose Beratung.',
-      keywords: ['Hausreinigung Köln', 'Putzfrau Bonn', 'Reinigungsservice privat', 'Haushaltshilfe', 'Wohnungsreinigung']
+      title: 'Treppenhausreinigung Köln & Bonn | Gemeinschaftsräume | SUZ Reinigung',
+      description: 'Professionelle Reinigung von Treppenhäusern und Gemeinschaftsräumen in Köln und Bonn. ✓ Regelmäßig ✓ Zuverlässig ✓ Faire Preise',
+      keywords: ['Treppenhausreinigung', 'Gemeinschaftsräume', 'Mehrfamilienhaus', 'Wohnanlage', 'Hausreinigung Köln']
     }
   },
 
-  [SERVICE_TYPES.FENSTERREINIGUNG]: {
-    id: SERVICE_TYPES.FENSTERREINIGUNG,
-    title: 'Professionelle Fensterreinigung',
-    subtitle: 'Kristallklare Sicht das ganze Jahr über',
-    description: 'Saubere Fenster sorgen für mehr Licht, bessere Aussicht und einen gepflegten Eindruck. Unsere Fensterreinigung macht Ihre Fenster streifenfrei sauber – egal ob privat oder gewerblich.',
+  bueroreinigung: {
+    id: 'bueroreinigung',
+    title: 'Büroreinigung',
+    slug: 'bueroreinigung',
+    description: 'Professionelle Reinigung von Büroflächen und Arbeitsplätzen für ein sauberes und produktives Arbeitsumfeld.',
+    longDescription: 'Büroreinigung für moderne Arbeitsplätze. Wir sorgen für hygienische Sauberkeit und ein produktives Arbeitsumfeld für Ihre Mitarbeiter.',
+    icon: Briefcase,
+    image: '/assets/images/services/Büroreinigung-min.png',
+    category: 'Gewerbereinigung',
+    color: 'blue',
+    
     features: [
-      'Innen- und Außenreinigung aller Fenster',
-      'Rahmen und Fensterbänke werden mitgereinigt',
-      'Professionelle Ausrüstung für alle Höhen',
-      'Regelmäßige Termine oder Einzelreinigung',
-      'Auch für Wintergärten und Glasdächer',
-      'Geschäfts- und Schaufenster',
-      'Versicherung für Arbeiten in der Höhe',
-      'Umweltfreundliche Reinigungsmittel'
+      'Arbeitsplatzreinigung',
+      'Sanitärreinigung',
+      'Küchen & Pausenräume',
+      'Konferenzräume',
+      'Empfangsbereiche',
+      'Fensterreinigung',
+      'Müllentsorgung',
+      'Desinfektionsservice'
     ],
+    
     benefits: [
-      'Deutlich mehr Tageslicht in Ihren Räumen',
-      'Professioneller Eindruck bei Kunden',
-      'Längere Lebensdauer Ihrer Fenster',
-      'Keine streifigen oder schmierigen Ergebnisse',
-      'Sicherheit durch professionelle Ausrüstung',
-      'Zeitersparnis und keine eigene Anschaffung von Equipment',
-      'Ganzjahresservice auch bei schwierigen Wetterbedingungen'
+      'Produktiveres Arbeitsklima',
+      'Gesunde Mitarbeiter',
+      'Professioneller Eindruck',
+      'Flexible Reinigungszeiten',
+      'Hygiene-Standards',
+      'Langfristige Partnerschaften',
+      'Kosteneffizienz',
+      'Zuverlässiger Service'
     ],
+    
     process: [
       {
         step: 1,
-        title: 'Kostenvoranschlag',
-        description: 'Wir zählen Ihre Fenster und erstellen ein faires Angebot',
-        icon: 'Calculator'
+        title: 'Büro-Analyse',
+        description: 'Begehung und Ermittlung der Reinigungsanforderungen'
       },
       {
         step: 2,
-        title: 'Terminplanung',
-        description: 'Wir vereinbaren regelmäßige Termine oder Einzeltermine nach Ihren Wünschen',
-        icon: 'Clock'
+        title: 'Reinigungskonzept',
+        description: 'Erstellung eines maßgeschneiderten Reinigungsplans'
       },
       {
         step: 3,
-        title: 'Professionelle Reinigung',
-        description: 'Unser Team reinigt alle Fenster innen und außen streifenfrei',
-        icon: 'Droplets'
+        title: 'Regelmäßige Reinigung',
+        description: 'Durchführung nach Ihrem gewünschten Rhythmus'
       },
       {
         step: 4,
-        title: 'Qualitätsprüfung',
-        description: 'Wir prüfen das Ergebnis und garantieren streifenfreie Sauberkeit',
-        icon: 'Shield'
+        title: 'Qualitätsmanagement',
+        description: 'Kontinuierliche Kontrolle und Optimierung'
       }
     ],
+    
     pricing: {
-      startingPrice: 'Ab 2€',
-      priceRange: '2€ - 8€ pro Fenster',
-      factors: [
-        'Anzahl und Größe der Fenster',
-        'Zugänglichkeit (Erdgeschoss vs. höhere Etagen)',
-        'Reinigungsfrequenz',
-        'Rahmen und Fensterbänke',
-        'Verschmutzungsgrad'
-      ],
-      includes: [
-        'Innen- und Außenreinigung',
-        'Rahmen und Fensterbänke',
-        'Professionelle Ausrüstung',
-        'Umweltfreundliche Reinigungsmittel',
-        'Versicherungsschutz'
+      title: 'Büroreinigung Preise',
+      options: [
+        {
+          name: 'Kleinbüro',
+          price: 'ab 120€/Monat',
+          description: 'Bis 100m², wöchentliche Reinigung',
+          features: ['Arbeitsplätze', 'Sanitärräume', 'Küche', 'Müllentsorgung']
+        },
+        {
+          name: 'Mittelständisches Büro',
+          price: 'ab 280€/Monat',
+          description: 'Bis 300m², 2x wöchentlich',
+          features: ['Erweiterte Bereiche', 'Konferenzräume', 'Empfang', 'Fenster']
+        },
+        {
+          name: 'Großraumbüro',
+          price: 'auf Anfrage',
+          description: 'Über 300m², täglich oder individuell',
+          features: ['Vollservice', 'Spezialreinigungen', 'Notfallservice', '24/7 verfügbar']
+        }
       ]
     },
-    gallery: [
-      '/assets/images/window-cleaning-1.jpg',
-      '/assets/images/window-cleaning-2.jpg',
-      '/assets/images/window-cleaning-3.jpg'
-    ],
+    
     faqs: [
       {
-        question: 'Wie oft sollten Fenster gereinigt werden?',
-        answer: 'Für Privathaushalte empfehlen wir 2-4x pro Jahr, für Geschäfte je nach Lage monatlich bis vierteljährlich.'
+        question: 'Zu welchen Zeiten können Sie reinigen?',
+        answer: 'Wir reinigen flexibel nach Ihren Bedürfnissen: vor Arbeitsbeginn, in der Mittagspause, nach Feierabend oder am Wochenende.'
       },
       {
-        question: 'Reinigen Sie auch bei schlechtem Wetter?',
-        answer: 'Bei leichtem Regen ja, bei starkem Regen oder Sturm verschieben wir den Termin zu Ihrer und unserer Sicherheit.'
+        question: 'Sind Ihre Mitarbeiter versichert?',
+        answer: 'Ja, alle unsere Mitarbeiter sind vollständig versichert und haben Zugang zu Ihren Geschäftsräumen nur unter strengen Sicherheitsvorkehrungen.'
       },
       {
-        question: 'Können Sie auch sehr hohe Fenster reinigen?',
-        answer: 'Ja, wir haben professionelle Ausrüstung für Arbeiten bis zu 20 Meter Höhe und sind entsprechend versichert.'
+        question: 'Können Sie auch kurzfristige Reinigungen durchführen?',
+        answer: 'Ja, für wichtige Termine oder Besuch können wir oft kurzfristige Zusatzreinigungen anbieten. Sprechen Sie uns einfach an.'
       },
       {
-        question: 'Was machen Sie gegen Kalkflecken?',
-        answer: 'Wir verwenden spezielle Reinigungsmittel gegen Kalkablagerungen und können auch hartnäckige Flecken entfernen.'
+        question: 'Verwenden Sie umweltfreundliche Reinigungsmittel?',
+        answer: 'Ja, wir setzen auf ökologische und gesundheitsschonende Reinigungsmittel, die trotzdem höchste Reinigungsstandards erreichen.'
       }
     ],
-    cta: {
-      primary: 'Fenster zählen lassen',
-      secondary: 'Kostenvoranschlag anfordern'
-    },
+    
     seo: {
-      title: 'Fensterreinigung Köln & Bonn - Streifenfrei Sauber | SUZ Reinigung',
-      description: 'Professionelle Fensterreinigung in Köln und Bonn. ✓ Innen & Außen ✓ Alle Höhen ✓ Streifenfrei ✓ Regelmäßig oder einmalig. Jetzt Termin buchen!',
-      keywords: ['Fensterreinigung Köln', 'Fensterputzer Bonn', 'Glasreinigung', 'Schaufensterreinigung', 'Fenster putzen lassen']
+      title: 'Büroreinigung Köln & Bonn | Professionell & Zuverlässig | SUZ Reinigung',
+      description: 'Professionelle Büroreinigung in Köln und Bonn. ✓ Flexible Zeiten ✓ Hygiene-Standards ✓ Arbeitsplatzreinigung ✓ Langfristige Partnerschaften',
+      keywords: ['Büroreinigung', 'Arbeitsplatzreinigung', 'Gewerbliche Reinigung', 'Unternehmen', 'Büroreinigung Köln']
     }
   },
 
-  [SERVICE_TYPES.GRUNDREINIGUNG]: {
-    id: SERVICE_TYPES.GRUNDREINIGUNG,
-    title: 'Gründliche Grundreinigung',
-    subtitle: 'Für den perfekten Neustart',
-    description: 'Eine Grundreinigung schafft die perfekte Basis für ein sauberes Umfeld. Ob nach einem Umzug, vor einer Neuvermietung oder als saisonale Tiefenreinigung – wir machen alles wieder wie neu.',
+  krankenhausreinigung: {
+    id: 'krankenhausreinigung',
+    title: 'Krankenhausreinigung',
+    slug: 'krankenhausreinigung',
+    description: 'Spezialisierte Reinigung für medizinische Einrichtungen mit höchsten Hygienestandards und Desinfektionsprotokollen für Patientensicherheit.',
+    longDescription: 'Spezialisierte Krankenhausreinigung mit höchsten Hygienestandards. Zertifiziert für medizinische Einrichtungen, Praxen und Gesundheitszentren.',
+    icon: Heart,
+    image: '/assets/images/services/Krankenhausreinigung-min.png',
+    category: 'Medizinische Reinigung',
+    color: 'red',
+    
     features: [
-      'Komplette Tiefenreinigung aller Räume',
-      'Entfernung hartnäckiger Verschmutzungen',
-      'Reinigung von Küchenschränken innen und außen',
-      'Sanitärbereiche mit Kalkentfernung',
-      'Fensterreinigung innen und außen',
-      'Teppich- und Polsterreinigung',
-      'Entfernung von Klebstoffresten',
-      'Balkon und Terrasse auf Wunsch'
+      'Krankenhauszertifiziert',
+      'Sterilisation',
+      'Desinfektionsprotokolle',
+      'OP-Bereich geeignet',
+      'Patientenzimmer',
+      'Intensivstationen',
+      'Notaufnahme',
+      'Laborräume'
     ],
+    
     benefits: [
-      'Perfekte Basis für Neuvermietung oder Einzug',
-      'Wertsteigerung Ihrer Immobilie',
-      'Hygienische Tiefenreinigung',
-      'Entfernung aller Spuren der Vornutzung',
-      'Professionelle Ergebnisse in kurzer Zeit',
-      'Komplettservice ohne eigenen Aufwand',
-      'Günstigere Alternative zur Eigenrenovierung'
+      'Höchste Hygiene-Standards',
+      'Patientensicherheit',
+      'Zertifizierte Verfahren',
+      'Speziell geschultes Personal',
+      'Compliance mit Vorschriften',
+      'Infektionsschutz',
+      '24/7 Notfall-Service',
+      'Dokumentierte Verfahren'
     ],
+    
     process: [
       {
         step: 1,
-        title: 'Vor-Ort-Besichtigung',
-        description: 'Wir bewerten den Umfang und erstellen ein detailliertes Angebot',
-        icon: 'Search'
+        title: 'Hygiene-Assessment',
+        description: 'Analyse der medizinischen Anforderungen'
       },
       {
         step: 2,
-        title: 'Planung & Vorbereitung',
-        description: 'Wir planen den Ablauf und organisieren alle benötigten Materialien',
-        icon: 'Clipboard'
+        title: 'Protokoll-Entwicklung',
+        description: 'Erstellung spezifischer Reinigungs- und Desinfektionsprotokolle'
       },
       {
         step: 3,
-        title: 'Intensive Reinigung',
-        description: 'Unser Team führt die komplette Grundreinigung durch',
-        icon: 'Zap'
+        title: 'Zertifizierte Durchführung',
+        description: 'Reinigung nach medizinischen Standards'
       },
       {
         step: 4,
-        title: 'Abschlusskontrolle',
-        description: 'Gemeinsame Abnahme und Qualitätskontrolle aller Bereiche',
-        icon: 'CheckSquare'
+        title: 'Dokumentation',
+        description: 'Vollständige Dokumentation aller durchgeführten Maßnahmen'
       }
     ],
+    
     pricing: {
-      startingPrice: 'Ab 25€',
-      priceRange: '25€ - 40€ pro Stunde',
-      factors: [
-        'Größe der zu reinigenden Fläche',
-        'Grad der Verschmutzung',
-        'Spezielle Anforderungen',
-        'Zeitdruck und Terminwünsche',
-        'Zusätzliche Services'
-      ],
-      includes: [
-        'Komplette Grundreinigung aller Räume',
-        'Professionelle Reinigungsmittel',
-        'Spezialausrüstung für hartnäckige Verschmutzungen',
-        'Entsorgung von Reinigungsabfällen',
-        'Qualitätskontrolle'
+      title: 'Krankenhausreinigung Preise',
+      options: [
+        {
+          name: 'Arztpraxis',
+          price: 'ab 180€/Monat',
+          description: 'Kleinere Praxen, wöchentliche Reinigung',
+          features: ['Behandlungsräume', 'Wartebereiche', 'Sanitäranlagen', 'Desinfektion']
+        },
+        {
+          name: 'Fachklinik',
+          price: 'ab 450€/Monat',
+          description: 'Spezialisierte medizinische Einrichtungen',
+          features: ['OP-Bereiche', 'Sterilisation', 'Patientenzimmer', 'Intensivbereich']
+        },
+        {
+          name: 'Krankenhaus',
+          price: 'auf Anfrage',
+          description: 'Große Kliniken, 24/7 Service',
+          features: ['Vollumfänglicher Service', 'Notfall-Bereitschaft', 'Compliance-Management', 'Personalschulung']
+        }
       ]
     },
-    gallery: [
-      '/assets/images/deep-cleaning-1.jpg',
-      '/assets/images/deep-cleaning-2.jpg',
-      '/assets/images/deep-cleaning-3.jpg'
-    ],
+    
     faqs: [
       {
-        question: 'Wie lange dauert eine Grundreinigung?',
-        answer: 'Das hängt von der Größe und dem Zustand ab. Für eine 80m² Wohnung planen wir 6-8 Stunden, für größere Objekte entsprechend mehr.'
+        question: 'Sind Sie für Krankenhäuser zertifiziert?',
+        answer: 'Ja, wir sind nach den aktuellen Standards für medizinische Einrichtungen zertifiziert und bilden unser Personal kontinuierlich weiter.'
       },
       {
-        question: 'Können Sie auch am Wochenende oder abends arbeiten?',
-        answer: 'Ja, für Grundreinigungen bieten wir flexible Zeiten an, auch am Wochenende oder abends gegen einen kleinen Aufpreis.'
+        question: 'Können Sie auch in OP-Bereichen reinigen?',
+        answer: 'Ja, unser geschultes Personal ist für die Reinigung von Operationssälen und sterilen Bereichen nach höchsten Standards ausgebildet.'
       },
       {
-        question: 'Was ist der Unterschied zur normalen Reinigung?',
-        answer: 'Bei der Grundreinigung werden auch Bereiche gereinigt, die normalerweise nicht zugänglich sind: Schränke innen, hinter Geräten, intensive Badreinigung etc.'
+        question: 'Wie wird die Hygiene dokumentiert?',
+        answer: 'Wir dokumentieren alle Reinigungsvorgänge lückenlos und stellen Ihnen regelmäßige Berichte für Ihre Compliance zur Verfügung.'
       },
       {
-        question: 'Übernehmen Sie auch kleine Reparaturen?',
-        answer: 'Kleine Ausbesserungen wie Bohrlöcher schließen können wir gegen Aufpreis übernehmen. Größere Reparaturen vermitteln wir gerne an Partner.'
+        question: 'Arbeiten Sie auch nachts?',
+        answer: 'Ja, wir bieten 24/7-Service und können auch in den Nachtstunden reinigen, um den Klinikbetrieb nicht zu stören.'
       }
     ],
-    cta: {
-      primary: 'Grundreinigung anfragen',
-      secondary: 'Kostenlosen Kostenvoranschlag'
-    },
+    
     seo: {
-      title: 'Grundreinigung Köln & Bonn - Umzug & Renovierung | SUZ Reinigung',
-      description: 'Professionelle Grundreinigung in Köln und Bonn. ✓ Nach Umzug ✓ Für Neuvermietung ✓ Tiefenreinigung ✓ Kostenvoranschlag. Jetzt anfragen!',
-      keywords: ['Grundreinigung Köln', 'Umzugsreinigung Bonn', 'Tiefenreinigung', 'Endreinigung', 'Renovierungsreinigung']
+      title: 'Krankenhausreinigung Köln & Bonn | Zertifiziert & Steril | SUZ Reinigung',
+      description: 'Zertifizierte Krankenhausreinigung in Köln und Bonn. ✓ Höchste Hygiene-Standards ✓ OP-Bereiche ✓ Desinfektionsprotokolle ✓ 24/7 Service',
+      keywords: ['Krankenhausreinigung', 'Medizinische Reinigung', 'Hygiene', 'Desinfektion', 'Gesundheitswesen', 'Klinik Reinigung']
     }
   }
 };
 
-export const getAllServices = (): Service[] => {
-  return Object.values(servicesData);
-};
-
-export const getServiceById = (id: string): Service | undefined => {
-  return servicesData[id];
-};
+export default services;

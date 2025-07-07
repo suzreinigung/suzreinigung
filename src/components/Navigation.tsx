@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Link, useLocation } from 'react-router-dom';
+import { ChevronDown, Building2, Home, Sparkles, Users, Briefcase, Heart } from 'lucide-react';
 
 interface NavigationProps {
   scrollToSection: (id: string) => void;
@@ -120,39 +120,83 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
               )}
               
               {/* Services Dropdown */}
-              <div className="relative">
+              <div className="relative group">
                 <button
-                  type="button"
-                  onClick={toggleServicesDropdown}
-                  className="suz-nav-link suz-focus-ring whitespace-nowrap flex items-center gap-1"
-                  aria-label="Leistungen anzeigen"
-                  aria-expanded={isServicesOpen}
+                  className="flex items-center gap-1 px-4 py-2 text-white hover:text-blue-300 transition-colors"
+                  onMouseEnter={() => setIsServicesOpen(true)}
+                  onMouseLeave={() => setIsServicesOpen(false)}
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
                 >
                   Leistungen
-                  <svg className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 
                 {isServicesOpen && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+                  <div 
+                    className="absolute top-full left-0 mt-1 w-80 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50"
+                    onMouseEnter={() => setIsServicesOpen(true)}
+                    onMouseLeave={() => setIsServicesOpen(false)}
+                  >
                     <Link
-                      to="/#services"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
+                      to="/services/hotelzimmerreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                     >
-                      Alle Leistungen
+                      <Building2 className="w-5 h-5 text-blue-600" />
+                      <div>
+                        <div className="font-medium">Hotelzimmerreinigung</div>
+                        <div className="text-sm text-gray-500">Höchste Hygienestandards</div>
+                      </div>
                     </Link>
-                    {services.map((service) => (
-                      <Link
-                        key={service.id}
-                        to={service.path}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                        onClick={() => setIsServicesOpen(false)}
-                      >
-                        {service.title}
-                      </Link>
-                    ))}
+                    <Link
+                      to="/services/teppichreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                    >
+                      <Home className="w-5 h-5 text-green-600" />
+                      <div>
+                        <div className="font-medium">Teppichreinigung</div>
+                        <div className="text-sm text-gray-500">Tiefenreinigung & Fleckenentfernung</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services/bodenreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors"
+                    >
+                      <Sparkles className="w-5 h-5 text-purple-600" />
+                      <div>
+                        <div className="font-medium">Bodenreinigung</div>
+                        <div className="text-sm text-gray-500">Hartböden, Fliesen, Laminat</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services/gemeinschaftsraeume"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                    >
+                      <Users className="w-5 h-5 text-orange-600" />
+                      <div>
+                        <div className="font-medium">Gemeinschaftsräume</div>
+                        <div className="text-sm text-gray-500">Treppenhäuser & Flure</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services/bueroreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    >
+                      <Briefcase className="w-5 h-5 text-blue-600" />
+                      <div>
+                        <div className="font-medium">Büroreinigung</div>
+                        <div className="text-sm text-gray-500">Arbeitsplätze & Büroflächen</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services/krankenhausreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
+                    >
+                      <Heart className="w-5 h-5 text-red-600" />
+                      <div>
+                        <div className="font-medium">Krankenhausreinigung</div>
+                        <div className="text-sm text-gray-500">Medizinische Einrichtungen</div>
+                      </div>
+                    </Link>
                   </div>
                 )}
               </div>
@@ -240,45 +284,86 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
               )}
               
               {/* Mobile Services Section */}
-              <button
-                type="button"
-                onClick={toggleServicesDropdown}
-                className="suz-mobile-nav-link suz-focus-ring flex items-center justify-between w-full"
-                aria-label="Leistungen anzeigen"
-              >
-                Leistungen
-                <svg className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              {isServicesOpen && (
-                <div className="pl-4 space-y-2">
-                  <Link
-                    to="/#services"
-                    className="block py-2 text-sm text-white/80 hover:text-white transition-colors"
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsServicesOpen(false);
-                    }}
+              <div className="relative group">
+                <button
+                  className="flex items-center gap-1 px-4 py-2 text-white hover:text-blue-300 transition-colors"
+                  onMouseEnter={() => setIsServicesOpen(true)}
+                  onMouseLeave={() => setIsServicesOpen(false)}
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                >
+                  Leistungen
+                  <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {isServicesOpen && (
+                  <div 
+                    className="absolute top-full left-0 mt-1 w-80 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50"
+                    onMouseEnter={() => setIsServicesOpen(true)}
+                    onMouseLeave={() => setIsServicesOpen(false)}
                   >
-                    Alle Leistungen
-                  </Link>
-                  {services.map((service) => (
                     <Link
-                      key={service.id}
-                      to={service.path}
-                      className="block py-2 text-sm text-white/80 hover:text-white transition-colors"
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        setIsServicesOpen(false);
-                      }}
+                      to="/services/hotelzimmerreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                     >
-                      {service.title}
+                      <Building2 className="w-5 h-5 text-blue-600" />
+                      <div>
+                        <div className="font-medium">Hotelzimmerreinigung</div>
+                        <div className="text-sm text-gray-500">Höchste Hygienestandards</div>
+                      </div>
                     </Link>
-                  ))}
-                </div>
-              )}
+                    <Link
+                      to="/services/teppichreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                    >
+                      <Home className="w-5 h-5 text-green-600" />
+                      <div>
+                        <div className="font-medium">Teppichreinigung</div>
+                        <div className="text-sm text-gray-500">Tiefenreinigung & Fleckenentfernung</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services/bodenreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors"
+                    >
+                      <Sparkles className="w-5 h-5 text-purple-600" />
+                      <div>
+                        <div className="font-medium">Bodenreinigung</div>
+                        <div className="text-sm text-gray-500">Hartböden, Fliesen, Laminat</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services/gemeinschaftsraeume"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                    >
+                      <Users className="w-5 h-5 text-orange-600" />
+                      <div>
+                        <div className="font-medium">Gemeinschaftsräume</div>
+                        <div className="text-sm text-gray-500">Treppenhäuser & Flure</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services/bueroreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    >
+                      <Briefcase className="w-5 h-5 text-blue-600" />
+                      <div>
+                        <div className="font-medium">Büroreinigung</div>
+                        <div className="text-sm text-gray-500">Arbeitsplätze & Büroflächen</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services/krankenhausreinigung"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
+                    >
+                      <Heart className="w-5 h-5 text-red-600" />
+                      <div>
+                        <div className="font-medium">Krankenhausreinigung</div>
+                        <div className="text-sm text-gray-500">Medizinische Einrichtungen</div>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
               
               <button
                 type="button"
