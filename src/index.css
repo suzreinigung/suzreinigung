@@ -3747,6 +3747,179 @@ p, span, div {
   gap: var(--space-6);
 }
 
+/* ===== ENHANCED NAVIGATION STYLES ===== */
+
+/* Enhanced Navigation Container */
+.suz-navigation-enhanced {
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  will-change: transform !important;
+  z-index: 9999 !important;
+  position: fixed !important;
+}
+
+.suz-navigation-enhanced .suz-card-glass {
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.3),
+    0 10px 25px -5px rgba(59, 130, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Enhanced Dropdown Styles */
+.suz-services-dropdown {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  margin-top: 0.5rem !important;
+  width: 320px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  padding: 0.5rem 0 !important;
+  z-index: 10000 !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: none;
+}
+
+.suz-services-dropdown.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+  pointer-events: auto !important;
+}
+
+.suz-services-dropdown-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0.75rem 1rem !important;
+  color: #374151 !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease !important;
+  border-radius: 0.5rem !important;
+  margin: 0 0.5rem !important;
+}
+
+.suz-services-dropdown-item:hover {
+  background-color: rgba(59, 130, 246, 0.05) !important;
+  color: #2563eb !important;
+  transform: translateX(2px) !important;
+}
+
+.suz-services-dropdown-item:focus {
+  outline: 2px solid #2563eb !important;
+  outline-offset: -2px !important;
+}
+
+.suz-services-dropdown-icon {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  flex-shrink: 0 !important;
+}
+
+.suz-services-dropdown-content {
+  flex: 1 !important;
+}
+
+.suz-services-dropdown-title {
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25 !important;
+  margin-bottom: 0.125rem !important;
+}
+
+.suz-services-dropdown-description {
+  font-size: 0.75rem !important;
+  line-height: 1.167 !important;
+  color: #6b7280 !important;
+}
+
+/* Services Button Enhanced */
+.suz-services-button {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  padding: 0.5rem 1rem !important;
+  color: white !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+}
+
+.suz-services-button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #93c5fd !important;
+}
+
+.suz-services-button:focus {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+}
+
+.suz-services-button .chevron {
+  width: 1rem !important;
+  height: 1rem !important;
+  transition: transform 0.2s ease !important;
+}
+
+.suz-services-button .chevron.open {
+  transform: rotate(180deg) !important;
+}
+
+/* Mobile Dropdown Enhancement */
+@media (max-width: 768px) {
+  .suz-services-dropdown {
+    position: static !important;
+    width: 100% !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0.5rem !important;
+    margin: 0.5rem 0.5rem 0 !important;
+    padding: 0.5rem !important;
+  }
+
+  .suz-services-dropdown-item {
+    color: rgba(255, 255, 255, 0.8) !important;
+    padding: 0.5rem !important;
+    margin: 0 !important;
+    font-size: 0.875rem !important;
+  }
+
+  .suz-services-dropdown-item:hover {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+    color: white !important;
+  }
+
+  .suz-services-dropdown-title {
+    color: white !important;
+  }
+
+  .suz-services-dropdown-description {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+}
+
 /* End of @layer components */
 
 /* Additional utility overrides */
