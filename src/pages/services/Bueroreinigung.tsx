@@ -36,11 +36,11 @@ const Bueroreinigung = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-premium-gradient force-apple-design">
       <Navigation scrollToSection={scrollToSection} />
       
       {/* Hero Section */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-900 to-slate-900">
+      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-blue-800">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {service.title}
@@ -78,17 +78,17 @@ const Bueroreinigung = () => {
       {/* Service Features */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">
             Was wir für Sie tun
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {service.features.map((feature, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div key={index} className="suz-card-glass p-6 rounded-lg hover:shadow-lg transition-shadow">
                 <div className="flex items-start gap-3">
-                  <svg className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-6 w-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <p className="text-slate-700">{feature}</p>
+                  <p className="text-gray-200">{feature}</p>
                 </div>
               </div>
             ))}
@@ -97,9 +97,9 @@ const Bueroreinigung = () => {
       </section>
 
       {/* Process Steps */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">
             So läuft es ab
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -108,8 +108,8 @@ const Bueroreinigung = () => {
                 <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white text-2xl font-bold">{step.step}</span>
                 </div>
-                <h3 className="text-lg font-semibold mb-2 text-slate-900">{step.title}</h3>
-                <p className="text-slate-600 text-sm">{step.description}</p>
+                <h3 className="text-lg font-semibold mb-2 text-white">{step.title}</h3>
+                <p className="text-gray-300 text-sm">{step.description}</p>
               </div>
             ))}
           </div>
@@ -119,16 +119,16 @@ const Bueroreinigung = () => {
       {/* Benefits */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">
             Ihre Vorteile
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {service.benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-blue-50">
-                <svg className="h-6 w-6 text-yellow-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24">
+              <div key={index} className="flex items-start gap-3 p-4 rounded-lg suz-card-glass">
+                <svg className="h-6 w-6 text-yellow-400 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
-                <p className="text-slate-700 font-medium">{benefit}</p>
+                <p className="text-gray-200 font-medium">{benefit}</p>
               </div>
             ))}
           </div>
@@ -136,47 +136,47 @@ const Bueroreinigung = () => {
       </section>
 
       {/* Pricing */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-800 to-blue-900">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8 text-white">
             Transparente Preisgestaltung
           </h2>
           
-          <div className="bg-white rounded-lg p-8 max-w-2xl mx-auto">
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                {service.pricing.startingPrice} pro Stunde
-              </h3>
-              <p className="text-lg text-slate-600">
-                Preisspanne: {service.pricing.priceRange}
-              </p>
-            </div>
-            
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-semibold mb-3 text-slate-900">Preisfaktoren:</h4>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {service.pricing.factors.map((factor, index) => (
-                    <span key={index} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
-                      {factor}
-                    </span>
-                  ))}
-                </div>
+                      <div className="suz-card-glass rounded-lg p-8 max-w-2xl mx-auto">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  {service.pricing.startingPrice} pro Stunde
+                </h3>
+                <p className="text-lg text-gray-300">
+                  Preisspanne: {service.pricing.priceRange}
+                </p>
               </div>
               
-              <div>
-                <h4 className="font-semibold mb-3 text-slate-900">Im Preis enthalten:</h4>
-                <ul className="text-left space-y-2">
-                  {service.pricing.includes.map((item, index) => (
-                    <li key={index} className="flex items-center gap-2">
-                      <svg className="h-4 w-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-sm text-slate-700">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-semibold mb-3 text-white">Preisfaktoren:</h4>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {service.pricing.factors.map((factor, index) => (
+                      <span key={index} className="bg-blue-600/20 text-blue-300 border border-blue-500/30 px-3 py-1 rounded-full text-sm">
+                        {factor}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold mb-3 text-white">Im Preis enthalten:</h4>
+                  <ul className="text-left space-y-2">
+                    {service.pricing.includes.map((item, index) => (
+                      <li key={index} className="flex items-center gap-2">
+                        <svg className="h-4 w-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-sm text-gray-200">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               
               <button 
                 onClick={handleCTAClick}
@@ -192,16 +192,16 @@ const Bueroreinigung = () => {
       {/* FAQ */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">
             Häufige Fragen
           </h2>
           <div className="space-y-4">
             {service.faqs.map((faq, index) => (
-              <details key={index} className="border rounded-lg p-6 bg-white">
-                <summary className="font-semibold cursor-pointer text-slate-900 hover:text-blue-600">
+              <details key={index} className="border border-gray-600/30 rounded-lg p-6 suz-card-glass">
+                <summary className="font-semibold cursor-pointer text-white hover:text-blue-400">
                   {faq.question}
                 </summary>
-                <p className="text-slate-700 mt-3 leading-relaxed">{faq.answer}</p>
+                <p className="text-gray-300 mt-3 leading-relaxed">{faq.answer}</p>
               </details>
             ))}
           </div>
@@ -229,7 +229,7 @@ const Bueroreinigung = () => {
             </button>
             <a 
               href="tel:+4917623152477"
-              className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2"
+              className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

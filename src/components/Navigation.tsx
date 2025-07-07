@@ -135,10 +135,10 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
                 </button>
                 
                 {isServicesOpen && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 py-2 w-56 suz-card-glass rounded-lg shadow-xl border border-white/20 z-[60]">
                     <Link
                       to="/#services"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                      className="block px-4 py-2 text-sm text-white hover:bg-blue-500/20 hover:text-blue-300 transition-colors rounded-md mx-2"
                       onClick={() => setIsServicesOpen(false)}
                     >
                       Alle Leistungen
@@ -147,7 +147,7 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
                       <Link
                         key={service.id}
                         to={service.path}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        className="block px-4 py-2 text-sm text-gray-200 hover:bg-blue-500/20 hover:text-blue-300 transition-colors rounded-md mx-2"
                         onClick={() => setIsServicesOpen(false)}
                       >
                         {service.title}
@@ -253,10 +253,10 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
               </button>
               
               {isServicesOpen && (
-                <div className="pl-4 space-y-2">
+                <div className="pl-4 space-y-2 bg-black/20 rounded-lg p-2 ml-2 mt-2">
                   <Link
                     to="/#services"
-                    className="block py-2 text-sm text-white/80 hover:text-white transition-colors"
+                    className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
                     onClick={() => {
                       setIsMenuOpen(false);
                       setIsServicesOpen(false);
@@ -268,7 +268,7 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
                     <Link
                       key={service.id}
                       to={service.path}
-                      className="block py-2 text-sm text-white/80 hover:text-white transition-colors"
+                      className="block py-2 text-sm text-white/80 hover:text-white hover:bg-blue-500/20 transition-colors rounded-md px-2"
                       onClick={() => {
                         setIsMenuOpen(false);
                         setIsServicesOpen(false);

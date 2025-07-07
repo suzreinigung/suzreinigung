@@ -36,11 +36,11 @@ const Hausreinigung = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-premium-gradient force-apple-design">
       <Navigation scrollToSection={scrollToSection} />
       
       {/* Hero Section */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-900 to-blue-900">
+      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 to-emerald-700">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {service.title}
@@ -64,7 +64,7 @@ const Hausreinigung = () => {
             </button>
             <a 
               href="tel:+4917623152477"
-              className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2"
+              className="border-2 border-white text-white hover:bg-white hover:text-green-700 px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -78,17 +78,17 @@ const Hausreinigung = () => {
       {/* Service Features */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">
             Was wir für Sie tun
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {service.features.map((feature, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div key={index} className="suz-card-glass p-6 rounded-lg hover:shadow-lg transition-shadow">
                 <div className="flex items-start gap-3">
-                  <svg className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-6 w-6 text-green-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <p className="text-slate-700">{feature}</p>
+                  <p className="text-gray-200">{feature}</p>
                 </div>
               </div>
             ))}
@@ -97,18 +97,18 @@ const Hausreinigung = () => {
       </section>
 
       {/* Benefits */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-green-50">
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">
             Ihre Vorteile
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {service.benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-white shadow-sm">
-                <svg className="h-6 w-6 text-yellow-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24">
+              <div key={index} className="flex items-start gap-3 p-4 rounded-lg suz-card-glass">
+                <svg className="h-6 w-6 text-yellow-400 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
-                <p className="text-slate-700 font-medium">{benefit}</p>
+                <p className="text-gray-200 font-medium">{benefit}</p>
               </div>
             ))}
           </div>
@@ -116,7 +116,7 @@ const Hausreinigung = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 to-blue-600">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 to-emerald-700">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6 text-white">
             Bereit für zuverlässige Hausreinigung?
@@ -136,7 +136,7 @@ const Hausreinigung = () => {
             </button>
             <a 
               href="tel:+4917623152477"
-              className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2"
+              className="border-2 border-white text-white hover:bg-white hover:text-green-700 px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
