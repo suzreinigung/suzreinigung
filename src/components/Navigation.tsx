@@ -218,6 +218,14 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
                 </div>
               </div>
               
+              <Link
+                to="/booking"
+                className="suz-nav-link suz-focus-ring whitespace-nowrap bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors"
+                aria-label="Online Termin buchen"
+              >
+                Termin buchen
+              </Link>
+              
               <button
                 type="button"
                 onClick={() => handleNavClick('testimonials')}
@@ -399,6 +407,15 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
                   </div>
                 </Link>
               </div>
+              
+              <Link
+                to="/booking"
+                className="suz-mobile-nav-link suz-focus-ring bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Online Termin buchen"
+              >
+                🗓️ Termin buchen
+              </Link>
               
               <button
                 type="button"

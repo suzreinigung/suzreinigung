@@ -30,6 +30,9 @@ const BlogPost = lazy(() => import("./pages/BlogPost"));
 // Lazy load location pages
 const LocationPage = lazy(() => import("./pages/LocationPage"));
 
+// Lazy load booking page
+const Booking = lazy(() => import("./pages/Booking"));
+
 // Loading component for Suspense fallback
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
@@ -130,6 +133,9 @@ const App = () => (
                 
                 {/* Local SEO Routes */}
                 <Route path="/standorte/:location" element={<LocationPage />} />
+                
+                {/* Booking Route */}
+                <Route path="/booking" element={<Booking />} />
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
