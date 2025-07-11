@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { getPostBySlug, blogCategories } from '@/data/blog';
 import { trackBusinessEvents } from '@/lib/analytics';
-import { updateMetaTags, injectStructuredData } from '@/lib/seo';
+import { updateMetaTags, injectStructuredData, generateArticleSchema } from '@/lib/seo';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -24,35 +24,8 @@ const BlogPost = () => {
         url: post.seo.canonicalUrl || `https://www.suzreinigung.de/blog/${post.slug}`,
       });
 
-      // Inject structured data for article
-      const articleSchema = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": post.seo.schema.headline,
-        "author": {
-          "@type": "Person",
-          "name": post.seo.schema.author,
-          "jobTitle": post.author.title,
-          "description": post.author.bio
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": post.seo.schema.publisher,
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.suzreinigung.de/assets/logo.png"
-          }
-        },
-        "datePublished": post.seo.schema.datePublished,
-        "dateModified": post.seo.schema.dateModified || post.seo.schema.datePublished,
-        "mainEntityOfPage": post.seo.schema.mainEntityOfPage,
-        "image": post.featuredImage,
-        "articleSection": post.category.name,
-        "wordCount": post.content.split(' ').length,
-        "timeRequired": `PT${post.readingTime}M`,
-        "keywords": post.tags.join(', ')
-      };
-
+      // Inject enhanced structured data for article
+      const articleSchema = generateArticleSchema(post);
       injectStructuredData(articleSchema);
     }
   }, [post]);
@@ -81,7 +54,7 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-premium-gradient">
       <Helmet>
         <title>{post.seo.metaTitle}</title>
         <meta name="description" content={post.seo.metaDescription} />
@@ -105,50 +78,50 @@ const BlogPost = () => {
       <Navigation scrollToSection={scrollToSection} />
 
       {/* Breadcrumb */}
-      <section className="bg-white border-b border-gray-200 py-4 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-blue-600">Startseite</Link>
-            <span>›</span>
-            <Link to="/blog" className="hover:text-blue-600">Blog</Link>
-            <span>›</span>
-            <Link 
+      <section className="bg-slate-900/50 border-b border-white/10 py-4 pt-28">
+        <div className="suz-page-container">
+          <nav className="flex items-center space-x-2 text-sm text-slate-300">
+            <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors">Startseite</Link>
+            <span className="text-slate-500">›</span>
+            <Link to="/blog" className="text-blue-400 hover:text-blue-300 transition-colors">Blog</Link>
+            <span className="text-slate-500">›</span>
+            <Link
               to={`/blog?category=${post.category.id}`}
-              className="hover:text-blue-600"
+              className="text-blue-400 hover:text-blue-300 transition-colors"
             >
               {post.category.name}
             </Link>
-            <span>›</span>
-            <span className="text-gray-400 truncate">{post.title}</span>
+            <span className="text-slate-500">›</span>
+            <span className="text-slate-400 truncate">{post.title}</span>
           </nav>
         </div>
       </section>
 
       {/* Article Header */}
-      <article className="bg-white">
-        <header className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
+      <article className="bg-premium-gradient">
+        <header className="py-12">
+          <div className="suz-page-container">
             <div className="flex items-center gap-3 mb-6">
-              <span className={`px-3 py-1 rounded-full text-sm font-medium bg-${post.category.color}-100 text-${post.category.color}-800 flex items-center gap-2`}>
+              <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-500/20 text-blue-300 border border-blue-400/30 flex items-center gap-2">
                 <span>{post.category.icon}</span>
                 {post.category.name}
               </span>
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-slate-400">
                 {post.readingTime} Min. Lesezeit
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="suz-text-heading-xl text-white mb-4 leading-tight">
               {post.title}
             </h1>
 
             {post.subtitle && (
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+              <p className="text-xl text-slate-300 mb-6 leading-relaxed">
                 {post.subtitle}
               </p>
             )}
 
-            <div className="flex items-center gap-6 pb-8 border-b border-gray-200">
+            <div className="flex items-center gap-6 pb-8 border-b border-white/10">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-lg">
@@ -156,11 +129,11 @@ const BlogPost = () => {
                   </span>
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-900">{post.author.name}</div>
-                  <div className="text-sm text-gray-600">{post.author.title}</div>
+                  <div className="font-semibold text-white">{post.author.name}</div>
+                  <div className="text-sm text-slate-300">{post.author.title}</div>
                 </div>
               </div>
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-slate-400">
                 Veröffentlicht am {formatDate(post.publishedAt)}
                 {post.updatedAt && post.updatedAt !== post.publishedAt && (
                   <span className="block">
@@ -173,53 +146,61 @@ const BlogPost = () => {
         </header>
 
         {/* Featured Image */}
-        <div className="h-96 bg-gradient-to-br from-blue-100 to-slate-100 flex items-center justify-center mb-12">
-          <div className="text-6xl">{post.category.icon}</div>
+        <div className="h-64 bg-gradient-to-br from-slate-700/50 to-slate-800/50 flex items-center justify-center mb-8 border-y border-white/10">
+          <div className="text-5xl text-white/80">{post.category.icon}</div>
         </div>
 
-        {/* Article Content */}
-        <div className="px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="prose prose-lg max-w-none">
-              <div 
-                className="text-gray-700 leading-relaxed"
-                dangerouslySetInnerHTML={{ 
-                  __html: post.content
-                    .split('\n')
-                    .map(line => {
-                      if (line.startsWith('# ')) {
-                        return `<h1 class="text-3xl font-bold text-gray-900 mt-12 mb-6">${line.slice(2)}</h1>`;
-                      }
-                      if (line.startsWith('## ')) {
-                        return `<h2 class="text-2xl font-bold text-gray-900 mt-10 mb-4">${line.slice(3)}</h2>`;
-                      }
-                      if (line.startsWith('### ')) {
-                        return `<h3 class="text-xl font-bold text-gray-900 mt-8 mb-3">${line.slice(4)}</h3>`;
-                      }
-                      if (line.startsWith('**') && line.endsWith('**')) {
-                        return `<p class="font-semibold text-gray-900 mt-6 mb-3">${line.slice(2, -2)}</p>`;
-                      }
-                      if (line.startsWith('- ')) {
-                        return `<li class="mb-2">${line.slice(2)}</li>`;
-                      }
-                      if (line.trim() === '') {
-                        return '<br>';
-                      }
-                      return `<p class="mb-4">${line}</p>`;
-                    })
-                    .join('')
-                }}
-              />
+        {/* Enhanced Article Content with SUZ Design System */}
+        <div className="pb-12 suz-blog-post-container">
+          <div className="suz-page-container">
+            {/* Premium Content Container with Enhanced Glass Morphism */}
+            <div className="suz-blog-content-glass">
+              <div className="prose prose-lg max-w-none suz-blog-content">
+                <div
+                  className="suz-blog-typography"
+                  dangerouslySetInnerHTML={{
+                    __html: post.content
+                      .split('\n')
+                      .map(line => {
+                        if (line.startsWith('# ')) {
+                          return `<h1 class="suz-text-heading-xl text-white gradient-text-subtle">${line.slice(2)}</h1>`;
+                        }
+                        if (line.startsWith('## ')) {
+                          return `<h2 class="suz-text-heading-lg text-white">${line.slice(3)}</h2>`;
+                        }
+                        if (line.startsWith('### ')) {
+                          return `<h3 class="suz-text-heading-md text-white">${line.slice(4)}</h3>`;
+                        }
+                        if (line.startsWith('**') && line.endsWith('**')) {
+                          return `<blockquote class="suz-text-body-lg font-semibold text-white">${line.slice(2, -2)}</blockquote>`;
+                        }
+                        if (line.startsWith('- ')) {
+                          return `<li class="text-slate-300 suz-text-body-md">${line.slice(2)}</li>`;
+                        }
+                        if (line.trim() === '') {
+                          return '<div class="h-4"></div>';
+                        }
+                        return `<p class="text-slate-300 suz-text-body-md">${line}</p>`;
+                      })
+                      .join('')
+                  }}
+                />
+              </div>
             </div>
 
-            {/* Tags */}
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Schlagwörter:</h3>
-              <div className="flex flex-wrap gap-2">
+            {/* Enhanced Tags Section with SUZ Design */}
+            <div className="mt-12 pt-8 border-t border-white/10">
+              <h3 className="suz-text-heading-md font-semibold text-white mb-6 flex items-center gap-3">
+                <span className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 flex items-center justify-center border border-blue-400/30">
+                  <span className="text-blue-400 text-sm">🏷️</span>
+                </span>
+                Schlagwörter:
+              </h3>
+              <div className="flex flex-wrap gap-3">
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors cursor-pointer"
+                    className="suz-card-glass px-4 py-2 text-slate-300 rounded-full text-sm hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer border border-white/20 hover:border-blue-400/50 hover:bg-blue-500/10 backdrop-blur-sm"
                     onClick={() => {
                       trackBusinessEvents.serviceInquiry(`blog_tag_${tag}`);
                       // Could navigate to filtered blog view
@@ -232,7 +213,7 @@ const BlogPost = () => {
             </div>
 
             {/* Author Bio */}
-            <div className="mt-12 pt-8 border-t border-gray-200">
+            <div className="mt-12 pt-8 border-t border-white/10">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xl">
@@ -240,15 +221,15 @@ const BlogPost = () => {
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  <h3 className="text-lg font-semibold text-white mb-1">
                     Über {post.author.name}
                   </h3>
-                  <p className="text-gray-600 mb-3">{post.author.bio}</p>
+                  <p className="text-slate-300 mb-3">{post.author.bio}</p>
                   <div className="flex flex-wrap gap-2">
                     {post.author.expertise.map((skill) => (
                       <span
                         key={skill}
-                        className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm"
+                        className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm border border-blue-400/30"
                       >
                         {skill}
                       </span>
@@ -259,11 +240,11 @@ const BlogPost = () => {
             </div>
 
             {/* CTA Section */}
-            <div className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8 text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="mt-16 suz-card-glass rounded-xl p-8 text-center border border-white/20">
+              <h3 className="text-2xl font-bold text-white mb-4">
                 Benötigen Sie professionelle Reinigung?
               </h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
                 Lassen Sie unsere Experten für Sie arbeiten. Kontaktieren Sie uns für eine kostenlose Beratung und ein unverbindliches Angebot.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -281,7 +262,7 @@ const BlogPost = () => {
                 </a>
                 <a
                   href="tel:+4917623152477"
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
+                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-slate-900 px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
                   onClick={handleCTAClick}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -293,11 +274,11 @@ const BlogPost = () => {
             </div>
 
             {/* Navigation to related articles */}
-            <div className="mt-16 pt-8 border-t border-gray-200">
+            <div className="mt-16 pt-8 border-t border-white/10">
               <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <Link
                   to="/blog"
-                  className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors"
                   onClick={() => trackBusinessEvents.serviceInquiry('blog_back_to_list')}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -308,7 +289,7 @@ const BlogPost = () => {
                 
                 <Link
                   to={`/blog?category=${post.category.id}`}
-                  className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors"
                   onClick={() => trackBusinessEvents.serviceInquiry(`blog_more_${post.category.id}`)}
                 >
                   Mehr {post.category.name} Artikel

@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
           <div className="space-y-6 text-slate-300 suz-text-body-lg">
             <div>
-              <h3 className="text-slate-200 font-semibold mb-2">S.U.Z. Schutz und Sicherheit GmbH</h3>
+              <h3 className="text-slate-200 font-semibold mb-2">SUZ Reinigung GmbH</h3>
               <p><strong>Adresse:</strong><br />
               Paul-Langen-Straße 39<br />
               53229 Bonn</p>
@@ -89,7 +89,7 @@ const Footer = () => {
           <div className="space-y-6 text-slate-300 suz-text-body-lg">
             <div>
               <h3 className="text-slate-200 font-semibold mb-2">Verantwortlicher:</h3>
-              <p>S.U.Z. Schutz und Sicherheit GmbH<br />
+              <p>SUZ Reinigung GmbH<br />
               Paul-Langen-Straße 39<br />
               53229 Bonn<br />
               Telefon: +4917623152477<br />
@@ -142,7 +142,7 @@ const Footer = () => {
             <div>
               <h3 className="text-slate-200 font-semibold mb-2">Kontakt:</h3>
               <p>Für weitere Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden:<br />
-              S.U.Z. Schutz und Sicherheit GmbH<br />
+              SUZ Reinigung GmbH<br />
               Paul-Langen-Straße 39<br />
               53229 Bonn<br />
               E-Mail: info@suz-schutz-sicherheit.de</p>
@@ -162,7 +162,7 @@ const Footer = () => {
             <div className="flex flex-col items-center gap-4">
               {/* Copyright */}
               <p className="suz-text-body-lg text-slate-300 text-center">
-                © 2025 SUZ Schutz und Sicherheit GmbH
+                © 2025 SUZ Reinigung GmbH
               </p>
 
               {/* Legal Links */}

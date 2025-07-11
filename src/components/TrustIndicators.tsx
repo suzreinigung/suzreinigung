@@ -57,40 +57,41 @@ const TrustIndicators = ({
     }
   ];
 
-  const getColorClasses = (color: string, variant: string) => {
+  const getSuzColorClasses = (color: string, variant: string) => {
+    // Use SUZ dark theme design system with glass morphism effects
     const colorMap: Record<string, Record<string, string>> = {
       blue: {
-        default: 'bg-blue-50 border-blue-200 text-blue-900',
-        dark: 'bg-blue-900 border-blue-700 text-blue-100',
-        minimal: 'bg-transparent border-blue-300 text-blue-800'
+        default: 'suz-card-glass border-blue-400/30 text-slate-100 hover:border-blue-400/50',
+        dark: 'suz-card-glass border-blue-400/30 text-slate-100 hover:border-blue-400/50',
+        minimal: 'suz-card-glass border-blue-400/20 text-slate-200 hover:border-blue-400/40'
       },
       green: {
-        default: 'bg-green-50 border-green-200 text-green-900',
-        dark: 'bg-green-900 border-green-700 text-green-100',
-        minimal: 'bg-transparent border-green-300 text-green-800'
+        default: 'suz-card-glass border-green-400/30 text-slate-100 hover:border-green-400/50',
+        dark: 'suz-card-glass border-green-400/30 text-slate-100 hover:border-green-400/50',
+        minimal: 'suz-card-glass border-green-400/20 text-slate-200 hover:border-green-400/40'
       },
       emerald: {
-        default: 'bg-emerald-50 border-emerald-200 text-emerald-900',
-        dark: 'bg-emerald-900 border-emerald-700 text-emerald-100',
-        minimal: 'bg-transparent border-emerald-300 text-emerald-800'
+        default: 'suz-card-glass border-emerald-400/30 text-slate-100 hover:border-emerald-400/50',
+        dark: 'suz-card-glass border-emerald-400/30 text-slate-100 hover:border-emerald-400/50',
+        minimal: 'suz-card-glass border-emerald-400/20 text-slate-200 hover:border-emerald-400/40'
       },
       purple: {
-        default: 'bg-purple-50 border-purple-200 text-purple-900',
-        dark: 'bg-purple-900 border-purple-700 text-purple-100',
-        minimal: 'bg-transparent border-purple-300 text-purple-800'
+        default: 'suz-card-glass border-purple-400/30 text-slate-100 hover:border-purple-400/50',
+        dark: 'suz-card-glass border-purple-400/30 text-slate-100 hover:border-purple-400/50',
+        minimal: 'suz-card-glass border-purple-400/20 text-slate-200 hover:border-purple-400/40'
       },
       indigo: {
-        default: 'bg-indigo-50 border-indigo-200 text-indigo-900',
-        dark: 'bg-indigo-900 border-indigo-700 text-indigo-100',
-        minimal: 'bg-transparent border-indigo-300 text-indigo-800'
+        default: 'suz-card-glass border-indigo-400/30 text-slate-100 hover:border-indigo-400/50',
+        dark: 'suz-card-glass border-indigo-400/30 text-slate-100 hover:border-indigo-400/50',
+        minimal: 'suz-card-glass border-indigo-400/20 text-slate-200 hover:border-indigo-400/40'
       },
       orange: {
-        default: 'bg-orange-50 border-orange-200 text-orange-900',
-        dark: 'bg-orange-900 border-orange-700 text-orange-100',
-        minimal: 'bg-transparent border-orange-300 text-orange-800'
+        default: 'suz-card-glass border-orange-400/30 text-slate-100 hover:border-orange-400/50',
+        dark: 'suz-card-glass border-orange-400/30 text-slate-100 hover:border-orange-400/50',
+        minimal: 'suz-card-glass border-orange-400/20 text-slate-200 hover:border-orange-400/40'
       }
     };
-    
+
     return colorMap[color]?.[variant] || colorMap.blue.default;
   };
 
@@ -116,11 +117,13 @@ const TrustIndicators = ({
         {trustElements.map((element) => (
           <button
             key={element.id}
+            type="button"
             onClick={() => handleTrustClick(element.id)}
-            className={`flex items-center gap-2 px-4 py-2 border rounded-full text-sm font-medium transition-all hover:shadow-md ${getColorClasses(element.color, variant)}`}
+            className={`suz-trust-badge text-sm font-medium ${getSuzColorClasses(element.color, variant)}`}
+            aria-label={`${element.title} - ${element.description}`}
           >
-            {showIcons && <span className="text-base">{element.icon}</span>}
-            <span>{element.title}</span>
+            {showIcons && <span className="text-base" aria-hidden="true">{element.icon}</span>}
+            <span className="font-semibold">{element.title}</span>
           </button>
         ))}
       </div>
@@ -132,18 +135,27 @@ const TrustIndicators = ({
       {trustElements.map((element) => (
         <div
           key={element.id}
-          className={`border rounded-xl p-6 text-center transition-all hover:shadow-lg cursor-pointer ${getColorClasses(element.color, variant)} ${itemClasses[layout]}`}
+          className={`suz-card-glass rounded-xl p-6 text-center transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer border ${getSuzColorClasses(element.color, variant)} ${itemClasses[layout]}`}
           onClick={() => handleTrustClick(element.id)}
+          role="button"
+          tabIndex={0}
+          aria-label={`${element.title} - ${element.description}`}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleTrustClick(element.id);
+            }
+          }}
         >
           {showIcons && (
-            <div className="text-4xl mb-4">
+            <div className="text-4xl mb-4" aria-hidden="true">
               {element.icon}
             </div>
           )}
-          <h3 className="font-bold text-lg mb-2">
+          <h3 className="suz-text-heading-md font-bold text-slate-100 mb-2">
             {element.title}
           </h3>
-          <p className="text-sm opacity-80">
+          <p className="suz-text-body-sm text-slate-300 leading-relaxed">
             {element.description}
           </p>
         </div>

@@ -23,17 +23,17 @@ const CookieConsent = ({ onAccept, onDecline }: CookieConsentProps) => {
     functional: false,
   });
 
-  useEffect(() => {
-    // Check if user has already made a choice
-    const consent = localStorage.getItem('cookie_consent');
-    const consentDate = localStorage.getItem('cookie_consent_date');
+  // useEffect(() => {
+  //   // Check if user has already made a choice
+  //   const consent = localStorage.getItem('cookie_consent');
+  //   const consentDate = localStorage.getItem('cookie_consent_date');
     
-    // Show consent if no previous choice or consent is older than 1 year
-    if (!consent || !consentDate || 
-        (Date.now() - parseInt(consentDate)) > 365 * 24 * 60 * 60 * 1000) {
-      setIsVisible(true);
-    }
-  }, []);
+  //   // Show consent if no previous choice or consent is older than 1 year
+  //   if (!consent || !consentDate || 
+  //       (Date.now() - parseInt(consentDate)) > 365 * 24 * 60 * 60 * 1000) {
+  //     setIsVisible(true);
+  //   }
+  // }, []);
 
   const handleAcceptAll = () => {
     const newPreferences = {

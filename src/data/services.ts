@@ -402,7 +402,7 @@ export const services = {
     faqs: [
       {
         question: 'Wie oft sollten Gemeinschaftsräume gereinigt werden?',
-        answer: 'Wir empfehlen eine wöchentliche Reinigung für Treppenhäuser und Eingangsbereiche, je nach Nutzungsintensität.'
+        answer: 'Wir empfehlen eine wöchentliche Reinigung für Treppenhäuser und Eingangsbereiche, je nach Nutzungsintensität. Unser <a href="/services/hausreinigung" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">Hausreinigungsservice</a> übernimmt alle Aufgaben für Sie.'
       },
       {
         question: 'Können Sie auch am Wochenende reinigen?',
@@ -410,11 +410,11 @@ export const services = {
       },
       {
         question: 'Was ist bei der Schlüsselübergabe zu beachten?',
-        answer: 'Wir besprechen die Schlüsselübergabe individuell. Oft arbeiten wir mit Hausverwaltungen oder Hausmeistern zusammen.'
+        answer: 'Wir besprechen die Schlüsselübergabe individuell. Oft arbeiten wir mit Hausverwaltungen oder Hausmeistern zusammen. Für Unternehmen bieten wir auch <a href="/services/bueroreinigung" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">professionelle Büroreinigung</a> an.'
       },
       {
         question: 'Reinigen Sie auch Aufzüge?',
-        answer: 'Ja, die Aufzugsreinigung gehört zu unserem Standard-Service für Gemeinschaftsbereiche, inklusive Kabine und Bedienelemente.'
+        answer: 'Ja, die Aufzugsreinigung gehört zu unserem Standard-Service für Gemeinschaftsbereiche, inklusive Kabine und Bedienelemente. Bei starker Verschmutzung empfehlen wir unsere <a href="/services/teppichreinigung" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">professionelle Teppichreinigung</a>.'
       }
     ],
     
@@ -508,7 +508,7 @@ export const services = {
     faqs: [
       {
         question: 'Zu welchen Zeiten können Sie reinigen?',
-        answer: 'Wir reinigen flexibel nach Ihren Bedürfnissen: vor Arbeitsbeginn, in der Mittagspause, nach Feierabend oder am Wochenende.'
+        answer: 'Wir reinigen flexibel nach Ihren Bedürfnissen: vor Arbeitsbeginn, in der Mittagspause, nach Feierabend oder am Wochenende. Ergänzend zur Büroreinigung empfehlen wir unsere <a href="/services/fensterreinigung" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">professionelle Fensterreinigung</a>.'
       },
       {
         question: 'Sind Ihre Mitarbeiter versichert?',
@@ -516,11 +516,11 @@ export const services = {
       },
       {
         question: 'Können Sie auch kurzfristige Reinigungen durchführen?',
-        answer: 'Ja, für wichtige Termine oder Besuch können wir oft kurzfristige Zusatzreinigungen anbieten. Sprechen Sie uns einfach an.'
+        answer: 'Ja, für wichtige Termine oder Besuch können wir oft kurzfristige Zusatzreinigungen anbieten. Sprechen Sie uns einfach an. Privatkunden profitieren von unserer zuverlässigen <a href="/services/hausreinigung" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">Hausreinigung</a>.'
       },
       {
         question: 'Verwenden Sie umweltfreundliche Reinigungsmittel?',
-        answer: 'Ja, wir setzen auf ökologische und gesundheitsschonende Reinigungsmittel, die trotzdem höchste Reinigungsstandards erreichen.'
+        answer: 'Ja, wir setzen auf ökologische und gesundheitsschonende Reinigungsmittel, die trotzdem höchste Reinigungsstandards erreichen. Lesen Sie unsere <a href="/blog/bueroreinigung-koeln-tipps" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">Büroreinigung Tipps</a> für optimale Arbeitsplatz-Hygiene.'
       }
     ],
     
@@ -614,7 +614,7 @@ export const services = {
     faqs: [
       {
         question: 'Sind Sie für Krankenhäuser zertifiziert?',
-        answer: 'Ja, wir sind nach den aktuellen Standards für medizinische Einrichtungen zertifiziert und bilden unser Personal kontinuierlich weiter.'
+        answer: 'Ja, wir sind nach den aktuellen Standards für medizinische Einrichtungen zertifiziert und bilden unser Personal kontinuierlich weiter. Für Unternehmen bieten wir auch <a href="/services/bueroreinigung" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">professionelle Büroreinigung</a> an.'
       },
       {
         question: 'Können Sie auch in OP-Bereichen reinigen?',
@@ -622,11 +622,11 @@ export const services = {
       },
       {
         question: 'Wie wird die Hygiene dokumentiert?',
-        answer: 'Wir dokumentieren alle Reinigungsvorgänge lückenlos und stellen Ihnen regelmäßige Berichte für Ihre Compliance zur Verfügung.'
+        answer: 'Wir dokumentieren alle Reinigungsvorgänge lückenlos und stellen Ihnen regelmäßige Berichte für Ihre Compliance zur Verfügung. Privatkunden profitieren von unserer zuverlässigen <a href="/services/hausreinigung" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">Hausreinigung</a>.'
       },
       {
         question: 'Arbeiten Sie auch nachts?',
-        answer: 'Ja, wir bieten 24/7-Service und können auch in den Nachtstunden reinigen, um den Klinikbetrieb nicht zu stören.'
+        answer: 'Ja, wir bieten 24/7-Service und können auch in den Nachtstunden reinigen, um den Klinikbetrieb nicht zu stören. Lesen Sie auch unseren <a href="/blog/hausreinigung-fruehjahrsputz-2024" class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200">Frühjahrsputz Guide</a> für systematische Hausreinigung.'
       }
     ],
     

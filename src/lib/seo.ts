@@ -229,7 +229,203 @@ export const generateBreadcrumbs = (path: string) => {
   return breadcrumbs;
 };
 
-// Generate FAQ structured data
+// Generate enhanced LocalBusiness schema with Köln/Bonn data
+export const generateLocalBusinessSchema = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': 'https://www.suzreinigung.de/#organization',
+    'name': 'SUZ Reinigung',
+    'alternateName': ['SUZ Reinigungsservice', 'SUZ Cleaning Service'],
+    'description': 'Deutschlands führender Reinigungsservice seit 2000. Professionelle Büroreinigung, Hausreinigung und Spezialreinigung mit höchsten Qualitätsstandards in Köln, Bonn und ganz NRW.',
+    'url': 'https://www.suzreinigung.de',
+    'logo': 'https://www.suzreinigung.de/assets/logos/logo.png',
+    'image': 'https://www.suzreinigung.de/assets/images/uber_uns.png',
+    'foundingDate': '2000',
+    'slogan': 'Premium Reinigungsdienstleistungen seit 2000',
+    'telephone': '+49 176 23152477',
+    'email': 'info@suzreinigung.de',
+    'address': {
+      '@type': 'PostalAddress',
+      'addressLocality': 'Köln',
+      'addressRegion': 'Nordrhein-Westfalen',
+      'addressCountry': 'DE',
+      'postalCode': '50667'
+    },
+    'geo': {
+      '@type': 'GeoCoordinates',
+      'latitude': 50.9375,
+      'longitude': 6.9603
+    },
+    'areaServed': [
+      {
+        '@type': 'City',
+        'name': 'Köln',
+        'sameAs': 'https://de.wikipedia.org/wiki/Köln'
+      },
+      {
+        '@type': 'City',
+        'name': 'Bonn',
+        'sameAs': 'https://de.wikipedia.org/wiki/Bonn'
+      },
+      {
+        '@type': 'State',
+        'name': 'Nordrhein-Westfalen',
+        'sameAs': 'https://de.wikipedia.org/wiki/Nordrhein-Westfalen'
+      }
+    ],
+    'serviceType': [
+      'Büroreinigung',
+      'Hausreinigung',
+      'Fensterreinigung',
+      'Teppichreinigung',
+      'Grundreinigung',
+      'Krankenhausreinigung',
+      'Hotelzimmerreinigung'
+    ],
+    'priceRange': '€€',
+    'currenciesAccepted': 'EUR',
+    'paymentAccepted': ['Cash', 'Credit Card', 'Bank Transfer'],
+    'openingHours': 'Mo-Fr 08:00-18:00, Sa 09:00-16:00',
+    'hasOfferCatalog': {
+      '@type': 'OfferCatalog',
+      'name': 'Reinigungsdienstleistungen',
+      'itemListElement': [
+        {
+          '@type': 'Offer',
+          'itemOffered': {
+            '@type': 'Service',
+            'name': 'Büroreinigung',
+            'description': 'Professionelle Büroreinigung für Unternehmen in Köln und Bonn'
+          },
+          'priceRange': '25-35€/Stunde',
+          'priceCurrency': 'EUR'
+        },
+        {
+          '@type': 'Offer',
+          'itemOffered': {
+            '@type': 'Service',
+            'name': 'Hausreinigung',
+            'description': 'Zuverlässige Hausreinigung für Privatkunden in Köln und Bonn'
+          },
+          'priceRange': '20-30€/Stunde',
+          'priceCurrency': 'EUR'
+        }
+      ]
+    },
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.8',
+      'reviewCount': '127',
+      'bestRating': '5',
+      'worstRating': '1'
+    },
+    'sameAs': [
+      'https://www.facebook.com/suzreinigung',
+      'https://www.instagram.com/suzreinigung'
+    ]
+  };
+};
+
+// Generate enhanced Article schema for blog posts
+export const generateArticleSchema = (post: any) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `https://www.suzreinigung.de/blog/${post.slug}`,
+    'headline': post.title,
+    'alternativeHeadline': post.subtitle,
+    'description': post.excerpt,
+    'author': {
+      '@type': 'Person',
+      'name': post.author.name,
+      'jobTitle': post.author.title,
+      'description': post.author.bio,
+      'knowsAbout': post.author.expertise,
+      'worksFor': {
+        '@type': 'Organization',
+        'name': 'SUZ Reinigung',
+        'url': 'https://www.suzreinigung.de'
+      }
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'SUZ Reinigung',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://www.suzreinigung.de/assets/logos/logo.png',
+        'width': 200,
+        'height': 60
+      },
+      'url': 'https://www.suzreinigung.de',
+      'sameAs': [
+        'https://www.facebook.com/suzreinigung',
+        'https://www.instagram.com/suzreinigung'
+      ]
+    },
+    'datePublished': post.publishedAt,
+    'dateModified': post.updatedAt || post.publishedAt,
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `https://www.suzreinigung.de/blog/${post.slug}`
+    },
+    'image': {
+      '@type': 'ImageObject',
+      'url': post.featuredImage,
+      'width': 1200,
+      'height': 630
+    },
+    'articleSection': post.category.name,
+    'articleBody': post.content,
+    'wordCount': post.content.split(' ').length,
+    'timeRequired': `PT${post.readingTime}M`,
+    'keywords': post.tags.join(', '),
+    'inLanguage': 'de-DE',
+    'isAccessibleForFree': true,
+    'about': {
+      '@type': 'Thing',
+      'name': post.category.name,
+      'description': post.category.description
+    },
+    'mentions': post.tags.map((tag: string) => ({
+      '@type': 'Thing',
+      'name': tag
+    })),
+    'isPartOf': {
+      '@type': 'Blog',
+      'name': 'SUZ Reinigung Blog',
+      'url': 'https://www.suzreinigung.de/blog',
+      'description': 'Professionelle Tipps und Anleitungen für Reinigung und Hygiene'
+    }
+  };
+};
+
+// Generate FAQ structured data for service pages
+export const generateServiceFAQStructuredData = (faqs: Array<{question: string, answer: string}>, serviceName: string) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `https://www.suzreinigung.de/services/${serviceName.toLowerCase()}#faq`,
+    'name': `Häufige Fragen zu ${serviceName}`,
+    'description': `Antworten auf die wichtigsten Fragen zu ${serviceName} von SUZ Reinigung`,
+    'mainEntity': faqs.map((faq, index) => ({
+      '@type': 'Question',
+      '@id': `https://www.suzreinigung.de/services/${serviceName.toLowerCase()}#faq-${index + 1}`,
+      'name': faq.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': faq.answer,
+        'author': {
+          '@type': 'Organization',
+          'name': 'SUZ Reinigung',
+          'url': 'https://www.suzreinigung.de'
+        }
+      }
+    }))
+  };
+};
+
+// Generate general FAQ structured data
 export const generateFAQStructuredData = () => {
   return {
     '@context': 'https://schema.org',

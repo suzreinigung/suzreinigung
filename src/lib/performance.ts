@@ -285,26 +285,125 @@ export class PerformanceOptimizer {
   }
 
   /**
-   * Optimize images for better LCP
+   * Optimize images for better LCP and performance
    */
   static optimizeImages(): void {
-    const images = document.querySelectorAll('img[data-optimize]');
-    
+    const images = document.querySelectorAll('img[data-optimize], .suz-service-image, img[loading="lazy"]');
+
     images.forEach((img) => {
       const imageElement = img as HTMLImageElement;
-      
+
       // Add loading optimization
       if (!imageElement.loading) {
         imageElement.loading = 'lazy';
       }
-      
+
       // Add decode optimization
       imageElement.decoding = 'async';
-      
+
       // Add size hints if missing
       if (!imageElement.width || !imageElement.height) {
         imageElement.style.aspectRatio = '16/9';
       }
+
+      // Add intersection observer for enhanced lazy loading
+      this.setupIntersectionObserver(imageElement);
+
+      // Preload critical images (first 3 service images)
+      if (imageElement.classList.contains('suz-service-image')) {
+        const serviceImages = document.querySelectorAll('.suz-service-image');
+        const imageIndex = Array.from(serviceImages).indexOf(imageElement);
+        if (imageIndex < 3) {
+          imageElement.loading = 'eager';
+          this.preloadImage(imageElement.src);
+        }
+      }
+    });
+  }
+
+  /**
+   * Setup intersection observer for enhanced lazy loading
+   */
+  static setupIntersectionObserver(img: HTMLImageElement): void {
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const image = entry.target as HTMLImageElement;
+            image.classList.add('lazy-load');
+
+            // Add fade-in effect when image loads
+            image.addEventListener('load', () => {
+              image.classList.add('loaded');
+            });
+
+            observer.unobserve(image);
+          }
+        });
+      }, {
+        rootMargin: '50px 0px',
+        threshold: 0.1
+      });
+
+      imageObserver.observe(img);
+    }
+  }
+
+  /**
+   * Preload critical images
+   */
+  static preloadImage(src: string): void {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    document.head.appendChild(link);
+  }
+
+  /**
+   * Optimize image formats with WebP support
+   */
+  static optimizeImageFormats(): void {
+    const images = document.querySelectorAll('img');
+
+    images.forEach((img) => {
+      const imageElement = img as HTMLImageElement;
+      const originalSrc = imageElement.src;
+
+      // Check if browser supports WebP
+      if (this.supportsWebP()) {
+        // Try to load WebP version if available
+        const webpSrc = originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+
+        // Test if WebP version exists
+        this.testImageExists(webpSrc).then(exists => {
+          if (exists) {
+            imageElement.src = webpSrc;
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Check if browser supports WebP
+   */
+  static supportsWebP(): boolean {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = 1;
+    return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  }
+
+  /**
+   * Test if image exists
+   */
+  static testImageExists(src: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
     });
   }
 
@@ -367,6 +466,7 @@ export function initializePerformanceMonitoring(): void {
   // Apply optimizations
   PerformanceOptimizer.preloadCriticalResources();
   PerformanceOptimizer.optimizeImages();
+  PerformanceOptimizer.optimizeImageFormats();
   PerformanceOptimizer.reduceLayoutShifts();
   PerformanceOptimizer.optimizeFonts();
 

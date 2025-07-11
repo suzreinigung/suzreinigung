@@ -26,170 +26,371 @@ const Krankenhausreinigung = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen suz-page-container bg-premium-gradient">
       <Helmet>
         <title>{serviceData.seo.title}</title>
         <meta name="description" content={serviceData.seo.description} />
         <meta name="keywords" content={serviceData.seo.keywords.join(', ')} />
         <link rel="canonical" href="https://www.suzreinigung.de/services/krankenhausreinigung" />
+        <meta property="og:title" content={serviceData.seo.title} />
+        <meta property="og:description" content={serviceData.seo.description} />
+        <meta property="og:url" content="https://www.suzreinigung.de/services/krankenhausreinigung" />
+        <meta property="og:type" content="service" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={serviceData.seo.title} />
+        <meta name="twitter:description" content={serviceData.seo.description} />
       </Helmet>
 
       <Navigation scrollToSection={scrollToSection} />
 
-      {/* Hero Section */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-900 to-slate-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 mb-8 bg-red-600 rounded-full">
-            <Heart className="w-10 h-10 text-white" />
+      {/* Enhanced Hero Section with Logo Integration */}
+      <section
+        id="home"
+        className="relative suz-section-hero suz-hero-enhanced"
+        role="banner"
+        aria-label="Krankenhausreinigung Service Hero"
+      >
+        {/* Hero Logo Integration */}
+        <div className="absolute top-6 left-6 z-50 animate-fade-in suz-logo-container suz-hero-logo">
+          <div className="suz-card-glass suz-logo-wrapper rounded-3xl border border-white/30 shadow-xl logo-glow group">
+            <img
+              src="/assets/logos/logo.png"
+              alt="SUZ Reinigung Logo - Professionelle Krankenhausreinigung"
+              title="SUZ Reinigung - Premium Krankenhausreinigung"
+              className="suz-logo-enhanced object-contain transition-all duration-300 group-hover:scale-110 image-optimized"
+              loading="eager"
+              decoding="async"
+            />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            {serviceData.title}
-          </h1>
-          <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-            {serviceData.longDescription}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
+        </div>
+
+        {/* Enhanced Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-red-900/90 to-slate-900/95 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(239,68,68,0.15),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.1),transparent_50%)]"></div>
+
+        <div className="max-w-6xl mx-auto text-center animate-fade-in relative z-10">
+          <header className="suz-hero-headline-container mb-8">
+            <div
+              className="suz-icon-badge-premium mb-8 mx-auto"
+              role="img"
+              aria-label="Krankenhausreinigung Service Icon"
+              tabIndex={0}
+            >
+              <Heart
+                className="w-12 h-12 transition-all duration-500"
+                strokeWidth={2}
+                aria-hidden="true"
+                focusable="false"
+              />
+            </div>
+            <h1
+              className="suz-hero-title text-slate-100 optimize-lcp"
+              itemProp="name"
+              data-ai-content="service-heading"
+              role="heading"
+              aria-level="1"
+            >
+              <span
+                className="suz-hero-accent gradient-text-animated pulse-glow"
+                aria-label={`${serviceData.title} - Premium Reinigungsservice`}
+              >
+                {serviceData.title}
+              </span>
+            </h1>
+          </header>
+
+          <div className="suz-hero-content-container mb-12">
+            <p
+              className="suz-text-heading-xl text-slate-300 mb-8 max-w-4xl mx-auto leading-relaxed"
+              data-ai-content="service-description"
+              itemProp="description"
+            >
+              {serviceData.longDescription}
+            </p>
+          </div>
+
+          <div className="suz-hero-cta-container flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button
+              type="button"
               onClick={handleCTAClick}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2"
+              className="suz-btn-primary suz-btn-cta group"
+              aria-label="Kostenloses Angebot für Krankenhausreinigung anfordern"
             >
-              <MessageCircle className="w-5 h-5" />
-              Kostenloses Angebot
+              <MessageCircle className="w-5 h-5 transition-transform group-hover:scale-110" />
+              <span>Kostenloses Angebot</span>
             </button>
-            <a 
+            <a
               href="tel:+4917623152477"
-              className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors flex items-center justify-center gap-2"
+              className="suz-btn-secondary suz-btn-cta group"
+              aria-label="SUZ Reinigung anrufen für Krankenhausreinigung"
             >
-              <Phone className="w-5 h-5" />
-              Jetzt anrufen
+              <Phone className="w-5 h-5 transition-transform group-hover:scale-110" />
+              <span>Jetzt anrufen</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* Service Image */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      {/* Main Content Wrapper */}
+      <main id="main-content" role="main" aria-label="Krankenhausreinigung Service Inhalt">
+
+        {/* Enhanced Service Image Section */}
+        <section
+          className="suz-section-standard bg-slate-800/30"
+          role="region"
+          aria-label="Krankenhausreinigung Service Bild"
+        >
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <img
-              src={serviceData.image}
-              alt={`${serviceData.title} - SUZ Reinigung`}
-              className="w-full max-w-4xl mx-auto rounded-2xl shadow-xl"
-            />
+          <div className="text-center">
+            <div className="suz-service-image-container mx-auto">
+              <img
+                src={serviceData.image}
+                alt={`${serviceData.title} - SUZ Reinigung Premium Service`}
+                className="suz-service-image"
+                loading="lazy"
+                decoding="async"
+                itemProp="image"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Features & Benefits */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Unsere Leistungen</h2>
-              <div className="grid gap-4">
-                {serviceData.features.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-red-600 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </div>
-                ))}
+        {/* Enhanced Features & Benefits Section */}
+        <section
+          className="suz-section-standard bg-slate-900/30"
+          role="region"
+          aria-label="Leistungen und Vorteile"
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div className="animate-fade-in">
+                <header className="mb-8">
+                  <h2
+                    className="suz-text-display-md font-bold text-slate-100 mb-4"
+                    data-ai-content="features-heading"
+                  >
+                    Unsere Leistungen
+                  </h2>
+                  <p className="suz-text-body-lg text-slate-400">
+                    Professionelle Krankenhausreinigung für höchste Hygieneanforderungen
+                  </p>
+                </header>
+                <div className="grid gap-4" role="list">
+                  {serviceData.features.map((feature, index) => (
+                    <div
+                      key={index}
+                      className="suz-card-glass rounded-lg border border-white/10 p-4 group hover:border-red-400/30 transition-all duration-300"
+                      role="listitem"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Check className="w-5 h-5 text-red-400 flex-shrink-0 transition-transform group-hover:scale-110" />
+                        <span className="suz-text-body-md text-slate-300">{feature}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Ihre Vorteile</h2>
-              <div className="grid gap-4">
+              <div className="animate-fade-in">
+                <header className="mb-8">
+                  <h2
+                    className="suz-text-display-md font-bold text-slate-100 mb-4"
+                    data-ai-content="benefits-heading"
+                  >
+                    Ihre Vorteile
+                  </h2>
+                </header>
+                <div className="grid gap-4">
                 {serviceData.benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <Star className="w-5 h-5 text-red-600 flex-shrink-0" />
-                    <span className="text-gray-700">{benefit}</span>
+                    <span className="text-gray-300">{benefit}</span>
                   </div>
                 ))}
               </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Process */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Unser Reinigungsprozess
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {serviceData.process.map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 bg-red-100 rounded-full">
-                  <span className="text-2xl font-bold text-red-600">{step.step}</span>
+        {/* Enhanced Process Section */}
+        <section
+          className="suz-section-standard bg-slate-800/20"
+          role="region"
+          aria-label="Reinigungsprozess"
+        >
+          <div className="max-w-6xl mx-auto">
+            <header className="text-center mb-12">
+              <h2
+                className="suz-text-display-md font-bold text-slate-100 mb-4"
+                data-ai-content="process-heading"
+              >
+                Unser Reinigungsprozess
+              </h2>
+              <p className="suz-text-body-lg text-slate-400 max-w-2xl mx-auto">
+                Systematische Krankenhausreinigung in vier professionellen Schritten
+              </p>
+            </header>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {serviceData.process.map((step, index) => (
+                <div
+                  key={index}
+                  className="suz-card-glass rounded-xl border border-white/10 text-center group hover:border-red-400/30 transition-all duration-300"
+                  role="article"
+                  aria-label={`Schritt ${step.step}: ${step.title}`}
+                >
+                  <div className="p-6">
+                    <div className="suz-icon-badge-premium mb-4 mx-auto bg-red-500/20 border-red-400/30">
+                      <span className="text-2xl font-bold text-red-300 group-hover:text-red-200 transition-colors duration-300">
+                        {step.step}
+                      </span>
+                    </div>
+                    <h3 className="suz-text-heading-sm font-semibold text-slate-100 mb-3 group-hover:text-red-200 transition-colors duration-300">
+                      {step.title}
+                    </h3>
+                    <p className="suz-text-body-sm text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Pricing */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            {serviceData.pricing.title}
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {serviceData.pricing.options.map((option, index) => (
-              <div key={index} className="bg-white rounded-lg p-8 shadow-lg border border-gray-200">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{option.name}</h3>
-                <div className="text-3xl font-bold text-red-600 mb-4">{option.price}</div>
-                <p className="text-gray-600 mb-6">{option.description}</p>
-                <ul className="space-y-2">
-                  {option.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-red-600" />
-                      <span className="text-sm text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        {/* Enhanced Pricing Section */}
+        <section
+          className="suz-section-standard bg-slate-900/30"
+          role="region"
+          aria-label="Preise und Pakete"
+        >
+          <div className="max-w-6xl mx-auto">
+            <header className="text-center mb-12">
+              <h2
+                className="suz-text-display-md font-bold text-slate-100 mb-4"
+                data-ai-content="pricing-heading"
+              >
+                {serviceData.pricing.title}
+              </h2>
+              <p className="suz-text-body-lg text-slate-400 max-w-2xl mx-auto">
+                Transparente Preise für professionelle Krankenhausreinigung
+              </p>
+            </header>
+            <div className="grid md:grid-cols-3 gap-8">
+              {serviceData.pricing.options.map((option, index) => (
+                <div
+                  key={index}
+                  className={`suz-card-glass rounded-2xl border transition-all duration-300 group hover:border-red-400/40 hover:shadow-2xl ${
+                    index === 1
+                      ? 'border-red-400/30 shadow-lg shadow-red-500/10'
+                      : 'border-white/20'
+                  }`}
+                  role="article"
+                  aria-label={`Preispaket: ${option.name}`}
+                >
+                  <div className="p-8">
+                    <header className="text-center mb-6">
+                      <h3 className="suz-text-heading-md font-semibold text-slate-100 mb-3 group-hover:text-red-200 transition-colors duration-300">
+                        {option.name}
+                      </h3>
+                      <div className="suz-text-display-sm font-bold text-red-400 mb-2 group-hover:text-red-300 transition-colors duration-300">
+                        {option.price}
+                      </div>
+                      <p className="suz-text-body-sm text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
+                        {option.description}
+                      </p>
+                    </header>
+                    <ul className="space-y-3" role="list" aria-label="Leistungen">
+                      {option.features.map((feature, featureIndex) => (
+                        <li
+                          key={featureIndex}
+                          className="flex items-center suz-text-body-sm text-slate-300 group-hover:text-slate-200 transition-colors duration-300"
+                          role="listitem"
+                        >
+                          <Check
+                            className="w-5 h-5 text-red-400 mr-3 flex-shrink-0 group-hover:text-red-300 transition-colors duration-300"
+                            aria-hidden="true"
+                          />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <TrustIndicators layout="compact" />
 
-      {/* FAQ */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Häufig gestellte Fragen
-          </h2>
-          <div className="space-y-6">
-            {serviceData.faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h3>
-                <p className="text-gray-700">{faq.answer}</p>
-              </div>
-            ))}
+        {/* Enhanced FAQ Section */}
+        <section
+          className="suz-section-standard bg-slate-900/30"
+          role="region"
+          aria-label="Häufig gestellte Fragen"
+        >
+          <div className="max-w-4xl mx-auto">
+            <header className="text-center mb-12">
+              <h2
+                className="suz-text-display-md font-bold text-slate-100 mb-4"
+                data-ai-content="faq-heading"
+              >
+                Häufig gestellte Fragen
+              </h2>
+              <p className="suz-text-body-lg text-slate-400 max-w-2xl mx-auto">
+                Antworten auf die wichtigsten Fragen zur Krankenhausreinigung
+              </p>
+            </header>
+            <div className="space-y-6" role="list" aria-label="FAQ Liste">
+              {serviceData.faqs.map((faq, index) => (
+                <article
+                  key={index}
+                  className="suz-card-glass rounded-xl border border-white/20 group hover:border-red-400/30 transition-all duration-300"
+                  role="listitem"
+                >
+                  <div className="p-6">
+                    <h3 className="suz-text-heading-sm font-semibold text-slate-100 mb-3 group-hover:text-red-200 transition-colors duration-300">
+                      {faq.question}
+                    </h3>
+                    <p className="suz-text-body-md text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Quote Request */}
-      <section id="quote" className="py-16 px-4 sm:px-6 lg:px-8 bg-red-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Kostenloses Angebot anfordern
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Erhalten Sie ein unverbindliches Angebot für Ihre Krankenhausreinigung. 
-              Wir melden uns innerhalb von 24 Stunden bei Ihnen.
-            </p>
+        {/* Enhanced Quote Request Section */}
+        <section
+          id="quote"
+          className="suz-section-standard bg-slate-800/20"
+          role="region"
+          aria-label="Angebot anfordern"
+        >
+          <div className="max-w-4xl mx-auto">
+            <header className="text-center mb-12">
+              <h2
+                className="suz-text-display-md font-bold text-slate-100 mb-4"
+                data-ai-content="quote-heading"
+              >
+                Kostenloses Angebot anfordern
+              </h2>
+              <p className="suz-text-body-lg text-slate-300 max-w-2xl mx-auto">
+                Erhalten Sie ein unverbindliches Angebot für Ihre Krankenhausreinigung.
+                Wir melden uns innerhalb von 24 Stunden bei Ihnen.
+              </p>
+            </header>
+            <div className="suz-card-glass rounded-2xl border border-white/20">
+              <QuoteRequestForm />
+            </div>
           </div>
-          <QuoteRequestForm />
-        </div>
-      </section>
+        </section>
+
+      </main>
 
       <Footer />
     </div>

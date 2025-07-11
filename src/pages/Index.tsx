@@ -6,6 +6,7 @@ import Navigation from '../components/Navigation';
 const Hero = lazy(() => import('../components/Hero'));
 const CompanyShowcase = lazy(() => import('../components/CompanyShowcase'));
 const Services = lazy(() => import('../components/Services'));
+const CalculatorCTA = lazy(() => import('../components/CalculatorCTA'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 const UberUns = lazy(() => import('../components/UberUns'));
 const Contact = lazy(() => import('../components/Contact'));
@@ -48,6 +49,10 @@ const Index = () => {
 
       <Suspense fallback={<ComponentLoader />}>
         <Services />
+      </Suspense>
+
+      <Suspense fallback={<ComponentLoader />}>
+        <CalculatorCTA />
       </Suspense>
 
       <Suspense fallback={<ComponentLoader />}>
