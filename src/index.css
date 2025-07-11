@@ -2942,9 +2942,11 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 
 /* Prevent layout shifts during animation */
 .suz-hero-headline-container {
-  /* Maintain consistent height during title transitions */
-  min-height: 1.2em;
+  /* Maintain consistent height during title transitions - increased for mobile compatibility */
+  min-height: 3.5rem;
   position: relative;
+  /* Add overflow protection for mobile */
+  overflow: visible;
 }
 
 /* Ensure gradient animation continues smoothly */
@@ -3173,9 +3175,9 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
     overflow: hidden; /* Prevent any overflow */
   }
 
-  /* Mobile: Center logo horizontally above title with minimal top spacing */
+  /* Mobile: Center logo horizontally above title with proper spacing */
   .suz-hero-logo {
-    top: 0.5rem !important; /* Further reduced from 1rem to bring logo even closer to title */
+    top: 1rem !important; /* Increased from 0.5rem to provide adequate space for title */
     left: 50% !important;
     transform: translateX(-50%) !important;
     position: absolute !important;
@@ -3230,18 +3232,24 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 /* Mobile Hero Adjustments */
 @media (max-width: 768px) {
   .suz-hero-enhanced {
-    padding-top: 7rem !important;
+    padding-top: 8rem !important;
+    /* Ensure minimum height for proper content display */
+    min-height: 100vh;
   }
 
   .suz-hero-title {
-    font-size: clamp(2rem, 10vw, 3.5rem) !important;
+    font-size: clamp(2rem, 6vw, 3rem) !important;
+    line-height: 1.1 !important;
     margin-bottom: 1.5rem !important;
     text-align: center !important;
     width: 100% !important;
+    /* Add overflow protection */
+    overflow: visible;
+    word-wrap: break-word;
   }
 
   .suz-hero-subtitle {
-    font-size: clamp(1rem, 5vw, 1.5rem) !important;
+    font-size: clamp(1rem, 4vw, 1.5rem) !important;
     margin-bottom: 1.5rem !important;
     text-align: center !important;
     width: 100% !important;
@@ -3256,6 +3264,15 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 
   .suz-hero-cta-container {
     padding: 0 1rem;
+  }
+
+  /* Enhanced mobile title container spacing */
+  .suz-hero-headline-container {
+    margin-bottom: 2rem !important;
+    /* Ensure adequate height for rotating titles on mobile */
+    min-height: 4rem !important;
+    /* Add padding to prevent title cutoff */
+    padding: 0.5rem 1rem;
   }
 
   .suz-hero-cta-primary,
@@ -3286,13 +3303,17 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 /* Small Mobile Adjustments */
 @media (max-width: 480px) {
   .suz-hero-title {
-    font-size: clamp(1.75rem, 12vw, 3rem) !important;
+    font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
+    line-height: 1.1 !important;
     text-align: center !important;
     width: 100% !important;
+    /* Enhanced overflow protection for small screens */
+    overflow: visible;
+    word-wrap: break-word;
   }
 
   .suz-hero-subtitle {
-    font-size: clamp(0.875rem, 6vw, 1.25rem) !important;
+    font-size: clamp(0.875rem, 4vw, 1.25rem) !important;
     text-align: center !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -3308,6 +3329,14 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
     min-height: 48px;
+  }
+
+  /* Enhanced small mobile title container spacing */
+  .suz-hero-headline-container {
+    /* Ensure adequate height for rotating titles on small mobile */
+    min-height: 3.5rem !important;
+    /* Add padding to prevent title cutoff */
+    padding: 0.5rem 0.75rem;
   }
 }
 
