@@ -1,438 +1,330 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Building2, Home, Sparkles, Users, Briefcase, Heart } from 'lucide-react';
+import { ChevronDown, Building2, Home, Sparkles, Users, Briefcase, Heart, Menu, X } from 'lucide-react';
 
 interface NavigationProps {
   scrollToSection: (id: string) => void;
 }
 
 const Navigation = ({ scrollToSection }: NavigationProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const isMobile = useIsMobile();
   const location = useLocation();
+  const navRef = useRef<HTMLElement>(null);
 
-  // Close menu when clicking outside or on navigation
+
+
+  // Close mobile menu when navigating
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  }, [location.pathname]);
+
+  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      const nav = document.querySelector('[data-nav="main"]');
-      const dropdown = document.querySelector('[data-dropdown="services"]');
-      if (nav && !nav.contains(event.target as Node) && 
-          dropdown && !dropdown.contains(event.target as Node)) {
-        setIsMenuOpen(false);
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
         setIsServicesOpen(false);
       }
     };
 
-    if (isMenuOpen || isServicesOpen) {
+    if (isMobileMenuOpen || isServicesOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      if (isMenuOpen) {
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
-      }
-    } else {
-      document.body.style.overflow = 'unset';
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'unset';
     };
-  }, [isMenuOpen, isServicesOpen]);
+  }, [isMobileMenuOpen, isServicesOpen]);
 
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        setIsMenuOpen(false);
+        setIsMobileMenuOpen(false);
         setIsServicesOpen(false);
       }
     };
 
-    if (isMenuOpen || isServicesOpen) {
+    if (isMobileMenuOpen || isServicesOpen) {
       document.addEventListener('keydown', handleEscape);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isMenuOpen, isServicesOpen]);
+  }, [isMobileMenuOpen, isServicesOpen]);
 
   const handleNavClick = (sectionId: string) => {
-    // If we're on a service page and trying to navigate to homepage sections
     if (location.pathname !== '/' && ['home', 'services', 'testimonials', 'contact'].includes(sectionId)) {
       window.location.href = `/#${sectionId}`;
       return;
     }
     scrollToSection(sectionId);
-    setIsMenuOpen(false); // Close mobile menu after navigation
-    setIsServicesOpen(false); // Close services dropdown
+    setIsMobileMenuOpen(false);
+    setIsServicesOpen(false);
   };
 
-  const toggleServicesDropdown = () => {
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsServicesOpen(false);
+  };
+
+  const toggleServices = () => {
     setIsServicesOpen(!isServicesOpen);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const navLinks = [
+    { name: 'Startseite', path: '/', sectionId: 'home' },
+    { name: 'Über Uns', path: '/', sectionId: 'uber-uns' },
+    { name: 'Kostenrechner', path: '/kostenrechner' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Referenzen', path: '/', sectionId: 'testimonials' },
+    { name: 'Kontakt', path: '/', sectionId: 'contact' },
+    { name: 'Termin buchen', path: '/booking', isButton: true },
+  ];
+
+  const serviceLinks = [
+    { name: 'Hotelzimmerreinigung', path: '/services/hotelzimmerreinigung', icon: Building2 },
+    { name: 'Teppichreinigung', path: '/services/teppichreinigung', icon: Home },
+    { name: 'Bodenreinigung', path: '/services/bodenreinigung', icon: Sparkles },
+    { name: 'Gemeinschaftsräume', path: '/services/gemeinschaftsraeume', icon: Users },
+    { name: 'Büroreinigung', path: '/services/bueroreinigung', icon: Briefcase },
+    { name: 'Krankenhausreinigung', path: '/services/krankenhausreinigung', icon: Heart },
+  ];
 
   return (
     <>
-      {/* Desktop Navigation - Only visible on screens larger than 768px */}
+      {/* Desktop Navigation */}
       {!isMobile && (
         <nav
-          className="fixed top-6 z-50 animate-fade-in suz-navigation-enhanced"
+          ref={navRef}
+          className="suz-nav-desktop"
           role="navigation"
           aria-label="Hauptnavigation"
-          data-nav="main"
-          style={{
-            // Perfect centering with consistent positioning
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 'auto',
-            maxWidth: 'calc(100vw - 2rem)', // Prevent overflow on small screens
-            minWidth: 'fit-content', // Ensure content fits properly
-            display: 'block', // Ensure proper block-level behavior
-          }}
         >
-          <div className="suz-card-glass px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-white/30 shadow-xl">
-            <div className="flex items-center justify-center space-x-1 sm:space-x-2 md:space-x-4 lg:space-x-6 xl:space-x-8">
-              {location.pathname === '/' ? (
+          <div className="suz-nav-container">
+            <div className="suz-nav-content">
+              {navLinks.map((link) => (
+                link.name === 'Startseite' && location.pathname === '/' ? (
+                  <button
+                    key={link.name}
+                    type="button"
+                    onClick={() => handleNavClick(link.sectionId!)}
+                    className="suz-nav-link"
+                    aria-label={`Zur ${link.name} navigieren`}
+                  >
+                    {link.name}
+                  </button>
+                ) : link.name === 'Startseite' ? (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="suz-nav-link"
+                    aria-label={`Zur ${link.name} navigieren`}
+                  >
+                    {link.name}
+                  </Link>
+                ) : link.name === 'Termin buchen' ? (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="suz-nav-link-cta"
+                    aria-label={link.name}
+                  >
+                    {link.name}
+                  </Link>
+                ) : link.sectionId ? (
+                  <button
+                    key={link.name}
+                    type="button"
+                    onClick={() => handleNavClick(link.sectionId)}
+                    className="suz-nav-link"
+                    aria-label={`Zu ${link.name} navigieren`}
+                  >
+                    {link.name}
+                  </button>
+                ) : link.path ? (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="suz-nav-link"
+                    aria-label={`Zur ${link.name} navigieren`}
+                  >
+                    {link.name}
+                  </Link>
+                ) : null
+              ))}
+
+              {/* Services Dropdown */}
+              <div className="suz-services-container">
                 <button
                   type="button"
-                  onClick={() => handleNavClick('home')}
-                  className="suz-nav-link suz-focus-ring whitespace-nowrap"
-                  aria-label="Zur Startseite navigieren"
-                >
-                  Startseite
-                </button>
-              ) : (
-                <Link
-                  to="/"
-                  className="suz-nav-link suz-focus-ring whitespace-nowrap"
-                  aria-label="Zur Startseite navigieren"
-                >
-                  Startseite
-                </Link>
-              )}
-              
-              {/* Services Dropdown */}
-              <div className="relative group" data-dropdown="services">
-                <button
                   className="suz-services-button"
-                  onClick={toggleServicesDropdown}
+                  onClick={toggleServices}
                   onMouseEnter={() => setIsServicesOpen(true)}
-                  onMouseLeave={() => setTimeout(() => {
-                    if (!document.querySelector('[data-dropdown="services"]:hover')) {
-                      setIsServicesOpen(false);
-                    }
-                  }, 100)}
-                  aria-expanded={isServicesOpen}
-                  aria-haspopup="true"
+                  onMouseLeave={() => setIsServicesOpen(false)}
+                  aria-expanded={isServicesOpen.toString()}
+                  aria-haspopup="menu"
                   aria-label="Leistungen anzeigen"
                 >
                   Leistungen
-                  <ChevronDown className={`chevron ${isServicesOpen ? 'open' : ''}`} />
+                  <ChevronDown className={`suz-chevron ${isServicesOpen ? 'suz-chevron-open' : ''}`} />
                 </button>
-                
-                <div 
-                  className={`suz-services-dropdown ${isServicesOpen ? 'show' : ''}`}
-                  onMouseEnter={() => setIsServicesOpen(true)}
-                  onMouseLeave={() => setIsServicesOpen(false)}
+
+                <div
+                  className={`suz-services-dropdown ${isServicesOpen ? 'suz-dropdown-open' : ''}`}
                   role="menu"
                   aria-label="Leistungen Dropdown"
+                  onMouseEnter={() => setIsServicesOpen(true)}
+                  onMouseLeave={() => setIsServicesOpen(false)}
                 >
-                  <Link
-                    to="/services/hotelzimmerreinigung"
-                    className="suz-services-dropdown-item"
-                    role="menuitem"
-                    onClick={() => setIsServicesOpen(false)}
-                  >
-                    <Building2 className="suz-services-dropdown-icon text-blue-600" />
-                    <div className="suz-services-dropdown-content">
-                      <div className="suz-services-dropdown-title">Hotelzimmerreinigung</div>
-                      <div className="suz-services-dropdown-description">Höchste Hygienestandards</div>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/services/teppichreinigung"
-                    className="suz-services-dropdown-item"
-                    role="menuitem"
-                    onClick={() => setIsServicesOpen(false)}
-                  >
-                    <Home className="suz-services-dropdown-icon text-green-600" />
-                    <div className="suz-services-dropdown-content">
-                      <div className="suz-services-dropdown-title">Teppichreinigung</div>
-                      <div className="suz-services-dropdown-description">Tiefenreinigung & Fleckenentfernung</div>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/services/bodenreinigung"
-                    className="suz-services-dropdown-item"
-                    role="menuitem"
-                    onClick={() => setIsServicesOpen(false)}
-                  >
-                    <Sparkles className="suz-services-dropdown-icon text-purple-600" />
-                    <div className="suz-services-dropdown-content">
-                      <div className="suz-services-dropdown-title">Bodenreinigung</div>
-                      <div className="suz-services-dropdown-description">Hartböden, Fliesen, Laminat</div>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/services/gemeinschaftsraeume"
-                    className="suz-services-dropdown-item"
-                    role="menuitem"
-                    onClick={() => setIsServicesOpen(false)}
-                  >
-                    <Users className="suz-services-dropdown-icon text-orange-600" />
-                    <div className="suz-services-dropdown-content">
-                      <div className="suz-services-dropdown-title">Gemeinschaftsräume</div>
-                      <div className="suz-services-dropdown-description">Treppenhäuser & Flure</div>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/services/bueroreinigung"
-                    className="suz-services-dropdown-item"
-                    role="menuitem"
-                    onClick={() => setIsServicesOpen(false)}
-                  >
-                    <Briefcase className="suz-services-dropdown-icon text-blue-600" />
-                    <div className="suz-services-dropdown-content">
-                      <div className="suz-services-dropdown-title">Büroreinigung</div>
-                      <div className="suz-services-dropdown-description">Arbeitsplätze & Büroflächen</div>
-                    </div>
-                  </Link>
-                  <Link
-                    to="/services/krankenhausreinigung"
-                    className="suz-services-dropdown-item"
-                    role="menuitem"
-                    onClick={() => setIsServicesOpen(false)}
-                  >
-                    <Heart className="suz-services-dropdown-icon text-red-600" />
-                    <div className="suz-services-dropdown-content">
-                      <div className="suz-services-dropdown-title">Krankenhausreinigung</div>
-                      <div className="suz-services-dropdown-description">Medizinische Einrichtungen</div>
-                    </div>
-                  </Link>
+                  {serviceLinks.map((service) => {
+                    const Icon = service.icon;
+                    return (
+                      <Link
+                        key={service.name}
+                        to={service.path}
+                        className="suz-service-item"
+                        role="menuitem"
+                        onClick={() => setIsServicesOpen(false)}
+                      >
+                        <Icon className="suz-service-icon" />
+                        <span className="suz-service-name">{service.name}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
-              
-              <Link
-                to="/booking"
-                className="suz-nav-link suz-focus-ring whitespace-nowrap bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors"
-                aria-label="Online Termin buchen"
-              >
-                Termin buchen
-              </Link>
-              
-              <button
-                type="button"
-                onClick={() => handleNavClick('testimonials')}
-                className="suz-nav-link suz-focus-ring whitespace-nowrap"
-                aria-label="Zu unseren Referenzen navigieren"
-              >
-                Referenzen
-              </button>
-              <button
-                type="button"
-                onClick={() => handleNavClick('contact')}
-                className="suz-nav-link suz-focus-ring whitespace-nowrap"
-                aria-label="Zum Kontakt navigieren"
-              >
-                Kontakt
-              </button>
             </div>
           </div>
         </nav>
       )}
 
-      {/* Mobile Navigation - Only visible on screens 768px and below */}
+      {/* Mobile Navigation */}
       {isMobile && (
         <>
-          {/* Mobile Menu Button - Positioned in top-right corner */}
-          <div
-            className="fixed top-6 right-6 z-50 animate-fade-in"
-            role="navigation"
-            aria-label="Mobile Navigation"
-          >
-            <div className="suz-card-glass px-4 py-3 rounded-full border border-white/30 shadow-xl">
+          {/* Mobile Menu Button */}
+          <div className="suz-mobile-button-container">
+            <div className="suz-mobile-button-wrapper">
               <button
                 type="button"
-                onClick={toggleMenu}
-                className="suz-mobile-menu-button suz-focus-ring"
-                aria-label={isMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
-                aria-expanded={isMenuOpen ? 'true' : 'false'}
+                onClick={toggleMobileMenu}
+                className="suz-mobile-button"
+                aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={isMobileMenuOpen.toString()}
                 aria-controls="mobile-menu"
               >
-                <div className="suz-hamburger-icon">
-                  <span className={`suz-hamburger-line ${isMenuOpen ? 'suz-hamburger-line-1-open' : ''}`}></span>
-                  <span className={`suz-hamburger-line ${isMenuOpen ? 'suz-hamburger-line-2-open' : ''}`}></span>
-                  <span className={`suz-hamburger-line ${isMenuOpen ? 'suz-hamburger-line-3-open' : ''}`}></span>
-                </div>
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6 text-slate-100" />
+                ) : (
+                  <Menu className="w-6 h-6 text-slate-100" />
+                )}
               </button>
             </div>
           </div>
 
           {/* Mobile Menu Overlay */}
-          {isMenuOpen && (
-            <div className="suz-mobile-menu-overlay" aria-hidden="true">
-              <div className="suz-mobile-menu-backdrop" onClick={() => setIsMenuOpen(false)}></div>
-            </div>
+          {isMobileMenuOpen && (
+            <div className="suz-mobile-overlay" onClick={toggleMobileMenu} />
           )}
 
           {/* Mobile Menu */}
           <div
             id="mobile-menu"
-            className={`suz-mobile-menu ${isMenuOpen ? 'suz-mobile-menu-open' : 'suz-mobile-menu-closed'}`}
-            aria-hidden={!isMenuOpen ? 'true' : 'false'}
+            className={`suz-mobile-menu ${isMobileMenuOpen ? 'suz-mobile-open' : 'suz-mobile-closed'}`}
+            aria-hidden={(!isMobileMenuOpen).toString()}
           >
-            <div className="suz-mobile-menu-content">
-              {location.pathname === '/' ? (
-                <button
-                  type="button"
-                  onClick={() => handleNavClick('home')}
-                  className="suz-mobile-nav-link suz-focus-ring"
-                  aria-label="Zur Startseite navigieren"
-                >
-                  Startseite
-                </button>
-              ) : (
-                <Link
-                  to="/"
-                  className="suz-mobile-nav-link suz-focus-ring"
-                  onClick={() => setIsMenuOpen(false)}
-                  aria-label="Zur Startseite navigieren"
-                >
-                  Startseite
-                </Link>
-              )}
-              
+            <div className="suz-mobile-content">
+              {navLinks.map((link) => (
+                link.name === 'Startseite' && location.pathname === '/' ? (
+                  <button
+                    key={link.name}
+                    type="button"
+                    onClick={() => handleNavClick(link.sectionId!)}
+                    className="suz-mobile-link"
+                    aria-label={`Zur ${link.name} navigieren`}
+                  >
+                    {link.name}
+                  </button>
+                ) : link.name === 'Startseite' ? (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="suz-mobile-link"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label={`Zur ${link.name} navigieren`}
+                  >
+                    {link.name}
+                  </Link>
+                ) : link.name === 'Termin buchen' ? (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="suz-mobile-link-cta"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label={link.name}
+                  >
+                    🗓️ {link.name}
+                  </Link>
+                ) : link.sectionId ? (
+                  <button
+                    key={link.name}
+                    type="button"
+                    onClick={() => handleNavClick(link.sectionId)}
+                    className="suz-mobile-link"
+                    aria-label={`Zu ${link.name} navigieren`}
+                  >
+                    {link.name}
+                  </button>
+                ) : link.path ? (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="suz-mobile-link"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label={`Zur ${link.name} navigieren`}
+                  >
+                    {link.name}
+                  </Link>
+                ) : null
+              ))}
+
               {/* Mobile Services Section */}
               <button
                 type="button"
-                onClick={toggleServicesDropdown}
-                className="suz-mobile-nav-link suz-focus-ring flex items-center justify-between w-full"
+                onClick={toggleServices}
+                className="suz-mobile-services-button"
                 aria-label="Leistungen anzeigen"
+                aria-expanded={isServicesOpen.toString()}
               >
                 Leistungen
-                <svg className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
               </button>
               
-              <div className={`suz-services-dropdown ${isServicesOpen ? 'show' : ''}`}>
-                <Link
-                  to="/services/hotelzimmerreinigung"
-                  className="suz-services-dropdown-item"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    setIsServicesOpen(false);
-                  }}
-                >
-                  <Building2 className="suz-services-dropdown-icon text-blue-600" />
-                  <div className="suz-services-dropdown-content">
-                    <div className="suz-services-dropdown-title">Hotelzimmerreinigung</div>
-                    <div className="suz-services-dropdown-description">Höchste Hygienestandards</div>
-                  </div>
-                </Link>
-                <Link
-                  to="/services/teppichreinigung"
-                  className="suz-services-dropdown-item"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    setIsServicesOpen(false);
-                  }}
-                >
-                  <Home className="suz-services-dropdown-icon text-green-600" />
-                  <div className="suz-services-dropdown-content">
-                    <div className="suz-services-dropdown-title">Teppichreinigung</div>
-                    <div className="suz-services-dropdown-description">Tiefenreinigung & Fleckenentfernung</div>
-                  </div>
-                </Link>
-                <Link
-                  to="/services/bodenreinigung"
-                  className="suz-services-dropdown-item"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    setIsServicesOpen(false);
-                  }}
-                >
-                  <Sparkles className="suz-services-dropdown-icon text-purple-600" />
-                  <div className="suz-services-dropdown-content">
-                    <div className="suz-services-dropdown-title">Bodenreinigung</div>
-                    <div className="suz-services-dropdown-description">Hartböden, Fliesen, Laminat</div>
-                  </div>
-                </Link>
-                <Link
-                  to="/services/gemeinschaftsraeume"
-                  className="suz-services-dropdown-item"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    setIsServicesOpen(false);
-                  }}
-                >
-                  <Users className="suz-services-dropdown-icon text-orange-600" />
-                  <div className="suz-services-dropdown-content">
-                    <div className="suz-services-dropdown-title">Gemeinschaftsräume</div>
-                    <div className="suz-services-dropdown-description">Treppenhäuser & Flure</div>
-                  </div>
-                </Link>
-                <Link
-                  to="/services/bueroreinigung"
-                  className="suz-services-dropdown-item"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    setIsServicesOpen(false);
-                  }}
-                >
-                  <Briefcase className="suz-services-dropdown-icon text-blue-600" />
-                  <div className="suz-services-dropdown-content">
-                    <div className="suz-services-dropdown-title">Büroreinigung</div>
-                    <div className="suz-services-dropdown-description">Arbeitsplätze & Büroflächen</div>
-                  </div>
-                </Link>
-                <Link
-                  to="/services/krankenhausreinigung"
-                  className="suz-services-dropdown-item"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    setIsServicesOpen(false);
-                  }}
-                >
-                  <Heart className="suz-services-dropdown-icon text-red-600" />
-                  <div className="suz-services-dropdown-content">
-                    <div className="suz-services-dropdown-title">Krankenhausreinigung</div>
-                    <div className="suz-services-dropdown-description">Medizinische Einrichtungen</div>
-                  </div>
-                </Link>
+              <div className={`suz-mobile-services ${isServicesOpen ? 'suz-mobile-services-open' : ''}`}>
+                {serviceLinks.map((service) => {
+                  const Icon = service.icon;
+                  return (
+                    <Link
+                      key={service.name}
+                      to={service.path}
+                      className="suz-mobile-service-item"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setIsServicesOpen(false);
+                      }}
+                    >
+                      <Icon className="suz-mobile-service-icon" />
+                      <span className="suz-mobile-service-name">{service.name}</span>
+                    </Link>
+                  );
+                })}
               </div>
-              
-              <Link
-                to="/booking"
-                className="suz-mobile-nav-link suz-focus-ring bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-                aria-label="Online Termin buchen"
-              >
-                🗓️ Termin buchen
-              </Link>
-              
-              <button
-                type="button"
-                onClick={() => handleNavClick('testimonials')}
-                className="suz-mobile-nav-link suz-focus-ring"
-                aria-label="Zu unseren Referenzen navigieren"
-              >
-                Referenzen
-              </button>
-              <button
-                type="button"
-                onClick={() => handleNavClick('contact')}
-                className="suz-mobile-nav-link suz-focus-ring"
-                aria-label="Zum Kontakt navigieren"
-              >
-                Kontakt
-              </button>
             </div>
           </div>
         </>

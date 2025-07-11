@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { initializeAnalytics, performanceMonitoring, trackPageView } from "@/lib/analytics";
 import { updateMetaTags, injectStructuredData, generateFAQStructuredData } from "@/lib/seo";
@@ -32,6 +33,9 @@ const LocationPage = lazy(() => import("./pages/LocationPage"));
 
 // Lazy load booking page
 const Booking = lazy(() => import("./pages/Booking"));
+
+// Lazy load calculator page
+const Kostenrechner = lazy(() => import("./pages/Kostenrechner"));
 
 // Loading component for Suspense fallback
 const PageLoader = () => (
@@ -103,52 +107,57 @@ const SEOAnalyticsProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter
-          future={{
-            v7_startTransition: true,
-            v7_relativeSplatPath: true,
-          }}
-        >
-          <SEOAnalyticsProvider>
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                
-                {/* Service Pages - Updated to match real services */}
-                <Route path="/services/hotelzimmerreinigung" element={<Hotelzimmerreinigung />} />
-                <Route path="/services/teppichreinigung" element={<Teppichreinigung />} />
-                <Route path="/services/bodenreinigung" element={<Bodenreinigung />} />
-                <Route path="/services/gemeinschaftsraeume" element={<Gemeinschaftsraeume />} />
-                <Route path="/services/bueroreinigung" element={<Bueroreinigung />} />
-                <Route path="/services/krankenhausreinigung" element={<Krankenhausreinigung />} />
-                
-                {/* Blog Routes */}
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
-                
-                {/* Local SEO Routes */}
-                <Route path="/standorte/:location" element={<LocationPage />} />
-                
-                {/* Booking Route */}
-                <Route path="/booking" element={<Booking />} />
-                
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-            <Suspense fallback={null}>
-              <CookieConsent />
-            </Suspense>
-          </SEOAnalyticsProvider>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter
+            future={{
+              v7_startTransition: true,
+              v7_relativeSplatPath: true,
+            }}
+          >
+            <SEOAnalyticsProvider>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+
+                  {/* Service Pages - Updated to match real services */}
+                  <Route path="/services/hotelzimmerreinigung" element={<Hotelzimmerreinigung />} />
+                  <Route path="/services/teppichreinigung" element={<Teppichreinigung />} />
+                  <Route path="/services/bodenreinigung" element={<Bodenreinigung />} />
+                  <Route path="/services/gemeinschaftsraeume" element={<Gemeinschaftsraeume />} />
+                  <Route path="/services/bueroreinigung" element={<Bueroreinigung />} />
+                  <Route path="/services/krankenhausreinigung" element={<Krankenhausreinigung />} />
+
+                  {/* Blog Routes */}
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
+
+                  {/* Local SEO Routes */}
+                  <Route path="/standorte/:location" element={<LocationPage />} />
+
+                  {/* Booking Route */}
+                  <Route path="/booking" element={<Booking />} />
+
+                  {/* Calculator Route */}
+                  <Route path="/kostenrechner" element={<Kostenrechner />} />
+
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+              <Suspense fallback={null}>
+                <CookieConsent />
+              </Suspense>
+            </SEOAnalyticsProvider>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

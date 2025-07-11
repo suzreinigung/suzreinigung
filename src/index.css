@@ -828,51 +828,74 @@ body.force-apple-design,
 .suz-service-image-container {
   position: relative;
   overflow: hidden;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(100, 210, 255, 0.05));
-  border: 1px solid rgba(10, 132, 255, 0.2);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  /* Enhanced glass morphism background with stronger effect */
+  background: linear-gradient(135deg,
+    rgba(28, 28, 30, 0.8) 0%,
+    rgba(10, 132, 255, 0.15) 25%,
+    rgba(100, 210, 255, 0.08) 75%,
+    rgba(28, 28, 30, 0.9) 100%
+  );
+  border: 1px solid rgba(10, 132, 255, 0.3);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
   box-shadow:
-    0 8px 25px rgba(10, 132, 255, 0.1),
-    0 4px 12px rgba(100, 210, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 12px 32px rgba(10, 132, 255, 0.15),
+    0 6px 16px rgba(100, 210, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(10, 132, 255, 0.1);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  /* True zoom-independent container sizing using fixed pixel dimensions */
-  display: flex;
+  /* Container adapts to image dimensions to eliminate side gaps */
+  display: inline-flex; /* Changed to inline-flex to fit content width */
   align-items: center;
   justify-content: center;
-  width: 100%;
-  /* Fixed pixel dimensions that remain constant regardless of browser zoom */
-  height: 280px; /* Fixed height for desktop */
+  width: auto; /* Allow width to adapt to image */
+  max-width: 90%; /* Responsive maximum width */
+  /* Adaptive height that accommodates full image without cropping */
+  min-height: 280px;
+  max-height: 450px; /* Increased to accommodate full image */
+  height: auto;
   /* Additional zoom-independent properties */
   contain: layout style paint;
   /* Force hardware acceleration for smooth zoom-independent rendering */
   transform: translateZ(0);
+  /* Better padding for content */
+  padding: 1rem;
+  /* Center the container */
+  margin: 0 auto;
 }
 
 .suz-service-image-container:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) translateZ(0);
   box-shadow:
-    0 20px 40px rgba(10, 132, 255, 0.2),
-    0 8px 20px rgba(100, 210, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  border-color: rgba(10, 132, 255, 0.3);
+    0 24px 48px rgba(10, 132, 255, 0.25),
+    0 12px 24px rgba(100, 210, 255, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(10, 132, 255, 0.2);
+  border-color: rgba(10, 132, 255, 0.4);
+  background: linear-gradient(135deg,
+    rgba(28, 28, 30, 0.85) 0%,
+    rgba(10, 132, 255, 0.2) 25%,
+    rgba(100, 210, 255, 0.12) 75%,
+    rgba(28, 28, 30, 0.95) 100%
+  );
 }
 
 .suz-service-image {
-  /* True zoom-independent image sizing using fixed pixel dimensions */
-  width: auto;
+  /* Optimized image sizing to show complete image without cropping */
+  width: 100%;
   height: auto;
-  /* Fixed maximum dimensions that remain constant regardless of browser zoom */
+  /* Better maximum dimensions to accommodate full image */
   max-width: 100%;
-  max-height: 260px; /* Fixed max height for desktop */
-  /* Use cover to fill container without letterboxing, but maintain aspect ratio */
-  object-fit: cover;
+  max-height: 400px; /* Increased to accommodate full image */
+  /* Use contain to show complete image without cropping */
+  object-fit: contain;
   object-position: center;
   border-radius: 1rem;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0.9) contrast(1.1) saturate(1.1);
+  filter: brightness(0.95) contrast(1.1) saturate(1.15);
   /* Force hardware acceleration for smooth zoom-independent rendering */
   transform: translateZ(0);
   will-change: transform, filter;
@@ -880,14 +903,20 @@ body.force-apple-design,
   contain: layout style paint;
   /* Optimize image rendering for consistent display */
   image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   /* Ensure proper scaling behavior */
   display: block;
+  /* Better shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .suz-service-image:hover {
-  filter: brightness(1) contrast(1.2) saturate(1.2);
-  transform: translateZ(0) scale(1.02);
+  filter: brightness(1.05) contrast(1.2) saturate(1.25);
+  transform: translateZ(0) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .suz-service-image-overlay {
@@ -906,32 +935,35 @@ body.force-apple-design,
   .suz-service-image-container {
     display: block !important;
     text-align: center !important;
-    height: 280px !important;
+    height: 380px !important; /* Increased for full image display */
   }
 
   .suz-service-image {
     display: inline-block !important;
     vertical-align: middle !important;
-    max-height: 260px !important;
+    max-height: 360px !important; /* Increased for full image display */
+    object-fit: contain !important; /* Show complete image */
   }
 
   @media (max-width: 768px) {
     .suz-service-image-container {
-      height: 220px !important;
+      height: 320px !important; /* Increased for full image display */
     }
 
     .suz-service-image {
-      max-height: 200px !important;
+      max-height: 300px !important; /* Increased for full image display */
+      object-fit: contain !important; /* Show complete image */
     }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
     .suz-service-image-container {
-      height: 250px !important;
+      height: 350px !important; /* Increased for full image display */
     }
 
     .suz-service-image {
-      max-height: 230px !important;
+      max-height: 330px !important; /* Increased for full image display */
+      object-fit: contain !important; /* Show complete image */
     }
   }
 }
@@ -1280,18 +1312,33 @@ body.force-apple-design,
   /* Service images mobile optimization with adaptive container sizing */
   .suz-service-image-container {
     margin-bottom: 1rem !important;
-    border-radius: 0.75rem !important;
-    /* Enhanced glass morphism for mobile */
-    background: linear-gradient(135deg, rgba(10, 132, 255, 0.15), rgba(100, 210, 255, 0.08)) !important;
-    border: 1px solid rgba(10, 132, 255, 0.25) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    backdrop-filter: blur(8px) !important;
+    border-radius: 1rem !important;
+    /* Container adapts to image width on mobile */
+    display: inline-flex !important; /* Changed to inline-flex to fit content */
+    width: auto !important; /* Allow width to adapt to image */
+    max-width: 95% !important; /* Responsive maximum width for mobile */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    /* Enhanced glass morphism for mobile matching desktop */
+    background: linear-gradient(135deg,
+      rgba(28, 28, 30, 0.85) 0%,
+      rgba(10, 132, 255, 0.18) 25%,
+      rgba(100, 210, 255, 0.1) 75%,
+      rgba(28, 28, 30, 0.9) 100%
+    ) !important;
+    border: 1px solid rgba(10, 132, 255, 0.3) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+    backdrop-filter: blur(16px) saturate(160%) !important;
     /* Adaptive container sizing for mobile - adjusts to image content */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     width: 100% !important;
-    /* Flexible height that adapts to image aspect ratio on mobile */
+    /* Optimized height for mobile to reduce white space */
+    min-height: 180px !important;
+    max-height: 260px !important;
+    height: auto !important;
+    padding: 0.75rem !important;
     min-height: 180px !important; /* Minimum height for mobile */
     max-height: 280px !important; /* Maximum height for mobile */
     height: auto !important; /* Allow container to adapt to image */
@@ -1302,18 +1349,17 @@ body.force-apple-design,
   }
 
   .suz-service-image {
-    /* Adaptive image sizing for mobile - maintains aspect ratio */
+    /* Optimized image sizing for mobile to show complete image */
     width: 100% !important;
     height: auto !important;
-    /* Flexible dimensions that adapt to image content on mobile */
+    /* Better dimensions that accommodate full image on mobile */
     max-width: 100% !important;
-    min-height: 160px !important; /* Minimum height for mobile */
-    max-height: 260px !important; /* Maximum height for mobile */
+    max-height: 280px !important; /* Increased to accommodate full image */
     border-radius: 0.75rem !important;
-    object-fit: cover !important; /* Fill container without letterboxing on mobile */
+    object-fit: contain !important; /* Show complete image without cropping on mobile */
     object-position: center !important;
-    /* Optimized for mobile performance */
-    filter: brightness(0.95) contrast(1.05) saturate(1.05) !important;
+    /* Enhanced visual quality for mobile */
+    filter: brightness(0.98) contrast(1.08) saturate(1.12) !important;
     /* Force hardware acceleration for smooth zoom-independent rendering */
     transform: translateZ(0) !important;
     will-change: transform, filter !important;
@@ -1324,6 +1370,8 @@ body.force-apple-design,
     image-rendering: crisp-edges !important;
     /* Ensure proper scaling behavior */
     display: block !important;
+    /* Enhanced shadow for mobile */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15) !important;
   }
 
   .suz-service-image:hover {
@@ -1335,24 +1383,24 @@ body.force-apple-design,
     transform: translateY(-2px) !important; /* Reduced movement for mobile */
   }
 
-  /* Enhanced mobile image container adaptation for better photo frame fitting */
+  /* Enhanced mobile image container adaptation for full image display */
   .suz-service-image-container {
-    /* Use aspect-ratio to maintain better proportions */
-    aspect-ratio: 4/3 !important; /* Standard aspect ratio for service images */
+    /* Remove fixed aspect ratio to accommodate full image */
+    aspect-ratio: unset !important; /* Allow natural image proportions */
     height: auto !important; /* Override fixed height for better adaptation */
-    min-height: 180px !important;
-    max-height: 280px !important;
+    min-height: 200px !important;
+    max-height: 350px !important; /* Increased to accommodate full image */
     /* Ensure container adapts to content */
-    align-items: stretch !important;
-    padding: 8px !important; /* Add padding to create better frame effect */
+    align-items: center !important;
+    padding: 12px !important; /* Increased padding for better frame effect */
   }
 
-  /* Ensure images fill the adaptive container properly */
+  /* Ensure images display completely within container */
   .suz-service-image {
     width: 100% !important;
-    height: 100% !important; /* Fill the aspect-ratio container */
-    object-fit: cover !important;
-    min-height: unset !important; /* Remove conflicting min-height */
+    height: auto !important; /* Allow natural height for full image display */
+    object-fit: contain !important; /* Show complete image without cropping */
+    max-height: 320px !important; /* Increased maximum height */
     border-radius: 0.5rem !important; /* Slightly smaller radius inside padded container */
   }
 }
@@ -1361,13 +1409,14 @@ body.force-apple-design,
 @supports not (aspect-ratio: 4/3) {
   @media (max-width: 768px) {
     .suz-service-image-container {
-      height: 220px !important; /* Fallback fixed height */
+      height: 320px !important; /* Increased fallback height for full image */
       aspect-ratio: unset !important;
     }
 
     .suz-service-image {
       height: auto !important;
-      max-height: 200px !important;
+      max-height: 300px !important; /* Increased for full image display */
+      object-fit: contain !important; /* Show complete image */
     }
   }
 }
@@ -1407,24 +1456,29 @@ body.force-apple-design,
 
   /* Service images tablet optimization with true zoom-independent sizing */
   .suz-service-image-container {
-    /* Fixed pixel dimensions that remain constant regardless of browser zoom on tablets */
-    height: 250px !important; /* Fixed height for tablets */
+    /* Container adapts to image dimensions on tablets */
+    display: inline-flex !important; /* Changed to inline-flex to fit content */
+    width: auto !important; /* Allow width to adapt to image */
+    max-width: 90% !important; /* Responsive maximum width for tablets */
+    margin: 0 auto !important; /* Center the container */
+    min-height: 280px !important; /* Minimum height for tablets */
+    max-height: 400px !important; /* Increased maximum height for full image */
+    height: auto !important; /* Allow container to adapt to image */
     /* Additional zoom-independent properties for tablets */
     contain: layout style paint !important;
     /* Force hardware acceleration for smooth zoom-independent rendering */
     transform: translateZ(0) !important;
     /* Ensure proper flexbox layout */
-    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
   }
 
   .suz-service-image {
-    /* True zoom-independent image sizing for tablets */
-    width: auto !important;
+    /* Optimized image sizing for tablets to show complete image */
+    width: 100% !important;
     height: auto !important;
     max-width: 100% !important;
-    max-height: 230px !important; /* Fixed max height for tablets */
+    max-height: 380px !important; /* Increased max height for full image display */
     /* Additional zoom-independent properties for tablets */
     contain: layout style paint !important;
     /* Optimize image rendering for consistent display */
@@ -1432,7 +1486,7 @@ body.force-apple-design,
     image-rendering: crisp-edges !important;
     /* Ensure proper scaling behavior */
     display: block !important;
-    object-fit: cover !important;
+    object-fit: contain !important; /* Show complete image without cropping */
     object-position: center !important;
   }
 }
@@ -1859,10 +1913,12 @@ body.force-apple-design,
   }
 }
 
-/* Performance Optimization Classes */
+/* Enhanced Performance Optimization Classes */
 .lazy-load {
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  will-change: opacity;
 }
 
 .lazy-load.loaded {
@@ -1872,14 +1928,53 @@ body.force-apple-design,
 .image-optimized {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  object-fit: contain; /* Use contain as per user preference */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+  /* Enhanced performance optimizations */
+  transform: translateZ(0);
+  will-change: transform;
+  contain: layout style paint;
 }
 
-/* Preload critical resources */
+/* Critical resource optimization */
 .critical-resource {
   font-display: swap;
+}
+
+/* Enhanced service image performance */
+.suz-service-image {
+  /* Additional performance optimizations */
+  content-visibility: auto;
+  contain-intrinsic-size: 400px 300px;
+  /* Improved loading states */
+  background-color: rgba(28, 28, 30, 0.1);
+  background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  animation: loading-shimmer 1.5s infinite;
+}
+
+.suz-service-image.loaded {
+  background: none;
+  animation: none;
+}
+
+/* Loading shimmer animation */
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Performance-optimized transitions */
+.performance-optimized {
+  transform: translateZ(0);
+  will-change: transform;
+  contain: layout style paint;
 }
 
 /* Apple-Inspired Component Classes - High Priority */
@@ -1955,7 +2050,6 @@ body.force-apple-design,
   padding: var(--space-6) !important;
   /* Performance optimization for glass effects */
   will-change: transform, opacity;
-  contain: layout style paint;
   /* Enhanced fallback for browsers without backdrop-filter support */
   background-image: linear-gradient(135deg,
     rgba(28, 28, 30, 0.85) 0%,
@@ -1987,12 +2081,13 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) {
   /* Ensure perfect horizontal centering for desktop nav */
   position: fixed !important;
   left: 50% !important;
-  transform: translateX(-50%) !important;
   /* Prevent layout shifts */
   will-change: transform;
   /* Ensure proper stacking */
   z-index: 50;
-  /* Ensure content doesn't overflow */
+  /* Allow dropdown to extend beyond navigation container */
+  overflow: visible !important;
+  /* Ensure content doesn't overflow horizontally but allows vertical overflow for dropdown */
   box-sizing: border-box;
   /* Center the navigation container */
   display: block !important;
@@ -2003,6 +2098,10 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) {
 nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   margin: 0 auto;
   display: inline-block;
+  /* Allow dropdown to extend beyond this container */
+  overflow: visible !important;
+  position: relative;
+  z-index: 100; /* Ensure dropdown is above other content */
 }
 
 /* Desktop navigation centering for large screens only */
@@ -2034,6 +2133,38 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   color: var(--suz-blue-primary);
   background: var(--suz-gray-50);
   transform: scale(1.05);
+}
+
+/* Enhanced CTA Button Styling for Consistent Hover Effects */
+.suz-nav-link-cta {
+  color: white;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-body-lg);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-normal) var(--ease-out-cubic);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: #3b82f6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.suz-nav-link-cta:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.suz-nav-link-cta:focus {
+  outline: 2px solid var(--suz-blue-primary);
+  outline-offset: 2px;
+}
+
+.suz-nav-link-cta:active {
+  transform: scale(0.98);
 }
 
 /* Enhanced Typography Classes with German Text Optimization */
@@ -2139,6 +2270,9 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   padding: calc(8rem + var(--space-4)) var(--space-4) var(--section-spacing-vertical);
   margin: 0;
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .suz-section-compact {
@@ -2154,6 +2288,482 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 
   .suz-section-hero {
     padding: calc(6rem + var(--space-4)) var(--space-4) var(--section-spacing-mobile);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ===== BLOG PREVIEW ZOOM-INDEPENDENT STYLES ===== */
+
+/* Blog card zoom-independent styling */
+.suz-blog-card-zoom-independent {
+  /* Prevent layout shifts during zoom and animation */
+  contain: layout style paint;
+  transform: translateZ(0);
+  will-change: transform;
+  /* Ensure consistent sizing across zoom levels */
+  min-height: 400px;
+  max-height: 500px;
+}
+
+/* Blog icon container zoom-independent styling */
+.suz-blog-icon-container {
+  /* Force hardware acceleration for smooth zoom-independent rendering */
+  contain: layout style paint;
+  transform: translateZ(0);
+  /* Consistent height across zoom levels */
+  height: 12rem; /* 192px - equivalent to h-48 */
+  min-height: 12rem;
+  max-height: 12rem;
+}
+
+/* Blog icon zoom-independent styling */
+.suz-blog-icon {
+  /* Fixed font size that doesn't scale with browser zoom */
+  font-size: 3rem !important;
+  line-height: 1 !important;
+  contain: layout style;
+  /* Prevent text scaling issues */
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  /* Ensure consistent rendering */
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile blog preview optimizations */
+@media (max-width: 768px) {
+  .suz-blog-card-zoom-independent {
+    min-height: 350px;
+    max-height: 450px;
+  }
+
+  .suz-blog-icon-container {
+    height: 10rem; /* Smaller on mobile */
+    min-height: 10rem;
+    max-height: 10rem;
+  }
+
+  .suz-blog-icon {
+    font-size: 2.5rem !important;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* ===== BLOG PAGE LAYOUT OPTIMIZATIONS ===== */
+
+/* Blog page hero section optimizations */
+.blog-hero-optimized {
+  /* Reduce excessive padding between hero and content */
+  padding-bottom: 1rem !important;
+}
+
+/* Blog content section optimizations */
+.blog-content-optimized {
+  /* Reduce top padding to minimize gap from hero */
+  padding-top: 1rem !important;
+  padding-bottom: 2rem !important;
+}
+
+/* Blog page specific spacing adjustments */
+.blog-page .suz-hero-headline-container {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Ensure proper content flow without large gaps */
+.blog-page section + section {
+  margin-top: 0 !important;
+}
+
+/* Blog pagination spacing optimization */
+.blog-pagination-optimized {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* ===== ENHANCED BLOG POST CONTENT STYLES ===== */
+
+/* Blog content container with premium typography */
+.suz-blog-content {
+  line-height: 1.8;
+  /* Remove default prose styling that conflicts with SUZ design */
+  max-width: none !important;
+  /* Ensure proper text alignment within glass morphism container */
+  text-align: left;
+  /* Enhanced readability with optimal spacing */
+  font-size: 1rem;
+  color: rgb(203, 213, 225); /* slate-300 */
+  /* Zoom-independent styling */
+  contain: layout style;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+}
+
+/* Enhanced typography for blog content */
+.suz-blog-typography {
+  /* Improved text rendering for German content */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  /* Better text alignment and spacing */
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+}
+
+/* Premium heading styles */
+.suz-blog-typography h1,
+.suz-blog-typography h2,
+.suz-blog-typography h3 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.025em;
+  text-align: left; /* Headings should be left-aligned for better hierarchy */
+  margin-left: 0;
+  margin-right: 0;
+  /* Enhanced visual hierarchy */
+  font-weight: 600;
+  line-height: 1.2;
+  /* Improved spacing */
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Specific heading sizes and spacing */
+.suz-blog-typography h1 {
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.suz-blog-typography h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  color: white;
+}
+
+.suz-blog-typography h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+/* Enhanced paragraph styling */
+.suz-blog-typography p {
+  margin-bottom: 1.5rem;
+  line-height: 1.75;
+  text-align: justify;
+  text-justify: inter-word;
+  /* Better spacing and readability */
+  margin-top: 0;
+  orphans: 2;
+  widows: 2;
+  /* Ensure proper color inheritance */
+  color: rgb(203, 213, 225); /* slate-300 */
+}
+
+/* Enhanced list styling with better alignment */
+.suz-blog-typography ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 1.5rem 0;
+}
+
+.suz-blog-typography ul li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  text-align: left; /* Lists should be left-aligned for readability */
+  color: rgb(203, 213, 225); /* slate-300 */
+}
+
+.suz-blog-typography li::before {
+  content: '✓';
+  color: #0A84FF; /* SUZ blue primary */
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Gradient text effect for headings */
+.gradient-text-subtle {
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Enhanced link styling within blog content */
+.suz-blog-typography a {
+  color: #64D2FF; /* SUZ blue secondary */
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+}
+
+.suz-blog-typography a:hover {
+  color: #0A84FF; /* SUZ blue primary */
+  border-bottom-color: #0A84FF;
+  text-shadow: 0 0 8px rgba(10, 132, 255, 0.3);
+}
+
+/* Enhanced blockquote styling for highlighted content */
+.suz-blog-typography blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(100, 210, 255, 0.05));
+  border-left: 4px solid #0A84FF;
+  border-radius: 0.5rem;
+  font-style: italic;
+  color: rgb(226, 232, 240); /* slate-200 */
+  position: relative;
+}
+
+.suz-blog-typography blockquote::before {
+  content: '"';
+  font-size: 3rem;
+  color: #0A84FF;
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-family: Georgia, serif;
+  opacity: 0.5;
+}
+
+/* Enhanced code styling */
+.suz-blog-typography code {
+  background: rgba(28, 28, 30, 0.8);
+  color: #64D2FF;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.875rem;
+  border: 1px solid rgba(100, 210, 255, 0.2);
+}
+
+/* Enhanced strong/bold text styling */
+.suz-blog-typography strong,
+.suz-blog-typography b {
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced emphasis styling */
+.suz-blog-typography em,
+.suz-blog-typography i {
+  color: rgb(226, 232, 240); /* slate-200 */
+  font-style: italic;
+}
+
+/* Responsive blog content with enhanced mobile optimization */
+@media (max-width: 768px) {
+  .suz-blog-content {
+    padding: 1.5rem !important;
+    font-size: 0.95rem;
+  }
+
+  .suz-blog-typography {
+    /* Optimize text justification for mobile */
+    text-align: left;
+    hyphens: none;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+  }
+
+  .suz-blog-typography h1 {
+    font-size: 1.75rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .suz-blog-typography h2 {
+    font-size: 1.375rem !important;
+    margin-top: 1.75rem !important;
+    margin-bottom: 0.875rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .suz-blog-typography h3 {
+    font-size: 1.125rem !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .suz-blog-typography p {
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .suz-blog-typography ul li {
+    padding-left: 1.75rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  .suz-blog-typography blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .suz-blog-typography blockquote::before {
+    font-size: 2rem;
+    top: -0.25rem;
+    left: 0.75rem;
+  }
+}
+
+/* ===== BLOG POST LAYOUT ENHANCEMENTS ===== */
+
+/* Enhanced blog post container with better spacing */
+.suz-blog-post-container {
+  /* Ensure proper content flow and spacing */
+  max-width: none;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Enhanced glass morphism container for blog content */
+.suz-blog-content-glass {
+  /* Premium glass morphism with enhanced readability */
+  background: rgba(28, 28, 30, 0.85) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+  backdrop-filter: blur(25px) saturate(150%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(10, 132, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1rem !important;
+  /* Enhanced content padding for better readability */
+  padding: 3rem !important;
+  margin: 2rem 0 !important;
+  /* Ensure proper text rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove conflicting prose styles that interfere with SUZ design */
+.suz-blog-content.prose {
+  /* Override default prose styles */
+  color: rgb(203, 213, 225) !important; /* slate-300 */
+  max-width: none !important;
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+}
+
+.suz-blog-content.prose h1,
+.suz-blog-content.prose h2,
+.suz-blog-content.prose h3,
+.suz-blog-content.prose h4 {
+  color: white !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  font-weight: 600 !important;
+}
+
+.suz-blog-content.prose p {
+  color: rgb(203, 213, 225) !important; /* slate-300 */
+  margin-top: 0 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: justify !important;
+  text-justify: inter-word !important;
+}
+
+.suz-blog-content.prose ul {
+  margin: 1.5rem 0 !important;
+  padding-left: 0 !important;
+  list-style: none !important;
+}
+
+.suz-blog-content.prose li {
+  color: rgb(203, 213, 225) !important; /* slate-300 */
+  margin-bottom: 0.75rem !important;
+  padding-left: 2rem !important;
+  position: relative !important;
+}
+
+.suz-blog-content.prose li::before {
+  content: '✓' !important;
+  color: #0A84FF !important; /* SUZ blue primary */
+  font-weight: bold !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+.suz-blog-content.prose a {
+  color: #64D2FF !important; /* SUZ blue secondary */
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  border-bottom: 1px solid transparent !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.suz-blog-content.prose a:hover {
+  color: #0A84FF !important; /* SUZ blue primary */
+  border-bottom-color: #0A84FF !important;
+  text-shadow: 0 0 8px rgba(10, 132, 255, 0.3) !important;
+}
+
+/* Mobile optimizations for blog content */
+@media (max-width: 768px) {
+  .suz-blog-content-glass {
+    padding: 2rem !important;
+    margin: 1.5rem 0 !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .suz-blog-content.prose {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .suz-blog-content.prose p {
+    text-align: left !important; /* Better for mobile readability */
+    margin-bottom: 1.25rem !important;
+  }
+
+  .suz-blog-content.prose li {
+    padding-left: 1.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .suz-blog-content-glass {
+    padding: 2.5rem !important;
   }
 }
 
@@ -2184,6 +2794,12 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 .suz-hero-headline-container {
   margin-bottom: 2rem;
   animation: hero-fade-in-up 1s ease-out 0.2s both;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .suz-hero-title {
@@ -2194,7 +2810,9 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   text-shadow:
     0 4px 8px rgba(0, 0, 0, 0.3),
     0 2px 4px rgba(0, 0, 0, 0.2) !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  width: 100% !important;
 }
 
 .suz-hero-accent {
@@ -2216,6 +2834,12 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 .suz-hero-subtitle-container {
   margin-bottom: 2rem;
   animation: hero-fade-in-up 1s ease-out 0.4s both;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .suz-hero-subtitle {
@@ -2225,7 +2849,10 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   letter-spacing: 0.02em !important;
   color: #cbd5e1 !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
-  margin: 0 !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* Enhanced Description */
@@ -2596,147 +3223,7 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   }
 }
 
-/* ===== ENHANCED MOBILE NAVIGATION STYLES ===== */
 
-/* Mobile Menu Button */
-.suz-mobile-menu-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 0.5rem;
-}
-
-.suz-mobile-menu-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: scale(1.05);
-}
-
-/* Hamburger Icon */
-.suz-hamburger-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 1.5rem;
-  height: 1.125rem;
-}
-
-.suz-hamburger-line {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #f1f5f9;
-  border-radius: 1px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: center;
-}
-
-/* Hamburger Animation States */
-.suz-hamburger-line-1-open {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.suz-hamburger-line-2-open {
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.suz-hamburger-line-3-open {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* Mobile Menu Overlay */
-.suz-mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 40;
-  animation: fade-in 0.3s ease-out;
-}
-
-.suz-mobile-menu-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-}
-
-/* Mobile Menu */
-.suz-mobile-menu {
-  position: fixed;
-  top: 5rem;
-  right: 1.5rem;
-  width: calc(100vw - 3rem);
-  max-width: 20rem;
-  z-index: 50;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.suz-mobile-menu-open {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.suz-mobile-menu-closed {
-  opacity: 0;
-  transform: translateY(-1rem);
-  pointer-events: none;
-}
-
-.suz-mobile-menu-content {
-  background: rgba(28, 28, 30, 0.95);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 8px 20px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-/* Mobile Navigation Links */
-.suz-mobile-nav-link {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  color: #f1f5f9;
-  font-weight: 500;
-  font-size: 1rem;
-  text-align: center;
-  background: none;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.suz-mobile-nav-link:hover {
-  background: rgba(59, 130, 246, 0.2);
-  color: #3b82f6;
-  transform: translateX(4px);
-}
-
-.suz-mobile-nav-link:active {
-  transform: translateX(4px) scale(0.98);
-}
 
 /* ===== RESPONSIVE HERO ENHANCEMENTS ===== */
 
@@ -2749,11 +3236,16 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   .suz-hero-title {
     font-size: clamp(2rem, 10vw, 3.5rem) !important;
     margin-bottom: 1.5rem !important;
+    text-align: center !important;
+    width: 100% !important;
   }
 
   .suz-hero-subtitle {
     font-size: clamp(1rem, 5vw, 1.5rem) !important;
     margin-bottom: 1.5rem !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .suz-hero-description {
@@ -2795,10 +3287,15 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 @media (max-width: 480px) {
   .suz-hero-title {
     font-size: clamp(1.75rem, 12vw, 3rem) !important;
+    text-align: center !important;
+    width: 100% !important;
   }
 
   .suz-hero-subtitle {
     font-size: clamp(0.875rem, 6vw, 1.25rem) !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .suz-hero-description {
@@ -2818,10 +3315,15 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 @media (min-width: 769px) and (max-width: 1024px) {
   .suz-hero-title {
     font-size: clamp(3rem, 7vw, 4.5rem) !important;
+    text-align: center !important;
+    width: 100% !important;
   }
 
   .suz-hero-subtitle {
     font-size: clamp(1.5rem, 3.5vw, 1.875rem) !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .suz-hero-description {
@@ -2860,19 +3362,10 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
     color: #3b82f6 !important;
   }
 
-  .suz-hamburger-line {
-    transition: none !important;
-  }
-
-  .suz-mobile-menu {
-    transition: none !important;
-  }
-
   .suz-logo-enhanced,
   .suz-logo-wrapper,
   .suz-hero-cta-primary,
-  .suz-hero-cta-secondary,
-  .suz-mobile-nav-link {
+  .suz-hero-cta-secondary {
     transition: none !important;
   }
 }
@@ -2886,8 +3379,7 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   }
 
   .suz-card-glass,
-  .suz-logo-wrapper,
-  .suz-mobile-menu-content {
+  .suz-logo-wrapper {
     background: rgba(0, 0, 0, 0.9) !important;
     border: 2px solid #ffffff !important;
   }
@@ -2912,7 +3404,6 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
 
 .suz-hero-cta-primary,
 .suz-hero-cta-secondary,
-.suz-mobile-menu-button,
 .suz-logo-wrapper {
   will-change: transform;
   transform: translateZ(0);
@@ -2938,6 +3429,438 @@ nav[role="navigation"]:not([aria-label="Mobile Navigation"]) > div {
   border-radius: var(--radius-sm);
 }
 
+/* ===== ENHANCED BUTTON SYSTEM ===== */
+
+/* Primary Button Enhanced */
+.suz-button-primary {
+  background: linear-gradient(135deg, var(--suz-success), #22c55e) !important;
+  color: white !important;
+  padding: var(--space-4) var(--space-8) !important;
+  border-radius: var(--radius-lg) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  font-size: var(--text-body-lg) !important;
+  box-shadow:
+    0 4px 12px rgba(34, 197, 94, 0.3),
+    0 2px 6px rgba(34, 197, 94, 0.2) !important;
+  transition: all var(--duration-normal) var(--ease-out-cubic) !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--space-2) !important;
+  text-decoration: none !important;
+  min-height: 48px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.suz-button-primary:hover {
+  background: linear-gradient(135deg, #16a34a, #15803d) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 8px 20px rgba(34, 197, 94, 0.4),
+    0 4px 12px rgba(34, 197, 94, 0.3) !important;
+}
+
+.suz-button-primary:active {
+  transform: translateY(0) !important;
+  box-shadow:
+    0 2px 8px rgba(34, 197, 94, 0.3),
+    0 1px 4px rgba(34, 197, 94, 0.2) !important;
+}
+
+/* Secondary Button Enhanced */
+.suz-button-secondary {
+  background: transparent !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  padding: var(--space-4) var(--space-8) !important;
+  border-radius: var(--radius-lg) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  font-size: var(--text-body-lg) !important;
+  transition: all var(--duration-normal) var(--ease-out-cubic) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--space-2) !important;
+  text-decoration: none !important;
+  min-height: 48px !important;
+  position: relative !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.suz-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: var(--suz-blue-secondary) !important;
+  color: var(--suz-blue-secondary) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 8px 20px rgba(100, 210, 255, 0.2),
+    0 4px 12px rgba(100, 210, 255, 0.1) !important;
+}
+
+.suz-button-secondary:active {
+  transform: translateY(0) !important;
+}
+
+/* Button Enhanced Animation */
+.suz-button-enhanced {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.suz-button-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.suz-button-enhanced:hover::before {
+  left: 100%;
+}
+
+/* ===== ENHANCED ICON BADGE SYSTEM ===== */
+
+/* Premium Icon Badge */
+.suz-icon-badge-premium {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 80px !important;
+  height: 80px !important;
+  background: linear-gradient(135deg,
+    rgba(10, 132, 255, 0.2),
+    rgba(100, 210, 255, 0.15),
+    rgba(48, 209, 88, 0.1)) !important;
+  border-radius: 50% !important;
+  border: 2px solid rgba(10, 132, 255, 0.3) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  backdrop-filter: blur(20px) !important;
+  box-shadow:
+    0 12px 30px rgba(10, 132, 255, 0.2),
+    0 6px 15px rgba(100, 210, 255, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.suz-icon-badge-premium:hover {
+  transform: translateY(-4px) scale(1.05) !important;
+  box-shadow:
+    0 20px 40px rgba(10, 132, 255, 0.3),
+    0 10px 25px rgba(100, 210, 255, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3) !important;
+  border-color: rgba(10, 132, 255, 0.5) !important;
+}
+
+/* Small Icon Badge */
+.suz-icon-badge-small {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.suz-icon-badge-small:hover {
+  transform: scale(1.1) !important;
+}
+
+/* Trust Indicator Badge - Horizontal pill style with glass morphism */
+.suz-trust-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 9999px !important; /* Full rounded */
+  background: rgba(28, 28, 30, 0.8) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  border: 1px solid rgba(10, 132, 255, 0.3) !important;
+  box-shadow:
+    0 4px 12px rgba(10, 132, 255, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+}
+
+.suz-trust-badge:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow:
+    0 8px 20px rgba(10, 132, 255, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(10, 132, 255, 0.4) !important;
+  background: rgba(28, 28, 30, 0.9) !important;
+}
+
+/* Dark Theme Form Inputs */
+.suz-form-input {
+  width: 100% !important;
+  padding: 0.75rem 1rem !important;
+  background: rgba(28, 28, 30, 0.6) !important;
+  border: 1px solid rgba(10, 132, 255, 0.2) !important;
+  border-radius: 0.75rem !important;
+  color: #F2F2F7 !important; /* suz-gray-900 */
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.suz-form-input:focus {
+  outline: none !important;
+  border-color: rgba(10, 132, 255, 0.5) !important;
+  background: rgba(28, 28, 30, 0.8) !important;
+  box-shadow:
+    0 0 0 3px rgba(10, 132, 255, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+.suz-form-input::placeholder {
+  color: #8E8E93 !important; /* suz-gray-500 */
+  opacity: 0.8 !important;
+}
+
+.suz-form-input.error {
+  border-color: rgba(255, 69, 58, 0.5) !important; /* suz-error */
+  background: rgba(255, 69, 58, 0.05) !important;
+}
+
+.suz-form-input.error:focus {
+  border-color: rgba(255, 69, 58, 0.7) !important;
+  box-shadow:
+    0 0 0 3px rgba(255, 69, 58, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.suz-form-label {
+  display: block !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: #C7C7CC !important; /* suz-gray-700 */
+  margin-bottom: 0.5rem !important;
+}
+
+.suz-form-error {
+  color: #FF453A !important; /* suz-error */
+  font-size: 0.75rem !important;
+  margin-top: 0.25rem !important;
+  font-weight: 500 !important;
+}
+
+.suz-form-select {
+  width: 100% !important;
+  padding: 0.75rem 1rem !important;
+  background: rgba(28, 28, 30, 0.6) !important;
+  border: 1px solid rgba(10, 132, 255, 0.2) !important;
+  border-radius: 0.75rem !important;
+  color: #F2F2F7 !important;
+  font-size: 0.875rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  cursor: pointer !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23C7C7CC' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e") !important;
+  background-position: right 0.75rem center !important;
+  background-repeat: no-repeat !important;
+  background-size: 1rem !important;
+  padding-right: 2.5rem !important;
+}
+
+.suz-form-select:focus {
+  outline: none !important;
+  border-color: rgba(10, 132, 255, 0.5) !important;
+  background: rgba(28, 28, 30, 0.8) !important;
+  box-shadow:
+    0 0 0 3px rgba(10, 132, 255, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.suz-form-textarea {
+  width: 100% !important;
+  padding: 0.75rem 1rem !important;
+  background: rgba(28, 28, 30, 0.6) !important;
+  border: 1px solid rgba(10, 132, 255, 0.2) !important;
+  border-radius: 0.75rem !important;
+  color: #F2F2F7 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  resize: vertical !important;
+  min-height: 120px !important;
+}
+
+.suz-form-textarea:focus {
+  outline: none !important;
+  border-color: rgba(10, 132, 255, 0.5) !important;
+  background: rgba(28, 28, 30, 0.8) !important;
+  box-shadow:
+    0 0 0 3px rgba(10, 132, 255, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.suz-form-textarea::placeholder {
+  color: #8E8E93 !important;
+  opacity: 0.8 !important;
+}
+
+/* ===== SERVICE PAGE MOBILE OPTIMIZATIONS ===== */
+
+/* Mobile Hero Section Optimizations */
+@media (max-width: 768px) {
+  .suz-hero-enhanced {
+    padding-top: calc(6rem + var(--space-4)) !important;
+    padding-bottom: var(--space-16) !important;
+  }
+
+  .suz-hero-title {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+    line-height: 1.2 !important;
+    margin-bottom: var(--space-6) !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .suz-hero-subtitle-container p {
+    font-size: var(--text-body-lg) !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .suz-hero-cta-container {
+    flex-direction: column !important;
+    gap: var(--space-3) !important;
+  }
+
+  .suz-button-primary,
+  .suz-button-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: var(--space-4) var(--space-6) !important;
+    font-size: var(--text-body-md) !important;
+  }
+}
+
+/* Mobile Service Image Optimizations */
+@media (max-width: 768px) {
+  .suz-service-image-container {
+    height: 200px !important;
+    margin: 0 var(--space-4) !important;
+  }
+
+  .suz-service-image {
+    max-height: 180px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+}
+
+/* Mobile Card Optimizations */
+@media (max-width: 768px) {
+  .suz-card-glass {
+    padding: var(--space-4) !important;
+    margin: 0 var(--space-2) !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  .suz-text-display-md {
+    font-size: var(--text-heading-xl) !important;
+    line-height: 1.3 !important;
+  }
+
+  .suz-text-display-sm {
+    font-size: var(--text-heading-lg) !important;
+    line-height: 1.4 !important;
+  }
+
+  .suz-text-body-lg {
+    font-size: var(--text-body-md) !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* Mobile Process Cards */
+@media (max-width: 768px) {
+  .suz-section-standard .grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-4) !important;
+  }
+
+  .suz-icon-badge-premium {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+
+/* Mobile Pricing Cards */
+@media (max-width: 768px) {
+  .suz-section-standard .grid.md\\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-4) !important;
+  }
+}
+
+/* Mobile FAQ Optimizations */
+@media (max-width: 768px) {
+  .suz-section-standard .space-y-6 {
+    gap: var(--space-4) !important;
+  }
+}
+
+/* Touch Target Optimizations */
+@media (max-width: 768px) {
+  .suz-button-primary,
+  .suz-button-secondary,
+  .suz-focus-ring {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+
+  .suz-icon-badge-small {
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+
+/* Performance Optimizations for Mobile */
+@media (max-width: 768px) {
+  .suz-card-glass {
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
+  }
+
+  .suz-button-enhanced::before {
+    display: none !important;
+  }
+
+  .suz-hero-enhanced .bg-radial-gradient-hero {
+    opacity: 0.2 !important;
+  }
+}
+
 /* Typography Enhancements with German Language Optimization */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
@@ -2947,8 +3870,8 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Improved readability for German umlauts and special characters */
-  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   -webkit-font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
 
 .font-semibold {
@@ -2980,9 +3903,9 @@ h1, h2, h3, h4, h5, h6 {
   -moz-osx-font-smoothing: grayscale !important;
   /* Better readability for longer German descriptions */
   font-feature-settings: "kern" 1, "liga" 1 !important;
-  hyphens: auto !important;
   -webkit-hyphens: auto !important;
   -ms-hyphens: auto !important;
+  hyphens: auto !important;
 }
 
 /* German Testimonial Text Typography */
@@ -3503,16 +4426,8 @@ p, span, div {
 
 /* ===== ÜBER UNS (ABOUT US) SECTION STYLES ===== */
 
-/* Über Uns Section Container */
-.suz-uber-uns {
-  position: relative;
-  /* Use the same premium gradient as the main website background */
-  background: linear-gradient(135deg,
-    #000000 0%,
-    #1a1a1a 25%,
-    #0f172a 50%,
-    #1e293b 75%,
-    #0f1419 100%) !important;
+/* Enhanced Über Uns Section with SUZ Design System Integration */
+#uber-uns {
   /* Seamless integration with other sections */
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -3520,10 +4435,13 @@ p, span, div {
   contain: layout style;
   /* Ensure proper overflow handling */
   overflow-x: hidden;
+  /* Enhanced spacing matching other sections */
+  padding: var(--space-20) 0;
 }
 
-/* Glass morphism overlay for Über Uns section */
-.suz-glass-morphism-overlay {
+/* Enhanced glass morphism overlay matching other premium sections */
+#uber-uns::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -3534,10 +4452,33 @@ p, span, div {
   z-index: 0;
 }
 
-/* Über Uns content container */
-.suz-content-container {
-  position: relative;
-  z-index: 10;
+/* Über Uns specific glass card enhancements */
+#uber-uns .suz-card-glass {
+  /* Enhanced glass morphism for Über Uns cards */
+  background: rgba(28, 28, 30, 0.85) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.7),
+    0 10px 25px -5px rgba(10, 132, 255, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  /* Performance optimization */
+  will-change: transform, opacity;
+}
+
+/* Enhanced hover effects for Über Uns cards */
+#uber-uns .suz-card-glass:hover {
+  background: rgba(44, 44, 46, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    0 15px 30px -8px rgba(10, 132, 255, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px) scale(1.01) !important;
 }
 
 /* Über Uns image styling */
@@ -3602,16 +4543,59 @@ p, span, div {
   text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
 }
 
+/* Enhanced animation classes for staggered content */
+.suz-animate-stagger {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.suz-animate-stagger.animate-slide-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced gradient text animation */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #06b6d4, #0ea5e9, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+/* Enhanced typography for Über Uns content */
+#uber-uns .suz-text-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+
+/* Highlight text styling */
+#uber-uns .text-blue-400 {
+  color: #60a5fa !important;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+/* Enhanced decorative line */
+#uber-uns .bg-gradient-to-r {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6) !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+  transition: all 0.3s ease;
+}
+
+#uber-uns .bg-gradient-to-r:hover {
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.6);
+  transform: scaleX(1.1);
+}
+
 /* Enhanced Mobile Responsiveness for Über Uns */
 @media (max-width: 768px) {
-  .suz-uber-uns {
-    /* Maintain the same premium gradient background on mobile */
-    background: linear-gradient(135deg,
-      #000000 0%,
-      #1a1a1a 25%,
-      #0f172a 50%,
-      #1e293b 75%,
-      #0f1419 100%) !important;
+  #uber-uns {
+    /* Adjust padding for mobile */
     padding: var(--space-16) 0 !important;
     /* Remove margins that create black strips between sections */
     margin: 0 !important;
@@ -3621,73 +4605,123 @@ p, span, div {
     contain: layout style;
   }
 
-  .suz-uber-uns-image {
-    /* Adjust image sizing for mobile */
-    max-width: 100%;
-    margin-bottom: var(--space-8);
-    /* Reduce blur for better mobile performance */
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
+  #uber-uns .max-w-6xl {
+    /* Add mobile padding */
+    padding: 0 var(--space-4) !important;
   }
 
-  .suz-text-content {
-    /* Center text on mobile */
+  #uber-uns .flex {
+    /* Stack content vertically on mobile */
+    flex-direction: column !important;
+    gap: var(--space-12) !important;
+  }
+
+  /* Mobile layout adjustments */
+  #uber-uns > div > div {
+    /* Full width on mobile for flex children */
+    width: 100% !important;
+  }
+
+  #uber-uns .suz-text-heading-xl {
+    /* Adjust title size for mobile */
+    font-size: 2.25rem !important;
     text-align: center !important;
   }
 
-  .suz-text-content .suz-section-title {
-    /* Adjust title size for mobile */
-    font-size: 2.5rem !important;
+  #uber-uns .suz-card-glass {
+    /* Optimize card padding for mobile */
+    padding: var(--space-6) !important;
     margin-bottom: var(--space-4) !important;
+    /* Reduce blur for better mobile performance */
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
   }
 
-  .suz-text-content .suz-paragraph {
-    /* Improve readability on mobile */
+  #uber-uns .suz-text-body-lg {
+    /* Optimize text size for mobile */
     font-size: 1rem !important;
     line-height: 1.6 !important;
-    margin-bottom: var(--space-4) !important;
+  }
+
+  /* Center decorative line on mobile */
+  #uber-uns .w-24 {
+    margin: 0 auto !important;
+  }
+
+  /* Center all content on mobile */
+  #uber-uns > div > div > div {
+    text-align: center !important;
   }
 }
 
 /* Small mobile devices */
 @media (max-width: 480px) {
-  .suz-uber-uns {
+  #uber-uns {
     /* Reduce padding for small screens */
     padding: var(--space-12) 0 !important;
   }
 
-  .suz-text-content .suz-section-title {
+  #uber-uns .suz-text-heading-xl {
     /* Further adjust title size for small mobile */
     font-size: 2rem !important;
   }
 
-  .suz-text-content .suz-paragraph {
+  #uber-uns .suz-text-body-lg {
     /* Optimize text size for small screens */
     font-size: 0.9rem !important;
     line-height: 1.5 !important;
   }
+
+  #uber-uns .suz-card-glass {
+    /* Reduce padding for small screens */
+    padding: var(--space-4) !important;
+  }
 }
 
-/* Accessibility enhancements for Über Uns */
-.suz-uber-uns-image:focus {
+/* Enhanced Accessibility for Über Uns */
+#uber-uns img:focus {
   outline: 3px solid #3b82f6 !important;
   outline-offset: 2px !important;
   box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2) !important;
 }
 
-/* Reduced motion support for Über Uns */
+#uber-uns .suz-card-glass:focus-within {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.2),
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    0 15px 30px -8px rgba(10, 132, 255, 0.25) !important;
+}
+
+/* Enhanced Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
-  .suz-uber-uns-image {
+  #uber-uns .suz-animate-stagger {
     transition: none !important;
     animation: none !important;
-  }
-
-  .suz-uber-uns-image:hover {
+    opacity: 1 !important;
     transform: none !important;
   }
 
-  .suz-text-content .suz-section-title {
+  #uber-uns .gradient-text {
     animation: none !important;
+    background: #3b82f6 !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    color: #3b82f6 !important;
+  }
+
+  #uber-uns .suz-card-glass {
+    transition: none !important;
+  }
+
+  #uber-uns .suz-card-glass:hover {
+    transform: none !important;
+  }
+
+  #uber-uns .bg-gradient-to-r:hover {
+    transform: none !important;
   }
 }
 
@@ -3747,176 +4781,436 @@ p, span, div {
   gap: var(--space-6);
 }
 
-/* ===== ENHANCED NAVIGATION STYLES ===== */
 
-/* Enhanced Navigation Container */
-.suz-navigation-enhanced {
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  will-change: transform !important;
-  z-index: 9999 !important;
-  position: fixed !important;
+
+
+
+/* ===== NEW NAVIGATION SYSTEM ===== */
+
+/* Desktop Navigation */
+.suz-nav-desktop {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: auto;
+  max-width: calc(100vw - 2rem);
+  display: block;
 }
 
-.suz-navigation-enhanced .suz-card-glass {
-  background: rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(30px) !important;
-  -webkit-backdrop-filter: blur(30px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 
-    0 20px 40px -10px rgba(0, 0, 0, 0.3),
-    0 10px 25px -5px rgba(59, 130, 246, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+/* Hide desktop navigation on mobile */
+@media (max-width: 767px) {
+  .suz-nav-desktop {
+    display: none !important;
+  }
 }
 
-/* Enhanced Dropdown Styles */
-.suz-services-dropdown {
-  position: absolute !important;
-  top: 100% !important;
-  left: 0 !important;
-  margin-top: 0.5rem !important;
-  width: 320px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border-radius: 0.75rem !important;
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
-  border: 1px solid rgba(0, 0, 0, 0.05) !important;
-  padding: 0.5rem 0 !important;
-  z-index: 10000 !important;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px) scale(0.95);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  pointer-events: none;
+.suz-nav-container {
+  background: rgba(28, 28, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 0.75rem 2rem;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.suz-services-dropdown.show {
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: translateY(0) scale(1) !important;
-  pointer-events: auto !important;
+.suz-nav-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  white-space: nowrap;
 }
 
-.suz-services-dropdown-item {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.75rem !important;
-  padding: 0.75rem 1rem !important;
-  color: #374151 !important;
-  text-decoration: none !important;
-  transition: all 0.15s ease !important;
-  border-radius: 0.5rem !important;
-  margin: 0 0.5rem !important;
+.suz-nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.suz-services-dropdown-item:hover {
-  background-color: rgba(59, 130, 246, 0.05) !important;
-  color: #2563eb !important;
-  transform: translateX(2px) !important;
+.suz-nav-link:hover {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
 }
 
-.suz-services-dropdown-item:focus {
-  outline: 2px solid #2563eb !important;
-  outline-offset: -2px !important;
+.suz-nav-link-cta {
+  color: white;
+  background: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-.suz-services-dropdown-icon {
-  width: 1.25rem !important;
-  height: 1.25rem !important;
-  flex-shrink: 0 !important;
+.suz-nav-link-cta:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
-.suz-services-dropdown-content {
-  flex: 1 !important;
+/* Services Dropdown */
+.suz-services-container {
+  position: relative;
 }
 
-.suz-services-dropdown-title {
-  font-weight: 500 !important;
-  font-size: 0.875rem !important;
-  line-height: 1.25 !important;
-  margin-bottom: 0.125rem !important;
-}
-
-.suz-services-dropdown-description {
-  font-size: 0.75rem !important;
-  line-height: 1.167 !important;
-  color: #6b7280 !important;
-}
-
-/* Services Button Enhanced */
 .suz-services-button {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.25rem !important;
-  padding: 0.5rem 1rem !important;
-  color: white !important;
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0.5rem !important;
-  font-weight: 500 !important;
-  cursor: pointer !important;
-  transition: all 0.2s ease !important;
-  position: relative !important;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .suz-services-button:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: #93c5fd !important;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
 }
 
-.suz-services-button:focus {
-  outline: 2px solid #3b82f6 !important;
-  outline-offset: 2px !important;
+.suz-chevron {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.2s ease;
 }
 
-.suz-services-button .chevron {
-  width: 1rem !important;
-  height: 1rem !important;
-  transition: transform 0.2s ease !important;
+.suz-chevron-open {
+  transform: rotate(180deg);
 }
 
-.suz-services-button .chevron.open {
-  transform: rotate(180deg) !important;
+.suz-services-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px) scale(0.95);
+  width: 280px;
+  background: rgba(28, 28, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.4),
+    0 20px 25px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
 }
 
-/* Mobile Dropdown Enhancement */
-@media (max-width: 768px) {
-  .suz-services-dropdown {
-    position: static !important;
-    width: 100% !important;
-    background: rgba(0, 0, 0, 0.2) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    box-shadow: none !important;
-    border: none !important;
-    border-radius: 0.5rem !important;
-    margin: 0.5rem 0.5rem 0 !important;
-    padding: 0.5rem !important;
+.suz-dropdown-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.suz-service-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease;
+  margin-bottom: 0.25rem;
+}
+
+.suz-service-item:hover {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  transform: translateX(2px);
+}
+
+.suz-service-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.suz-service-name {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+/* Mobile Navigation */
+.suz-mobile-button-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  display: block;
+}
+
+.suz-mobile-button-wrapper {
+  background: rgba(28, 28, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 0.75rem;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.suz-mobile-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 0.5rem;
+}
+
+.suz-mobile-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.suz-mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 40;
+}
+
+.suz-mobile-menu {
+  position: fixed;
+  top: 5rem;
+  right: 1.5rem;
+  width: calc(100vw - 3rem);
+  max-width: 28rem;
+  z-index: 50;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.suz-mobile-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.suz-mobile-closed {
+  opacity: 0;
+  transform: translateY(-1rem);
+  pointer-events: none;
+}
+
+.suz-mobile-content {
+  background: rgba(28, 28, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+.suz-mobile-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  color: #f1f5f9;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  min-height: 44px;
+}
+
+.suz-mobile-link:hover {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  transform: translateX(4px);
+}
+
+.suz-mobile-link-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+  background: #3b82f6;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  min-height: 44px;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.suz-mobile-link-cta:hover {
+  background: #2563eb;
+  transform: translateX(4px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+/* Mobile Services */
+.suz-mobile-services-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  color: #f1f5f9;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 44px;
+}
+
+.suz-mobile-services-button:hover {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  transform: translateX(4px);
+}
+
+.suz-mobile-services {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.suz-mobile-services-open {
+  max-height: 400px;
+  padding: 0.5rem;
+}
+
+.suz-mobile-service-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.suz-mobile-service-item:hover {
+  background: rgba(59, 130, 246, 0.25);
+  color: white;
+  transform: translateX(2px);
+}
+
+.suz-mobile-service-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.suz-mobile-service-name {
+  font-weight: 500;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .suz-mobile-menu {
+    right: 1rem;
+    width: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
   }
 
-  .suz-services-dropdown-item {
-    color: rgba(255, 255, 255, 0.8) !important;
-    padding: 0.5rem !important;
-    margin: 0 !important;
-    font-size: 0.875rem !important;
+  .suz-mobile-content {
+    padding: 0.75rem;
   }
 
-  .suz-services-dropdown-item:hover {
-    background-color: rgba(59, 130, 246, 0.2) !important;
-    color: white !important;
+  .suz-mobile-service-item {
+    padding: 0.625rem 0.5rem;
+    font-size: 0.8125rem;
   }
 
-  .suz-services-dropdown-title {
-    color: white !important;
+  .suz-mobile-service-name {
+    font-size: 0.8125rem;
+    line-height: 1.2;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .suz-nav-link,
+  .suz-nav-link-cta,
+  .suz-services-button,
+  .suz-services-dropdown,
+  .suz-mobile-button,
+  .suz-mobile-menu,
+  .suz-mobile-link,
+  .suz-mobile-link-cta,
+  .suz-mobile-services,
+  .suz-mobile-service-item {
+    transition: none !important;
   }
 
-  .suz-services-dropdown-description {
-    color: rgba(255, 255, 255, 0.6) !important;
+  .suz-chevron {
+    transition: none !important;
   }
 }
 
