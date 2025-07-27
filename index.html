@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professioneller Arbeitsvertrag-Generator für S.U.Z. Reinigung - Erstellen Sie rechtssichere Arbeitsverträge online">
+    <meta name="keywords" content="Arbeitsvertrag, Minijob, Teilzeit, Vollzeit, Reinigung, S.U.Z., Generator">
+    <meta name="author" content="S.U.Z. Reinigung">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://contracts.suz-reinigung.de/">
+    <meta property="og:title" content="S.U.Z. Reinigung - Arbeitsvertrag Generator">
+    <meta property="og:description" content="Erstellen Sie professionelle Arbeitsverträge online mit unserem benutzerfreundlichen Generator">
+    <meta property="og:image" content="/assets/images/logo-new.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://contracts.suz-reinigung.de/">
+    <meta property="twitter:title" content="S.U.Z. Reinigung - Arbeitsvertrag Generator">
+    <meta property="twitter:description" content="Erstellen Sie professionelle Arbeitsverträge online mit unserem benutzerfreundlichen Generator">
+    <meta property="twitter:image" content="/assets/images/logo-new.png">
+
+    <title>S.U.Z. Reinigung - Arbeitsvertrag Generator</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/icons/site.webmanifest">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/print.css" media="print">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    
+    <!-- Progressive Web App -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="S.U.Z. Contracts">
+    
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Anwendung wird geladen...</p>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app" class="app-container" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="/assets/images/logo-new.png" alt="S.U.Z. Reinigung Logo" class="company-logo">
+                    <div class="company-info">
+                        <h1 class="company-name">S.U.Z. Reinigung</h1>
+                        <p class="company-tagline">Professioneller Arbeitsvertrag-Generator</p>
+                    </div>
+                </div>
+                <nav class="main-nav">
+                    <button id="help-btn" class="nav-btn" aria-label="Hilfe anzeigen">
+                        <span class="icon">❓</span>
+                        Hilfe
+                    </button>
+                    <button id="settings-btn" class="nav-btn" aria-label="Einstellungen öffnen">
+                        <span class="icon">⚙️</span>
+                        Einstellungen
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Vertragsart</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Mitarbeiterdaten</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Arbeitsdetails</div>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Vorschau</div>
+                </div>
+                <div class="step" data-step="5">
+                    <div class="step-number">5</div>
+                    <div class="step-label">Download</div>
+                </div>
+            </div>
+
+            <!-- Form Container -->
+            <div class="form-container">
+                <form id="contract-form" class="contract-form" novalidate>
+                    <!-- Step 1: Contract Type -->
+                    <div class="form-step active" data-step="1">
+                        <div class="step-content">
+                            <h2 class="step-title">Vertragsart auswählen</h2>
+                            <p class="step-description">Wählen Sie die Art des Arbeitsvertrags aus, den Sie erstellen möchten.</p>
+
+                            <div class="contract-type-selection">
+                                <div class="contract-type-card" data-type="minijob">
+                                    <div class="card-header">
+                                        <h3>Minijob</h3>
+                                        <span class="card-badge">Bis 520€</span>
+                                    </div>
+                                    <div class="card-content">
+                                        <p>Geringfügige Beschäftigung für Einkommen bis 520€ pro Monat</p>
+                                        <ul class="card-features">
+                                            <li>Steuer- und sozialversicherungsfrei</li>
+                                            <li>Flexible Arbeitszeiten</li>
+                                            <li>Einfache Abrechnung</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="contract-type-card" data-type="teilzeit">
+                                    <div class="card-header">
+                                        <h3>Teilzeit</h3>
+                                        <span class="card-badge">Reduziert</span>
+                                    </div>
+                                    <div class="card-content">
+                                        <p>Teilzeitbeschäftigung mit reduzierten Wochenstunden</p>
+                                        <ul class="card-features">
+                                            <li>Sozialversicherungspflichtig</li>
+                                            <li>Urlaubsanspruch</li>
+                                            <li>Kündigungsschutz</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="contract-type-card" data-type="vollzeit">
+                                    <div class="card-header">
+                                        <h3>Vollzeit</h3>
+                                        <span class="card-badge">Standard</span>
+                                    </div>
+                                    <div class="card-content">
+                                        <p>Vollzeitbeschäftigung mit regulären Arbeitszeiten</p>
+                                        <ul class="card-features">
+                                            <li>Vollständige Sozialleistungen</li>
+                                            <li>Karriereentwicklung</li>
+                                            <li>Betriebliche Altersvorsorge</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="contract-type" name="contractType" required>
+                            <div class="error-message" id="contract-type-error"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Employee Information -->
+                    <div class="form-step" data-step="2">
+                        <div class="step-content">
+                            <h2 class="step-title">Mitarbeiterdaten</h2>
+                            <p class="step-description">Geben Sie die persönlichen Daten des Mitarbeiters ein.</p>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="employee-name" class="form-label">
+                                        Vor- und Nachname <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="employee-name" name="employeeName" class="form-input"
+                                           placeholder="Max Mustermann" required>
+                                    <div class="error-message" id="employee-name-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="birth-date" class="form-label">
+                                        Geburtsdatum <span class="required">*</span>
+                                    </label>
+                                    <input type="date" id="birth-date" name="birthDate" class="form-input" required>
+                                    <div class="error-message" id="birth-date-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tax-id" class="form-label">
+                                        Steuer-Identifikationsnummer <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="tax-id" name="taxId" class="form-input"
+                                           placeholder="12345678901" pattern="[0-9]{11}" maxlength="11" required>
+                                    <div class="form-help">11-stellige Steuer-ID</div>
+                                    <div class="error-message" id="tax-id-error"></div>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="address" class="form-label">
+                                        Straße und Hausnummer <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="address" name="address" class="form-input"
+                                           placeholder="Musterstraße 123" required>
+                                    <div class="error-message" id="address-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="postal-code" class="form-label">
+                                        Postleitzahl <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="postal-code" name="postalCode" class="form-input"
+                                           placeholder="12345" pattern="[0-9]{5}" maxlength="5" required>
+                                    <div class="error-message" id="postal-code-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city" class="form-label">
+                                        Ort <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="city" name="city" class="form-input"
+                                           placeholder="Musterstadt" required>
+                                    <div class="error-message" id="city-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">
+                                        Telefonnummer <span class="required">*</span>
+                                    </label>
+                                    <input type="tel" id="phone" name="phone" class="form-input"
+                                           placeholder="+49 123 456789" required>
+                                    <div class="error-message" id="phone-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="form-label">
+                                        E-Mail-Adresse
+                                    </label>
+                                    <input type="email" id="email" name="email" class="form-input"
+                                           placeholder="max@example.com">
+                                    <div class="error-message" id="email-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Work Details -->
+                    <div class="form-step" data-step="3">
+                        <div class="step-content">
+                            <h2 class="step-title">Arbeitsdetails</h2>
+                            <p class="step-description">Definieren Sie die Arbeitskonditionen und Vergütung.</p>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="start-date" class="form-label">
+                                        Beschäftigungsbeginn <span class="required">*</span>
+                                    </label>
+                                    <input type="date" id="start-date" name="startDate" class="form-input" required>
+                                    <div class="error-message" id="start-date-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="job-title" class="form-label">
+                                        Tätigkeitsbezeichnung <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="job-title" name="jobTitle" class="form-input"
+                                           value="Reinigungskraft" required>
+                                    <div class="error-message" id="job-title-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="weekly-hours" class="form-label">
+                                        Wöchentliche Arbeitszeit <span class="required">*</span>
+                                    </label>
+                                    <input type="number" id="weekly-hours" name="weeklyHours" class="form-input"
+                                           placeholder="20" min="1" max="43" step="0.5" required>
+                                    <div class="form-help">Stunden pro Woche (max. 43)</div>
+                                    <div class="error-message" id="weekly-hours-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="hourly-wage" class="form-label">
+                                        Stundenlohn (brutto) <span class="required">*</span>
+                                    </label>
+                                    <input type="number" id="hourly-wage" name="hourlyWage" class="form-input"
+                                           placeholder="12.00" min="12" step="0.01" required>
+                                    <div class="form-help">€ pro Stunde (mind. 12,00€)</div>
+                                    <div class="error-message" id="hourly-wage-error"></div>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="work-days" class="form-label">
+                                        Arbeitstage <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="work-days" name="workDays" class="form-input"
+                                           placeholder="Montag bis Freitag" required>
+                                    <div class="error-message" id="work-days-error"></div>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="work-hours" class="form-label">
+                                        Arbeitszeiten <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="work-hours" name="workHours" class="form-input"
+                                           placeholder="08:00 - 12:00 Uhr" required>
+                                    <div class="error-message" id="work-hours-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vacation-days" class="form-label">
+                                        Urlaubsanspruch pro Jahr <span class="required">*</span>
+                                    </label>
+                                    <input type="number" id="vacation-days" name="vacationDays" class="form-input"
+                                           placeholder="24" min="20" max="30" required>
+                                    <div class="form-help">Tage (mind. 20)</div>
+                                    <div class="error-message" id="vacation-days-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="other-employment" class="form-label">
+                                        Weitere Beschäftigungen <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="other-employment" name="otherEmployment" class="form-input"
+                                           placeholder="keine" required>
+                                    <div class="form-help">Angabe weiterer Arbeitgeber oder 'keine'</div>
+                                    <div class="error-message" id="other-employment-error"></div>
+                                </div>
+                            </div>
+
+                            <div class="checkbox-section">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="sonderzahlungen" name="sonderzahlungen">
+                                    <label for="sonderzahlungen" class="checkbox-label">
+                                        Sonderzahlungen (Urlaubs-/Weihnachtsgeld) sind nicht vereinbart
+                                    </label>
+                                </div>
+
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="datenschutz" name="datenschutz" required>
+                                    <label for="datenschutz" class="checkbox-label">
+                                        Ich wurde über die Datenschutzbestimmungen informiert und stimme der Verarbeitung
+                                        meiner personenbezogenen Daten zu <span class="required">*</span>
+                                    </label>
+                                    <div class="error-message" id="datenschutz-error"></div>
+                                </div>
+
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="arbeitsschutz-belehrung" name="arbeitsschutzBelehrung" required>
+                                    <label for="arbeitsschutz-belehrung" class="checkbox-label">
+                                        Arbeitsschutzbelehrung wurde durchgeführt <span class="required">*</span>
+                                    </label>
+                                    <div class="error-message" id="arbeitsschutz-belehrung-error"></div>
+                                </div>
+
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="hygiene-schulung" name="hygieneSchulung" required>
+                                    <label for="hygiene-schulung" class="checkbox-label">
+                                        Hygieneschulung wurde absolviert <span class="required">*</span>
+                                    </label>
+                                    <div class="error-message" id="hygiene-schulung-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Preview -->
+                    <div class="form-step" data-step="4">
+                        <div class="step-content">
+                            <h2 class="step-title">Vertragsvorschau</h2>
+                            <p class="step-description">Überprüfen Sie alle Angaben vor der PDF-Erstellung.</p>
+
+                            <div id="contract-preview-content" class="contract-preview-content">
+                                <!-- Preview will be dynamically generated -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Download -->
+                    <div class="form-step" data-step="5">
+                        <div class="step-content">
+                            <h2 class="step-title">Vertrag herunterladen</h2>
+                            <p class="step-description">Ihr Arbeitsvertrag wurde erfolgreich erstellt.</p>
+
+                            <div class="download-section">
+                                <div class="success-message">
+                                    <div class="success-icon">✅</div>
+                                    <h3>Vertrag erfolgreich erstellt!</h3>
+                                    <p>Ihr professioneller Arbeitsvertrag wurde generiert und kann jetzt heruntergeladen werden.</p>
+                                </div>
+
+                                <div class="download-options">
+                                    <button type="button" id="download-pdf-btn" class="btn btn-primary btn-large">
+                                        <span class="icon">📄</span>
+                                        PDF herunterladen
+                                    </button>
+
+                                    <button type="button" id="email-pdf-btn" class="btn btn-secondary">
+                                        <span class="icon">📧</span>
+                                        Per E-Mail senden
+                                    </button>
+                                </div>
+
+                                <div class="contract-info">
+                                    <h4>Vertragsdetails</h4>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <span class="info-label">Vertragsart:</span>
+                                            <span class="info-value" id="final-contract-type"></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Mitarbeiter:</span>
+                                            <span class="info-value" id="final-employee-name"></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Startdatum:</span>
+                                            <span class="info-value" id="final-start-date"></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Stundenlohn:</span>
+                                            <span class="info-value" id="final-hourly-wage"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="next-steps">
+                                    <h4>Nächste Schritte</h4>
+                                    <ol>
+                                        <li>Vertrag ausdrucken (2 Exemplare)</li>
+                                        <li>Beide Vertragsparteien unterschreiben</li>
+                                        <li>Je ein Exemplar für Arbeitgeber und Arbeitnehmer</li>
+                                        <li>Bei Minijobs: Anmeldung bei der Minijob-Zentrale</li>
+                                    </ol>
+                                </div>
+
+                                <div class="action-buttons">
+                                    <button type="button" id="new-contract-btn" class="btn btn-secondary">
+                                        <span class="icon">➕</span>
+                                        Neuen Vertrag erstellen
+                                    </button>
+
+                                    <button type="button" id="edit-contract-btn" class="btn btn-secondary">
+                                        <span class="icon">✏️</span>
+                                        Vertrag bearbeiten
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="form-navigation">
+                        <button type="button" id="prev-btn" class="btn btn-secondary" disabled>
+                            <span class="icon">←</span>
+                            Zurück
+                        </button>
+                        <button type="button" id="next-btn" class="btn btn-primary">
+                            Weiter
+                            <span class="icon">→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Contract Preview (Hidden initially) -->
+            <div id="contract-preview" class="contract-preview hidden">
+                <!-- Preview content will be dynamically generated -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>S.U.Z. Reinigung</h4>
+                    <p>Paul-Langen-Straße 39<br>53229 Bonn</p>
+                    <p>Geschäftsführer: Ali Mohamed</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>Telefon: +49 (0) 228 XXX XXXX</p>
+                    <p>E-Mail: info@suz-reinigung.de</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <a href="#" class="footer-link">Datenschutz</a>
+                    <a href="#" class="footer-link">Impressum</a>
+                    <a href="#" class="footer-link">AGB</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 S.U.Z. Reinigung. Alle Rechte vorbehalten.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="help-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Hilfe</h3>
+                <button type="button" class="modal-close" onclick="ContractApp.hideModal('help-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4>Wie verwende ich den Vertragsgenerator?</h4>
+                <ol>
+                    <li><strong>Vertragsart wählen:</strong> Wählen Sie zwischen Minijob, Teilzeit oder Vollzeit</li>
+                    <li><strong>Mitarbeiterdaten eingeben:</strong> Füllen Sie alle persönlichen Daten aus</li>
+                    <li><strong>Arbeitsdetails definieren:</strong> Legen Sie Arbeitszeit, Lohn und Konditionen fest</li>
+                    <li><strong>Vorschau prüfen:</strong> Kontrollieren Sie alle Angaben</li>
+                    <li><strong>PDF erstellen:</strong> Laden Sie den fertigen Vertrag herunter</li>
+                </ol>
+
+                <h4>Häufige Fragen</h4>
+                <p><strong>Was ist ein Minijob?</strong><br>
+                Ein Minijob ist eine geringfügige Beschäftigung mit einem monatlichen Verdienst bis 520€.</p>
+
+                <p><strong>Sind die Verträge rechtsgültig?</strong><br>
+                Ja, die generierten Verträge entsprechen den aktuellen gesetzlichen Bestimmungen.</p>
+
+                <p><strong>Werden meine Daten gespeichert?</strong><br>
+                Nein, alle Daten werden nur lokal in Ihrem Browser verarbeitet und nicht dauerhaft gespeichert.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Einstellungen</h3>
+                <button type="button" class="modal-close" onclick="ContractApp.hideModal('settings-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4>Anwendungseinstellungen</h4>
+
+                <div class="form-group">
+                    <label for="auto-save" class="checkbox-label">
+                        <input type="checkbox" id="auto-save" checked>
+                        Automatisches Speichern aktivieren
+                    </label>
+                    <div class="form-help">Formulardaten werden automatisch im Browser gespeichert</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pdf-quality" class="form-label">PDF-Qualität</label>
+                    <select id="pdf-quality" class="form-input">
+                        <option value="high">Hoch (empfohlen)</option>
+                        <option value="medium">Mittel</option>
+                        <option value="low">Niedrig</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" onclick="ContractApp.clearSavedData()">
+                        Gespeicherte Daten löschen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script src="/js/pdf-generator.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</body>
+</html>

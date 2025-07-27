@@ -1,0 +1,90 @@
+{
+  "name": "suz-contract-generator",
+  "version": "1.0.0",
+  "description": "Professional employment contract generator for S.U.Z. Reinigung",
+  "main": "public/index.html",
+  "scripts": {
+    "dev": "http-server public -p 3000 -o",
+    "start": "http-server public -p 3000 -o",
+    "build": "echo 'Build completed - static files ready'",
+    "serve": "http-server public -p 8080",
+    "test": "echo 'Tests would run here'",
+    "clean": "echo 'Clean completed'"
+  },
+  "keywords": [
+    "contract-generator",
+    "employment-contract",
+    "pdf-generation",
+    "netlify",
+    "serverless",
+    "cleaning-services"
+  ],
+  "author": "S.U.Z. Reinigung",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suz-reinigung/contract-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suz-reinigung/contract-generator/issues"
+  },
+  "homepage": "https://contracts.suz-reinigung.de",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "public/js/**/*.js",
+      "netlify/functions/**/*.js",
+      "!public/js/**/*.min.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es2022": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "no-console": "warn",
+      "no-unused-vars": "error",
+      "prefer-const": "error"
+    }
+  },
+  "prettier": {
+    "semi": true,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false
+  }
+}
